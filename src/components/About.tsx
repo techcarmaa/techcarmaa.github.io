@@ -416,7 +416,7 @@ const About = () => {
                     }
                   }
                 }}
-                className="group glass rounded-xl p-8 hover:bg-white/5 transition-all duration-300 cursor-pointer hover:scale-105"
+                className="group rounded-xl p-8 hover:bg-black/20 transition-all duration-300 cursor-pointer hover:scale-105 border border-white/10 hover:border-white/30"
                 whileHover={{ y: -10 }}
               >
                 <motion.div 
