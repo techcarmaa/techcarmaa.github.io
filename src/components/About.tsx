@@ -160,6 +160,31 @@ const About = () => {
           </motion.div>
         </div>
 
+        {/* Tagline Section */}
+        <motion.div
+          variants={itemVariants}
+          className="mt-24 mb-24"
+        >
+          <div className="relative h-[50vh] flex items-center justify-center bg-black/40 rounded-2xl overflow-hidden">
+            {/* Background overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/80" />
+            
+            {/* Content */}
+            <div className="relative z-10 text-center px-6">
+              <motion.h3 
+                className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-tight"
+                initial={{ opacity: 0, y: 50 }}
+                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+                transition={{ delay: 0.3, duration: 0.8 }}
+              >
+                Building Tomorrow's
+                <br />
+                <span className="text-white">Technology Today</span>
+              </motion.h3>
+            </div>
+          </div>
+        </motion.div>
+
         {/* Technical Expertise Section */}
         <motion.div
           variants={itemVariants}
