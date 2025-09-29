@@ -75,6 +75,9 @@ const Services = () => {
     },
   ];
 
+  // Backward-compat alias to prevent stale builds referencing `courses`
+  const courses = solutions;
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -92,7 +95,6 @@ const Services = () => {
   };
 
   return (
-    // Updated Services component with courses data
     <section className="py-24 px-6 relative">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-muted/10 to-background" />
