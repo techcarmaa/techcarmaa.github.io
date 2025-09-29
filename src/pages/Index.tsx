@@ -4,6 +4,7 @@ import Services from "@/components/Services";
 import TeamSection from "@/components/TeamSection";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
@@ -29,6 +30,8 @@ const Index = () => {
       <section id="contact">
         <Contact />
       </section>
+      
+      <Footer />
     </div>
   );
 };
