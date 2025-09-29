@@ -165,23 +165,27 @@ const About = () => {
           variants={itemVariants}
           className="mt-24 mb-24"
         >
-          <div className="relative h-[50vh] flex items-center justify-center bg-black/40 rounded-2xl overflow-hidden">
-            {/* Background overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/80" />
+          <div className="relative h-[50vh] flex items-center bg-gradient-to-r from-black/30 to-transparent rounded-2xl overflow-hidden border border-white/10">
+            {/* Elegant background pattern */}
+            <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-transparent to-black/10" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(120,119,198,0.1),transparent_50%)]" />
             
             {/* Content */}
-            <div className="relative z-10 text-center px-6">
+            <div className="relative z-10 pl-12 md:pl-16 lg:pl-20">
               <motion.h3 
-                className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-tight"
-                initial={{ opacity: 0, y: 50 }}
-                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+                className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-relaxed tracking-wide"
+                initial={{ opacity: 0, x: -50 }}
+                animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
                 transition={{ delay: 0.3, duration: 0.8 }}
               >
                 Building Tomorrow's
                 <br />
-                <span className="text-white">Technology Today</span>
+                <span className="text-white/90 font-light">Technology Today</span>
               </motion.h3>
             </div>
+            
+            {/* Subtle decorative element */}
+            <div className="absolute top-8 left-12 md:left-16 lg:left-20 w-16 h-px bg-gradient-to-r from-white/60 to-transparent" />
           </div>
         </motion.div>
 
