@@ -239,7 +239,7 @@ const About = () => {
 
           <motion.div 
             ref={scrollRef}
-            className="flex gap-8 overflow-x-auto scrollbar-hide pb-8 px-2"
+            className="flex gap-8 overflow-x-auto scrollbar-hide pb-8 px-2 pt-6"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             variants={containerVariants}
             initial="hidden"
