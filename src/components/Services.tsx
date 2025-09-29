@@ -154,7 +154,7 @@ const Services = () => {
             <motion.div
               key={index}
               variants={cardVariants}
-              className="group relative flex-shrink-0 w-80"
+              className="group relative flex-shrink-0 w-96"
               whileHover={{ y: -10 }}
               transition={{ duration: 0.3 }}
             >
