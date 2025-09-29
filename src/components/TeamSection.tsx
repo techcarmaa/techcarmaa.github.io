@@ -62,7 +62,7 @@ const TeamSection = () => {
   };
 
   return (
-    <section className="py-24 px-6 relative">
+    <section className="py-24 px-6 relative bg-background grid-pattern">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-muted/5 to-background" />
       

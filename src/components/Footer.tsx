@@ -59,7 +59,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-background border-t border-white/10 pt-20 pb-8 relative overflow-hidden">
+    <footer className="bg-background border-t border-white/10 pt-20 pb-8 relative overflow-hidden grid-pattern">
       {/* Floating background elements */}
       <motion.div
         className="absolute top-10 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl"
