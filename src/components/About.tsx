@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Button } from "@/components/ui/button";
-import { Award, Users, Lightbulb, Globe } from "lucide-react";
+import { Award, Users, Lightbulb, Globe, Code, Cloud, Database, Smartphone, Server, Settings } from "lucide-react";
 
 const About = () => {
   const [ref, inView] = useInView({
@@ -14,6 +14,45 @@ const About = () => {
     { number: "50+", label: "Expert Engineers", icon: Users },
     { number: "15+", label: "Years Experience", icon: Lightbulb },
     { number: "25+", label: "Countries Served", icon: Globe },
+  ];
+
+  const technicalExpertise = [
+    {
+      icon: Code,
+      title: "Full-Stack Development",
+      skills: ["React, Angular, Vue.js", "Node.js, Python, .NET", "MySQL, PostgreSQL, MongoDB", "RESTful APIs & GraphQL"],
+      color: "from-blue-500 to-purple-500",
+    },
+    {
+      icon: Cloud,
+      title: "AWS Cloud Services",
+      skills: ["EC2, Lambda, RDS, S3", "CloudFormation, CDK", "Auto Scaling & Load Balancing", "Cost Optimization"],
+      color: "from-purple-500 to-pink-500",
+    },
+    {
+      icon: Database,
+      title: "SaaS Architecture",
+      skills: ["Multi-tenant Design", "Subscription Management", "API Gateway & Microservices", "Enterprise Integrations"],
+      color: "from-pink-500 to-cyan-500",
+    },
+    {
+      icon: Smartphone,
+      title: "Mobile Development",
+      skills: ["React Native, Flutter", "iOS & Android Native", "Cross-platform Solutions", "App Store Deployment"],
+      color: "from-cyan-500 to-blue-500",
+    },
+    {
+      icon: Server,
+      title: "DevOps & Infrastructure",
+      skills: ["Docker & Kubernetes", "CI/CD Pipelines", "Infrastructure as Code", "Monitoring & Logging"],
+      color: "from-blue-500 to-green-500",
+    },
+    {
+      icon: Settings,
+      title: "Enterprise Integration",
+      skills: ["Legacy System Migration", "API Development", "Third-party Integrations", "Data Synchronization"],
+      color: "from-green-500 to-purple-500",
+    },
   ];
 
   const containerVariants = {
@@ -120,6 +159,51 @@ const About = () => {
             ))}
           </motion.div>
         </div>
+
+        {/* Technical Expertise Section */}
+        <motion.div
+          variants={itemVariants}
+          className="mt-32"
+        >
+          <div className="text-center mb-16">
+            <h3 className="text-4xl md:text-5xl font-bold mb-6">
+              <span className="gradient-text">Our Technical Expertise</span>
+            </h3>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Deep technical knowledge across modern technologies and frameworks that power enterprise-grade solutions.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {technicalExpertise.map((tech, index) => (
+              <motion.div
+                key={index}
+                variants={statsVariants}
+                className="glass rounded-xl p-8 group hover:scale-105 transition-all duration-300"
+                whileHover={{ y: -5 }}
+              >
+                <div className="mb-6">
+                  <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${tech.color} p-4 group-hover:scale-110 transition-transform duration-300`}>
+                    <tech.icon className="w-full h-full text-white" />
+                  </div>
+                </div>
+                
+                <h4 className="text-xl font-bold text-white mb-4">
+                  {tech.title}
+                </h4>
+                
+                <ul className="space-y-2">
+                  {tech.skills.map((skill, skillIndex) => (
+                    <li key={skillIndex} className="text-white/70 text-sm flex items-center">
+                      <div className="w-1 h-1 bg-primary rounded-full mr-2 flex-shrink-0" />
+                      {skill}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
 
         {/* Mission Statement */}
         <motion.div
