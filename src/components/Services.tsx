@@ -9,42 +9,60 @@ const Services = () => {
     triggerOnce: true,
   });
 
-  const services = [
-    {
-      icon: Car,
-      title: "Automotive AI",
-      description: "Next-generation autonomous driving systems with advanced computer vision and machine learning algorithms.",
-      color: "from-purple-500 to-blue-500",
-    },
+  const courses = [
     {
       icon: Brain,
-      title: "Smart Analytics",
-      description: "Harness the power of big data with real-time analytics and predictive intelligence platforms.",
-      color: "from-blue-500 to-cyan-500",
+      title: "AI & Machine Learning",
+      description: "Master artificial intelligence, deep learning, and neural networks.",
+      details: "12 weeks • Expert instructors • Hands-on projects • Career support",
+      duration: "12 weeks",
+      level: "Advanced",
+      color: "from-blue-500 to-purple-500",
     },
     {
       icon: Shield,
-      title: "Cybersecurity",
-      description: "Enterprise-grade security solutions protecting critical infrastructure and sensitive data.",
+      title: "Cybersecurity Fundamentals",
+      description: "Learn to protect digital assets and secure enterprise systems.",
+      details: "8 weeks • Industry certifications • Real-world scenarios • 24/7 lab access",
+      duration: "8 weeks",
+      level: "Intermediate",
+      color: "from-purple-500 to-pink-500",
+    },
+    {
+      icon: Cpu,
+      title: "Cloud Computing",
+      description: "Deploy and manage scalable cloud infrastructure solutions.",
+      details: "10 weeks • AWS/Azure certified • Live projects • Job placement assistance",
+      duration: "10 weeks",
+      level: "Intermediate",
+      color: "from-pink-500 to-blue-500",
+    },
+    {
+      icon: Smartphone,
+      title: "Full-Stack Development",
+      description: "Build modern web applications from frontend to backend.",
+      details: "16 weeks • React & Node.js • Portfolio projects • Mentorship included",
+      duration: "16 weeks",
+      level: "Beginner",
+      color: "from-blue-500 to-cyan-500",
+    },
+    {
+      icon: Car,
+      title: "IoT & Embedded Systems",
+      description: "Design smart devices and connected IoT ecosystems.",
+      details: "14 weeks • Hardware labs • Arduino/Raspberry Pi • Industry partnerships",
+      duration: "14 weeks",
+      level: "Advanced",
       color: "from-cyan-500 to-purple-500",
     },
     {
       icon: Rocket,
-      title: "Innovation Labs",
-      description: "Cutting-edge R&D in emerging technologies including IoT, blockchain, and quantum computing.",
-      color: "from-purple-500 to-pink-500",
-    },
-    {
-      icon: Smartphone,
-      title: "Mobile Solutions",
-      description: "Revolutionary mobile applications with seamless UX and cross-platform compatibility.",
-      color: "from-pink-500 to-blue-500",
-    },
-    {
-      icon: Cpu,
-      title: "Edge Computing",
-      description: "High-performance edge computing solutions for real-time processing and minimal latency.",
-      color: "from-blue-500 to-purple-500",
+      title: "DevOps Engineering",
+      description: "Streamline development workflows with automation and CI/CD.",
+      details: "12 weeks • Docker & Kubernetes • Enterprise tools • Team collaboration",
+      duration: "12 weeks",
+      level: "Advanced",
+      color: "from-purple-500 to-blue-500",
     },
   ];
 
@@ -82,23 +100,23 @@ const Services = () => {
             variants={cardVariants}
             className="text-4xl md:text-6xl font-bold mb-6"
           >
-            <span className="gradient-text">Innovative Solutions</span>
+            <span className="gradient-text">Enterprise-Grade IT Solutions</span>
           </motion.h2>
           <motion.p
             variants={cardVariants}
             className="text-xl text-muted-foreground max-w-3xl mx-auto"
           >
-            Empowering businesses with transformative technology solutions that drive growth, 
-            efficiency, and competitive advantage in the digital age.
+            Accelerate your career with industry-leading technology courses designed by experts 
+            and trusted by Fortune 500 companies.
           </motion.p>
         </div>
 
-        {/* Services Grid */}
+        {/* Courses Grid */}
         <motion.div 
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           variants={containerVariants}
         >
-          {services.map((service, index) => (
+          {courses.map((course, index) => (
             <motion.div
               key={index}
               variants={cardVariants}
@@ -106,32 +124,50 @@ const Services = () => {
               whileHover={{ y: -10 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="glass rounded-xl p-8 h-full relative overflow-hidden">
+              <div className="glass rounded-xl p-8 h-full relative overflow-hidden cursor-pointer">
                 {/* Background Gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-5 group-hover:opacity-10 transition-opacity duration-300`} />
+                <div className={`absolute inset-0 bg-gradient-to-br ${course.color} opacity-5 group-hover:opacity-10 transition-opacity duration-300`} />
                 
                 {/* Icon */}
                 <div className="relative z-10 mb-6">
-                  <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${service.color} p-4 group-hover:scale-110 transition-transform duration-300`}>
-                    <service.icon className="w-full h-full text-white" />
+                  <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${course.color} p-4 group-hover:scale-110 transition-transform duration-300`}>
+                    <course.icon className="w-full h-full text-white" />
                   </div>
                 </div>
 
-                {/* Content */}
+                {/* Course Content */}
                 <div className="relative z-10">
-                  <h3 className="text-2xl font-bold mb-4 text-white">
-                    {service.title}
-                  </h3>
-                  <p className="text-white/80 mb-6 leading-relaxed">
-                    {service.description}
-                  </p>
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">
+                      {course.level}
+                    </span>
+                    <span className="text-xs font-semibold text-white/60">
+                      {course.duration}
+                    </span>
+                  </div>
                   
-                  <Button 
-                    variant="ghost" 
-                    className="text-white hover:bg-white/10 p-0 h-auto font-semibold group-hover:text-cyan-400 transition-colors"
-                  >
-                    Learn More →
-                  </Button>
+                  <h3 className="text-2xl font-bold mb-4 text-white">
+                    {course.title}
+                  </h3>
+                  
+                  <p className="text-white/80 mb-6 leading-relaxed">
+                    {course.description}
+                  </p>
+
+                  {/* Course Details - Shown on Hover */}
+                  <div className="transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                    <div className="border-t border-white/10 pt-4">
+                      <p className="text-sm text-white/70 mb-4">
+                        {course.details}
+                      </p>
+                      <Button 
+                        variant="ghost" 
+                        className="text-white hover:bg-white/10 p-0 h-auto font-semibold group-hover:text-primary transition-colors"
+                      >
+                        Enroll Now →
+                      </Button>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Hover Effect */}
@@ -147,7 +183,7 @@ const Services = () => {
           className="text-center mt-20"
         >
           <Button variant="hero" size="xl" className="group">
-            Start Your Project
+            View All Courses
             <Rocket className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </Button>
         </motion.div>
