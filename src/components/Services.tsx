@@ -27,50 +27,50 @@ const Services = () => {
   const solutions = [
     {
       icon: Brain,
-      title: "AI-Powered Analytics",
-      description: "Transform your data into actionable insights with machine learning.",
-      details: "Advanced ML algorithms • Real-time processing • Predictive modeling • Custom dashboards",
-      category: "Analytics",
+      title: "Custom App & Web Development",
+      description: "Tailored software solutions that scale with your business needs.",
+      details: "React, Node.js, Python • Cloud-native architecture • API development • Mobile & web platforms",
+      category: "Development",
       color: "from-blue-500 to-purple-500",
     },
     {
       icon: Shield,
-      title: "Enterprise Security",
-      description: "Comprehensive cybersecurity solutions for enterprise protection.",
-      details: "Zero-trust architecture • 24/7 monitoring • Threat intelligence • Compliance ready",
-      category: "Security",
+      title: "SaaS Solutions for Businesses",
+      description: "Complete SaaS platforms designed to accelerate your digital transformation.",
+      details: "Multi-tenant architecture • Subscription management • Auto-scaling • Enterprise integrations",
+      category: "SaaS",
       color: "from-purple-500 to-pink-500",
     },
     {
       icon: Cpu,
-      title: "Cloud Infrastructure",
-      description: "Scalable cloud solutions optimized for enterprise workloads.",
-      details: "Multi-cloud support • Auto-scaling • High availability • Cost optimization",
+      title: "AWS Infrastructure Management",
+      description: "Expert cloud infrastructure setup, optimization, and ongoing management.",
+      details: "EC2, RDS, Lambda, S3 • DevOps automation • Cost optimization • 24/7 monitoring",
       category: "Cloud",
       color: "from-pink-500 to-blue-500",
     },
     {
       icon: Smartphone,
-      title: "Digital Transformation",
-      description: "Modernize legacy systems with cutting-edge technology.",
-      details: "API modernization • Microservices • DevOps integration • Change management",
-      category: "Transformation",
+      title: "Enterprise IT & Digital Transformation",
+      description: "Comprehensive IT modernization and digital transformation services.",
+      details: "Legacy system migration • Process automation • Change management • Staff training",
+      category: "Enterprise",
       color: "from-blue-500 to-cyan-500",
     },
     {
       icon: Car,
-      title: "IoT Solutions",
-      description: "Connect and manage enterprise IoT devices at scale.",
-      details: "Device management • Edge computing • Data collection • Remote monitoring",
-      category: "IoT",
+      title: "API Integration & Microservices",
+      description: "Seamless integration solutions connecting your business ecosystem.",
+      details: "REST & GraphQL APIs • Microservices architecture • Third-party integrations • Data synchronization",
+      category: "Integration",
       color: "from-cyan-500 to-purple-500",
     },
     {
       icon: Rocket,
-      title: "Process Automation",
-      description: "Streamline operations with intelligent automation platforms.",
-      details: "RPA implementation • Workflow optimization • Integration services • ROI tracking",
-      category: "Automation",
+      title: "DevOps & Continuous Deployment",
+      description: "Streamlined development workflows and automated deployment pipelines.",
+      details: "CI/CD pipelines • Docker & Kubernetes • Infrastructure as Code • Performance monitoring",
+      category: "DevOps",
       color: "from-purple-500 to-blue-500",
     },
   ];
@@ -112,13 +112,13 @@ const Services = () => {
             variants={cardVariants}
             className="text-4xl md:text-6xl font-bold mb-6"
           >
-            <span className="gradient-text">Enterprise-Grade IT Solutions</span>
+            <span className="gradient-text">IT & SaaS Solutions</span>
           </motion.h2>
           <motion.p
             variants={cardVariants}
             className="text-xl text-muted-foreground max-w-3xl mx-auto"
           >
-            Comprehensive technology solutions designed to transform and scale your enterprise operations.
+            Your technology growth partner—apps, web, SaaS & infrastructure. Hardcore IT company powering digital transformation from startups to enterprises.
           </motion.p>
         </div>
 
@@ -214,7 +214,7 @@ const Services = () => {
           className="text-center mt-20"
         >
           <Button variant="hero" size="xl" className="group">
-            Explore All Solutions
+            Explore Our Solutions
             <Rocket className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </Button>
         </motion.div>

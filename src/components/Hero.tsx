@@ -81,8 +81,8 @@ const Hero = () => {
       >
         <motion.div variants={itemVariants} className="mb-8">
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight text-white">
-            <span className="block mb-4">Where innovation</span>
-            <span className="block text-primary">drives performance</span>
+            <span className="block mb-4">Hardcore IT.</span>
+            <span className="block text-primary">Scalable SaaS.</span>
           </h1>
         </motion.div>
 
@@ -90,8 +90,8 @@ const Hero = () => {
           variants={itemVariants}
           className="text-xl md:text-2xl text-white/80 mb-12 max-w-4xl mx-auto leading-relaxed font-light"
         >
-          With CarmaaTech's cutting-edge platform, technology teams can build, manage, 
-          and optimize intelligent automotive systems that drive real business results.
+          From code to cloud—we build, manage & scale your digital world. 
+          End-to-end software and infrastructure solutions for businesses across industries.
         </motion.p>
 
         <motion.div
@@ -99,12 +99,12 @@ const Hero = () => {
           className="flex flex-col sm:flex-row gap-6 justify-center items-center"
         >
           <Button variant="default" size="xl" className="bg-primary hover:bg-primary-hover">
-            Watch Demo
+            Get Started
             <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </Button>
           
           <Button variant="ghost" size="xl" className="text-white border-white/30 hover:bg-white/10">
-            Talk to Sales
+            View Solutions
           </Button>
         </motion.div>
 

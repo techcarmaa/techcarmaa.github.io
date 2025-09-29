@@ -32,30 +32,30 @@ const TeamSection = () => {
       name: "Anirudh Dhobal",
       role: "Chief Technology Officer",
       image: anirudhImage,
-      expertise: "Cloud Architecture & AI Solutions",
+      expertise: "SaaS Architecture & Custom Development",
       experience: "15+ years",
-      description: "Leading digital transformation initiatives with expertise in scalable cloud infrastructure and machine learning implementations.",
-      email: "anirudh@company.com",
+      description: "Leading end-to-end software solutions with expertise in scalable SaaS platforms and enterprise application development.",
+      email: "anirudh@carmaatech.com",
       linkedin: "#"
     },
     {
       name: "Sandeep Singh",
-      role: "Senior Security Architect",
+      role: "AWS Infrastructure Specialist",
       image: sandeepImage,
-      expertise: "Cybersecurity & Enterprise Protection",
+      expertise: "Cloud Infrastructure & DevOps",
       experience: "12+ years",
-      description: "Specializes in zero-trust security frameworks and enterprise-grade threat detection systems.",
-      email: "sandeep@company.com",
+      description: "Expert in AWS infrastructure management, cloud optimization, and enterprise-grade deployment solutions.",
+      email: "sandeep@carmaatech.com",
       linkedin: "#"
     },
     {
       name: "Ankit Kumar Patel",
-      role: "Lead DevOps Engineer",
+      role: "Lead Full-Stack Developer",
       image: ankitImage,
-      expertise: "Infrastructure Automation & CI/CD",
+      expertise: "Enterprise Web & Mobile Development",
       experience: "10+ years",
-      description: "Expert in containerization, microservices architecture, and automated deployment pipelines.",
-      email: "ankit@company.com",
+      description: "Specializes in full-stack development, API integrations, and building scalable web and mobile applications.",
+      email: "ankit@carmaatech.com",
       linkedin: "#"
     },
   ];
@@ -100,7 +100,7 @@ const TeamSection = () => {
             variants={cardVariants}
             className="text-xl text-muted-foreground max-w-3xl mx-auto"
           >
-            Experienced professionals driving innovation and excellence in enterprise technology solutions.
+            Experienced IT professionals driving innovation in software development, cloud infrastructure, and digital transformation solutions.
           </motion.p>
         </div>
 

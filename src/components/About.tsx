@@ -54,8 +54,8 @@ const About = () => {
           <div>
             <motion.div variants={itemVariants} className="mb-8">
               <h2 className="text-4xl md:text-6xl font-bold mb-6">
-                Pioneering the 
-                <span className="gradient-text block">Digital Revolution</span>
+                Full-Scale 
+                <span className="gradient-text block">Technology Powerhouse</span>
               </h2>
             </motion.div>
 
@@ -63,18 +63,18 @@ const About = () => {
               variants={itemVariants}
               className="text-xl text-muted-foreground mb-8 leading-relaxed"
             >
-              At CarmaaTech, we're not just building technology – we're crafting the future. 
-              Our team of visionary engineers and designers collaborate to create solutions 
-              that transform industries and empower businesses to achieve unprecedented success.
+              Carmaatech is not limited to any single industry—we're a hardcore IT company 
+              providing end-to-end software and infrastructure solutions that enable businesses 
+              to scale with innovative technology across all sectors.
             </motion.p>
 
             <motion.p
               variants={itemVariants}
               className="text-lg text-muted-foreground mb-12 leading-relaxed"
             >
-              From autonomous vehicles to AI-powered analytics, our innovations are 
-              shaping tomorrow's world. We believe in the power of technology to solve 
-              complex challenges and create meaningful impact for our clients and society.
+              From custom applications to enterprise SaaS platforms, AWS infrastructure management 
+              to complete digital transformation—we build, manage, and scale your digital world 
+              with cutting-edge solutions that drive real business results.
             </motion.p>
 
             <motion.div variants={itemVariants}>
@@ -131,9 +131,9 @@ const About = () => {
               <span className="gradient-text">Our Mission</span>
             </h3>
             <p className="text-xl text-white/90 leading-relaxed">
-              "To accelerate human progress through transformative technology solutions 
-              that bridge the gap between imagination and reality, creating a smarter, 
-              more connected, and sustainable future for all."
+              "To empower businesses across industries with hardcore IT solutions, scalable SaaS platforms, 
+              and robust infrastructure that transforms digital capabilities and accelerates growth. 
+              We're your technology growth partner—from code to cloud."
             </p>
           </div>
         </motion.div>
