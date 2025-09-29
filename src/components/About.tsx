@@ -92,9 +92,9 @@ const About = () => {
           {/* Left Content */}
           <div>
             <motion.div variants={itemVariants} className="mb-8">
-              <h2 className="text-4xl md:text-6xl font-bold mb-6">
+              <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white">
                 Full-Scale 
-                <span className="gradient-text block">Technology Powerhouse</span>
+                <span className="text-white block">Technology Powerhouse</span>
               </h2>
             </motion.div>
 
@@ -143,7 +143,7 @@ const About = () => {
                 
                 <div className="mb-2">
                   <motion.span
-                    className="text-3xl md:text-4xl font-bold gradient-text block"
+                    className="text-3xl md:text-4xl font-bold text-white block"
                     initial={{ opacity: 0, scale: 0.5 }}
                     animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
                     transition={{ delay: index * 0.2 + 0.5, duration: 0.5 }}
@@ -172,7 +172,7 @@ const About = () => {
             transition={{ delay: 0.2, duration: 0.6 }}
           >
             <h3 className="text-4xl md:text-5xl font-bold mb-6">
-              <span className="gradient-text">Our Technical Expertise</span>
+              <span className="text-white">Our Technical Expertise</span>
             </h3>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Deep technical knowledge across modern technologies and frameworks that power enterprise-grade solutions.
@@ -289,7 +289,7 @@ const About = () => {
         >
           <div className="glass rounded-2xl p-12">
             <h3 className="text-3xl md:text-4xl font-bold mb-8">
-              <span className="gradient-text">Our Mission</span>
+              <span className="text-white">Our Mission</span>
             </h3>
             <p className="text-xl text-white/90 leading-relaxed">
               "To empower businesses across industries with hardcore IT solutions, scalable SaaS platforms, 

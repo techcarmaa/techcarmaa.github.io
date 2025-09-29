@@ -80,7 +80,7 @@ const Hero = () => {
         animate={inView ? "visible" : "hidden"}
       >
         <motion.div variants={itemVariants} className="mb-8">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight text-foreground">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight text-white">
             <span className="block mb-4">Hardcore IT.</span>
             <span className="block text-primary">Scalable SaaS.</span>
           </h1>

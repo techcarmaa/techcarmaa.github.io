@@ -87,7 +87,7 @@ const Contact = () => {
         {/* Header */}
         <motion.div variants={itemVariants} className="text-center mb-20">
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="gradient-text">Let's Build Together</span>
+            <span className="text-white">Let's Build Together</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Ready to transform your vision into reality? Get in touch with our team 

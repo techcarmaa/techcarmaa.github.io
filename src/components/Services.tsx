@@ -112,7 +112,7 @@ const Services = () => {
             variants={cardVariants}
             className="text-4xl md:text-6xl font-bold mb-6"
           >
-            <span className="gradient-text">IT & SaaS Solutions</span>
+            <span className="text-white">IT & SaaS Solutions</span>
           </motion.h2>
           <motion.p
             variants={cardVariants}

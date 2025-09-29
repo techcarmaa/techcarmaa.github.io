@@ -94,7 +94,7 @@ const TeamSection = () => {
             variants={cardVariants}
             className="text-4xl md:text-6xl font-bold mb-6"
           >
-            <span className="gradient-text">Meet Our Expert Team</span>
+            <span className="text-white">Meet Our Expert Team</span>
           </motion.h2>
           <motion.p
             variants={cardVariants}
