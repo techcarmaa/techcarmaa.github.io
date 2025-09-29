@@ -10,6 +10,12 @@ const About = () => {
     triggerOnce: true,
   });
 
+  // Separate ref for technical expertise section
+  const [techRef, techInView] = useInView({
+    threshold: 0.2,
+    triggerOnce: true,
+  });
+
   const scrollRef = useRef<HTMLDivElement>(null);
   const [selectedBlog, setSelectedBlog] = useState(null);
 
@@ -298,25 +304,67 @@ const About = () => {
 
         {/* Technical Expertise Section */}
         <motion.div
+          ref={techRef}
           variants={itemVariants}
           className="mt-32"
         >
           <motion.div 
             className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
+            initial={{ opacity: 0, y: 60, scale: 0.8 }}
+            animate={techInView ? { 
+              opacity: 1, 
+              y: 0, 
+              scale: 1,
+              transition: {
+                duration: 0.8,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }
+            } : { opacity: 0, y: 60, scale: 0.8 }}
           >
-            <h3 className="text-5xl md:text-7xl font-bold mb-6">
+            <motion.div
+              initial={{ width: 0 }}
+              animate={techInView ? { 
+                width: "100px",
+                transition: { delay: 0.3, duration: 0.6 }
+              } : { width: 0 }}
+              className="h-1 bg-gradient-to-r from-primary to-primary/50 mx-auto mb-8 rounded-full"
+            />
+            
+            <motion.h3 
+              className="text-5xl md:text-7xl font-bold mb-6"
+              initial={{ opacity: 0, y: 30 }}
+              animate={techInView ? { 
+                opacity: 1, 
+                y: 0,
+                transition: { delay: 0.2, duration: 0.6 }
+              } : { opacity: 0, y: 30 }}
+            >
               <span className="text-white">Our Technical Expertise</span>
-            </h3>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            </motion.h3>
+            
+            <motion.p 
+              className="text-xl text-muted-foreground max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={techInView ? { 
+                opacity: 1, 
+                y: 0,
+                transition: { delay: 0.4, duration: 0.6 }
+              } : { opacity: 0, y: 20 }}
+            >
               Deep technical knowledge across modern technologies and frameworks that power enterprise-grade solutions.
-            </p>
+            </motion.p>
           </motion.div>
 
           {/* Navigation Controls */}
-          <div className="flex justify-center items-center gap-4 mb-8">
+          <motion.div 
+            className="flex justify-center items-center gap-4 mb-8"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={techInView ? { 
+              opacity: 1, 
+              scale: 1,
+              transition: { delay: 0.6, duration: 0.5 }
+            } : { opacity: 0, scale: 0.8 }}
+          >
             <Button
               variant="ghost"
               size="icon"
@@ -334,41 +382,82 @@ const About = () => {
             >
               <ChevronRight className="h-5 w-5" />
             </Button>
-          </div>
+          </motion.div>
 
+          {/* Cards Container with Enhanced Scroll Animations */}
           <motion.div 
             ref={scrollRef}
-            className="flex gap-8 overflow-x-auto scrollbar-hide pb-8 px-2 pt-6"
+            className="flex gap-8 overflow-x-auto scrollbar-hide pb-8 px-2 pt-6 relative"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-            variants={containerVariants}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
           >
+            {/* Animated background elements */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 rounded-2xl"
+              initial={{ scaleX: 0, opacity: 0 }}
+              animate={techInView ? { 
+                scaleX: 1, 
+                opacity: 1,
+                transition: { delay: 0.8, duration: 1.2 }
+              } : { scaleX: 0, opacity: 0 }}
+            />
+            
+            {/* Floating particles background */}
+            {[...Array(8)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-2 h-2 bg-primary/20 rounded-full"
+                style={{
+                  left: `${10 + i * 12}%`,
+                  top: `${20 + (i % 3) * 30}%`,
+                }}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={techInView ? {
+                  opacity: [0, 1, 0],
+                  scale: [0, 1, 0],
+                  y: [0, -20, 0],
+                  transition: {
+                    delay: 1 + i * 0.2,
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }
+                } : { opacity: 0, scale: 0 }}
+              />
+            ))}
+            
             {technicalExpertise.map((tech, index) => (
               <motion.div
                 key={index}
-                variants={{
-                  hidden: { 
-                    opacity: 0, 
-                    x: index % 3 === 0 ? -100 : index % 3 === 1 ? 0 : 100,
-                    y: index % 3 === 1 ? 100 : 0,
-                    rotateX: -15,
-                    scale: 0.8
-                  },
-                  visible: { 
-                    opacity: 1, 
-                    x: 0,
-                    y: 0, 
-                    rotateX: 0,
-                    scale: 1,
-                    transition: {
-                      delay: index * 0.15,
-                      duration: 0.8,
-                      ease: [0.25, 0.46, 0.45, 0.94],
-                      type: "spring",
-                      stiffness: 100
-                    }
+                initial={{ 
+                  opacity: 0, 
+                  x: index % 3 === 0 ? -150 : index % 3 === 1 ? 0 : 150,
+                  y: index % 3 === 1 ? 150 : 50,
+                  rotateX: -20,
+                  rotateY: index % 2 === 0 ? -20 : 20,
+                  scale: 0.7
+                }}
+                animate={techInView ? { 
+                  opacity: 1, 
+                  x: 0,
+                  y: 0, 
+                  rotateX: 0,
+                  rotateY: 0,
+                  scale: 1,
+                  transition: {
+                    delay: 0.8 + index * 0.2,
+                    duration: 1,
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                    type: "spring",
+                    stiffness: 80,
+                    damping: 12
                   }
+                } : {
+                  opacity: 0, 
+                  x: index % 3 === 0 ? -150 : index % 3 === 1 ? 0 : 150,
+                  y: index % 3 === 1 ? 150 : 50,
+                  rotateX: -20,
+                  rotateY: index % 2 === 0 ? -20 : 20,
+                  scale: 0.7
                 }}
                 className="group flex-shrink-0 w-[420px] h-[320px] rounded-xl p-8 transition-all duration-500 backdrop-blur-sm cursor-pointer relative overflow-hidden"
                 style={{ 
@@ -384,8 +473,6 @@ const About = () => {
                     ease: "easeOut"
                   }
                 }}
-                onHoverStart={() => {}}
-                onHoverEnd={() => {}}
               >
                 {/* Animated background gradient */}
                 <motion.div 
@@ -421,6 +508,12 @@ const About = () => {
                 {/* Floating and rotating icon */}
                 <motion.div 
                   className="mb-6 relative z-10"
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={techInView ? {
+                    y: 0,
+                    opacity: 1,
+                    transition: { delay: 1 + index * 0.2, duration: 0.6 }
+                  } : { y: 20, opacity: 0 }}
                   whileHover={{ 
                     y: -10,
                     transition: { 
@@ -479,9 +572,12 @@ const About = () => {
                 {/* Title with enhanced hover effect */}
                 <motion.h4 
                   className="text-2xl font-bold text-white mb-4 relative z-10 transition-colors duration-300"
-                  initial={{ opacity: 0 }}
-                  animate={inView ? { opacity: 1 } : { opacity: 0 }}
-                  transition={{ delay: index * 0.15 + 0.3, duration: 0.4 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={techInView ? { 
+                    opacity: 1, 
+                    y: 0,
+                    transition: { delay: 1.2 + index * 0.2, duration: 0.5 }
+                  } : { opacity: 0, y: 20 }}
                   whileHover={{ 
                     scale: 1.05,
                     color: "#ffffff",
@@ -495,17 +591,15 @@ const About = () => {
                 {/* Skills list with stagger animation */}
                 <motion.ul 
                   className="space-y-3 relative z-10"
-                  variants={{
-                    hidden: {},
-                    visible: {
-                      transition: {
-                        staggerChildren: 0.1,
-                        delayChildren: index * 0.15 + 0.4
-                      }
+                  initial={{ opacity: 0 }}
+                  animate={techInView ? {
+                    opacity: 1,
+                    transition: {
+                      delay: 1.4 + index * 0.2,
+                      staggerChildren: 0.1,
+                      delayChildren: 0.2
                     }
-                  }}
-                  initial="hidden"
-                  animate={inView ? "visible" : "hidden"}
+                  } : { opacity: 0 }}
                 >
                   {tech.skills.map((skill, skillIndex) => (
                     <motion.li 
