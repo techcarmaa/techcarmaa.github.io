@@ -92,13 +92,13 @@ const About = () => {
   };
 
   return (
-    <section className="py-24 px-6 relative overflow-hidden">
+    <section className="py-32 px-4 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-t from-muted/20 to-transparent" />
       
       <motion.div
         ref={ref}
-        className="relative z-10 max-w-7xl mx-auto"
+        className="relative z-10 max-w-[1400px] mx-auto"
         variants={containerVariants}
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
@@ -239,7 +239,7 @@ const About = () => {
 
           <motion.div 
             ref={scrollRef}
-            className="flex gap-8 overflow-x-auto scrollbar-hide pb-8"
+            className="flex gap-8 overflow-x-auto scrollbar-hide pb-8 px-2"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             variants={containerVariants}
             initial="hidden"
@@ -261,7 +261,7 @@ const About = () => {
                     }
                   }
                 }}
-                className="group flex-shrink-0 w-[450px] h-[320px] rounded-xl p-8 hover:bg-black/20 transition-all duration-300 backdrop-blur-sm cursor-pointer relative hover:shadow-2xl hover:shadow-primary/10"
+                className="group flex-shrink-0 w-[420px] h-[320px] rounded-xl p-8 hover:bg-black/20 transition-all duration-300 backdrop-blur-sm cursor-pointer relative hover:shadow-2xl hover:shadow-primary/10"
                 whileHover={{ 
                   y: -15,
                   rotateY: 8,
