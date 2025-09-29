@@ -353,6 +353,106 @@ const About = () => {
             ))}
           </motion.div>
         </motion.div>
+
+        {/* Case Studies Section */}
+        <motion.div
+          variants={itemVariants}
+          className="mt-32"
+        >
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+          >
+            <h3 className="text-5xl md:text-7xl font-bold mb-6">
+              <span className="text-white">Our Case Studies</span>
+            </h3>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Real-world success stories showcasing how we've transformed businesses through innovative technology solutions.
+            </p>
+          </motion.div>
+
+          <motion.div 
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+          >
+            {[
+              {
+                title: "FinTech SaaS Platform",
+                category: "Financial Technology",
+                description: "Built a comprehensive financial management platform serving 10,000+ users with real-time analytics and automated reporting.",
+                metrics: ["300% ROI", "50K+ Users", "99.9% Uptime"],
+                color: "from-blue-500 to-purple-500"
+              },
+              {
+                title: "Healthcare Management System",
+                category: "Healthcare Tech",
+                description: "Developed an integrated patient management system that streamlined operations for 50+ medical facilities.",
+                metrics: ["40% Efficiency", "100K+ Patients", "HIPAA Compliant"],
+                color: "from-purple-500 to-pink-500"
+              },
+              {
+                title: "E-commerce Marketplace",
+                category: "Retail Technology",
+                description: "Created a multi-vendor marketplace platform handling millions in transactions with advanced inventory management.",
+                metrics: ["$5M+ Revenue", "1000+ Vendors", "24/7 Support"],
+                color: "from-pink-500 to-cyan-500"
+              }
+            ].map((study, index) => (
+              <motion.div
+                key={index}
+                variants={{
+                  hidden: { opacity: 0, y: 50 },
+                  visible: { 
+                    opacity: 1, 
+                    y: 0,
+                    transition: {
+                      delay: index * 0.2,
+                      duration: 0.6,
+                      ease: "easeOut"
+                    }
+                  }
+                }}
+                className="group glass rounded-xl p-8 hover:bg-white/5 transition-all duration-300 cursor-pointer hover:scale-105"
+                whileHover={{ y: -10 }}
+              >
+                <motion.div 
+                  className={`w-16 h-16 rounded-lg bg-gradient-to-br ${study.color} p-4 mb-6 group-hover:shadow-glow transition-all duration-300`}
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                >
+                  <div className="w-full h-full bg-white/20 rounded-sm" />
+                </motion.div>
+                
+                <div className="mb-3">
+                  <span className="text-sm text-primary font-medium">{study.category}</span>
+                </div>
+                
+                <h4 className="text-2xl font-bold text-white mb-4 group-hover:text-primary transition-colors duration-300">
+                  {study.title}
+                </h4>
+                
+                <p className="text-white/70 text-base mb-6 leading-relaxed">
+                  {study.description}
+                </p>
+                
+                <div className="space-y-2">
+                  {study.metrics.map((metric, metricIndex) => (
+                    <div 
+                      key={metricIndex}
+                      className="flex items-center text-white/80"
+                    >
+                      <div className="w-1 h-1 bg-primary rounded-full mr-3" />
+                      <span className="text-sm font-medium">{metric}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
       </motion.div>
     </section>
   );
