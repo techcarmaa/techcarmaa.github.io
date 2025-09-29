@@ -79,15 +79,67 @@ const Hero = () => {
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
       >
-        <motion.div variants={itemVariants} className="mb-8">
+        <motion.div 
+          variants={{
+            hidden: { opacity: 0, y: 100, scale: 0.8 },
+            visible: { 
+              opacity: 1, 
+              y: 0, 
+              scale: 1,
+              transition: { 
+                duration: 1,
+                ease: [0.25, 0.46, 0.45, 0.94],
+                type: "spring",
+                stiffness: 100
+              }
+            }
+          }} 
+          className="mb-8"
+        >
+          <motion.div
+            initial={{ width: 0 }}
+            animate={inView ? { 
+              width: "120px",
+              transition: { delay: 0.5, duration: 0.8 }
+            } : { width: 0 }}
+            className="h-1 bg-gradient-to-r from-primary to-primary/50 mx-auto mb-8 rounded-full"
+          />
+          
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight text-white">
-            <span className="block mb-4">Hardcore IT.</span>
-            <span className="block text-primary">Scalable SaaS.</span>
+            <motion.span 
+              className="block mb-4"
+              initial={{ opacity: 0, x: -50 }}
+              animate={inView ? { 
+                opacity: 1, 
+                x: 0,
+                transition: { delay: 0.3, duration: 0.6 }
+              } : { opacity: 0, x: -50 }}
+            >
+              Hardcore IT.
+            </motion.span>
+            <motion.span 
+              className="block text-primary"
+              initial={{ opacity: 0, x: 50 }}
+              animate={inView ? { 
+                opacity: 1, 
+                x: 0,
+                transition: { delay: 0.5, duration: 0.6 }
+              } : { opacity: 0, x: 50 }}
+            >
+              Scalable SaaS.
+            </motion.span>
           </h1>
         </motion.div>
 
         <motion.p
-          variants={itemVariants}
+          variants={{
+            hidden: { opacity: 0, y: 30 },
+            visible: { 
+              opacity: 1, 
+              y: 0,
+              transition: { delay: 0.7, duration: 0.6 }
+            }
+          }}
           className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed font-light"
         >
           From code to cloud—we build, manage & scale your digital world. 
@@ -95,33 +147,75 @@ const Hero = () => {
         </motion.p>
 
         <motion.div
-          variants={itemVariants}
+          variants={{
+            hidden: { opacity: 0, scale: 0.8 },
+            visible: { 
+              opacity: 1, 
+              scale: 1,
+              transition: { delay: 0.9, duration: 0.5 }
+            }
+          }}
           className="flex flex-col sm:flex-row gap-6 justify-center items-center"
         >
-          <Button variant="default" size="xl" className="bg-primary hover:bg-primary-hover">
-            Get Started
-            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
+          <motion.div
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Button variant="default" size="xl" className="bg-primary hover:bg-primary-hover">
+              Get Started
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </motion.div>
           
-          <Button variant="outline" size="xl" className="border-primary/30 text-foreground hover:bg-primary/10">
-            View Solutions
-          </Button>
+          <motion.div
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Button variant="outline" size="xl" className="border-primary/30 text-foreground hover:bg-primary/10">
+              View Solutions
+            </Button>
+          </motion.div>
         </motion.div>
 
-        {/* Scroll Indicator */}
+        {/* Enhanced Scroll Indicator */}
         <motion.div
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.5, duration: 0.8 }}
+          initial={{ opacity: 0, y: 30, scale: 0.8 }}
+          animate={inView ? { 
+            opacity: 1, 
+            y: 0, 
+            scale: 1,
+            transition: { delay: 1.5, duration: 0.8 }
+          } : { opacity: 0, y: 30, scale: 0.8 }}
         >
-          <div className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex justify-center">
+          <motion.div
+            className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex justify-center relative"
+            whileHover={{ scale: 1.1 }}
+          >
             <motion.div
               className="w-1 h-3 bg-primary/60 rounded-full mt-2"
               animate={{ y: [0, 12, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
-          </div>
+            
+            {/* Glow effect */}
+            <motion.div
+              className="absolute inset-0 border-2 border-primary/20 rounded-full"
+              animate={{ 
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.6, 0.3]
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+          </motion.div>
+          
+          <motion.p 
+            className="text-xs text-white/50 mt-2"
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            Scroll to explore
+          </motion.p>
         </motion.div>
       </motion.div>
     </section>

@@ -5,7 +5,7 @@ import { Mail, Phone, MapPin, Send, Linkedin, Twitter, Github } from "lucide-rea
 
 const Contact = () => {
   const [ref, inView] = useInView({
-    threshold: 0.1,
+    threshold: 0.2,
     triggerOnce: true,
   });
 
@@ -84,8 +84,25 @@ const Contact = () => {
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
       >
-        {/* Header */}
-        <motion.div variants={itemVariants} className="text-center mb-20">
+        {/* Enhanced Header */}
+        <motion.div 
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 50 }}
+          animate={inView ? { 
+            opacity: 1, 
+            y: 0,
+            transition: { duration: 0.8, ease: "easeOut" }
+          } : { opacity: 0, y: 50 }}
+        >
+          <motion.div
+            initial={{ width: 0 }}
+            animate={inView ? { 
+              width: "120px",
+              transition: { delay: 0.3, duration: 0.8 }
+            } : { width: 0 }}
+            className="h-1 bg-gradient-to-r from-primary to-primary/50 mx-auto mb-8 rounded-full"
+          />
+          
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
             <span className="text-white">Let's Build Together</span>
           </h2>
@@ -96,8 +113,15 @@ const Contact = () => {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-16">
-          {/* Contact Information */}
-          <motion.div variants={itemVariants}>
+          {/* Enhanced Contact Information */}
+          <motion.div 
+            initial={{ opacity: 0, x: -100 }}
+            animate={inView ? { 
+              opacity: 1, 
+              x: 0,
+              transition: { delay: 0.5, duration: 0.8, ease: "easeOut" }
+            } : { opacity: 0, x: -100 }}
+          >
             <h3 className="text-3xl font-bold mb-12 text-white">
               Get In Touch
             </h3>
@@ -147,9 +171,20 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          {/* Contact Form */}
-          <motion.div variants={itemVariants}>
-            <div className="glass rounded-2xl p-8">
+          {/* Enhanced Contact Form */}
+          <motion.div 
+            initial={{ opacity: 0, x: 100 }}
+            animate={inView ? { 
+              opacity: 1, 
+              x: 0,
+              transition: { delay: 0.7, duration: 0.8, ease: "easeOut" }
+            } : { opacity: 0, x: 100 }}
+          >
+            <motion.div 
+              className="glass rounded-2xl p-8"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
               <h3 className="text-3xl font-bold mb-8 text-white">
                 Start Your Project
               </h3>
@@ -220,7 +255,7 @@ const Contact = () => {
                   <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </form>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </motion.div>

@@ -4,7 +4,7 @@ import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from "luc
 
 const Footer = () => {
   const [ref, inView] = useInView({
-    threshold: 0.1,
+    threshold: 0.3,
     triggerOnce: true,
   });
 
@@ -59,7 +59,17 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-background border-t border-white/10 pt-20 pb-8">
+    <footer className="bg-background border-t border-white/10 pt-20 pb-8 relative overflow-hidden">
+      {/* Floating background elements */}
+      <motion.div
+        className="absolute top-10 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl"
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.2, 0.4, 0.2],
+        }}
+        transition={{ duration: 10, repeat: Infinity }}
+      />
+      
       <div className="max-w-[1400px] mx-auto px-4">
         <motion.div
           ref={ref}
@@ -68,9 +78,25 @@ const Footer = () => {
           animate={inView ? "visible" : "hidden"}
           className="grid lg:grid-cols-6 gap-12 lg:gap-8 mb-12"
         >
-          {/* Company Info */}
-          <motion.div variants={itemVariants} className="lg:col-span-2">
-            <h3 className="text-2xl font-bold text-white mb-4">Carmaatech</h3>
+          {/* Enhanced Company Info */}
+          <motion.div 
+            variants={{
+              hidden: { opacity: 0, y: 30, x: -50 },
+              visible: { 
+                opacity: 1, 
+                y: 0, 
+                x: 0,
+                transition: { delay: 0.2, duration: 0.6 }
+              }
+            }} 
+            className="lg:col-span-2"
+          >
+            <motion.h3 
+              className="text-2xl font-bold text-white mb-4"
+              whileHover={{ scale: 1.05 }}
+            >
+              Carmaatech
+            </motion.h3>
             <p className="text-white/70 mb-6 leading-relaxed">
               Hardcore IT company providing end-to-end software and infrastructure solutions. 
               From code to cloud—we build, manage & scale your digital world across all industries.

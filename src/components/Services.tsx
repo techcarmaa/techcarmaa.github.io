@@ -6,7 +6,7 @@ import { useRef } from "react";
 
 const Services = () => {
   const [ref, inView] = useInView({
-    threshold: 0.1,
+    threshold: 0.2,
     triggerOnce: true,
   });
 
@@ -108,14 +108,34 @@ const Services = () => {
       >
         {/* Section Header */}
         <div className="text-center mb-20">
+          <motion.div
+            initial={{ width: 0 }}
+            animate={inView ? { 
+              width: "120px",
+              transition: { delay: 0.2, duration: 0.8 }
+            } : { width: 0 }}
+            className="h-1 bg-gradient-to-r from-primary to-primary/50 mx-auto mb-8 rounded-full"
+          />
+          
           <motion.h2
-            variants={cardVariants}
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            animate={inView ? { 
+              opacity: 1, 
+              y: 0, 
+              scale: 1,
+              transition: { delay: 0.3, duration: 0.8, ease: "easeOut" }
+            } : { opacity: 0, y: 50, scale: 0.9 }}
             className="text-4xl md:text-6xl font-bold mb-6"
           >
             <span className="text-white">IT & SaaS Solutions</span>
           </motion.h2>
           <motion.p
-            variants={cardVariants}
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { 
+              opacity: 1, 
+              y: 0,
+              transition: { delay: 0.5, duration: 0.6 }
+            } : { opacity: 0, y: 30 }}
             className="text-xl text-muted-foreground max-w-3xl mx-auto"
           >
             Your technology growth partner—apps, web, SaaS & infrastructure. Hardcore IT company powering digital transformation from startups to enterprises.
@@ -123,7 +143,15 @@ const Services = () => {
         </div>
 
         {/* Navigation Controls */}
-        <div className="flex justify-center items-center gap-4 mb-8">
+        <motion.div 
+          className="flex justify-center items-center gap-4 mb-8"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={inView ? { 
+            opacity: 1, 
+            scale: 1,
+            transition: { delay: 0.7, duration: 0.5 }
+          } : { opacity: 0, scale: 0.8 }}
+        >
           <Button
             variant="ghost"
             size="icon"
@@ -141,19 +169,59 @@ const Services = () => {
           >
             <ChevronRight className="h-5 w-5" />
           </Button>
-        </div>
+        </motion.div>
 
-        {/* Horizontal Scrolling Solutions */}
+        {/* Enhanced Horizontal Scrolling Solutions */}
         <motion.div 
           ref={scrollRef}
-          className="flex gap-6 overflow-x-auto scrollbar-hide px-4 pb-8"
+          className="flex gap-6 overflow-x-auto scrollbar-hide px-4 pb-8 relative"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          variants={containerVariants}
+          initial={{ opacity: 0 }}
+          animate={inView ? { 
+            opacity: 1,
+            transition: { delay: 0.9, duration: 0.6 }
+          } : { opacity: 0 }}
         >
+          {/* Background gradient */}
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 rounded-2xl"
+            initial={{ scaleX: 0 }}
+            animate={inView ? { 
+              scaleX: 1,
+              transition: { delay: 1, duration: 1.2 }
+            } : { scaleX: 0 }}
+          />
+          
           {solutions.map((solution, index) => (
             <motion.div
               key={index}
-              variants={cardVariants}
+              initial={{ 
+                opacity: 0, 
+                y: 100,
+                x: index % 2 === 0 ? -50 : 50,
+                rotateY: index % 2 === 0 ? -20 : 20,
+                scale: 0.8
+              }}
+              animate={inView ? { 
+                opacity: 1, 
+                y: 0,
+                x: 0,
+                rotateY: 0,
+                scale: 1,
+                transition: {
+                  delay: 1.1 + index * 0.15,
+                  duration: 0.8,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                  type: "spring",
+                  stiffness: 80
+                }
+              } : { 
+                opacity: 0, 
+                y: 100,
+                x: index % 2 === 0 ? -50 : 50,
+                rotateY: index % 2 === 0 ? -20 : 20,
+                scale: 0.8
+              }}
               className="group relative flex-shrink-0 w-96"
               whileHover={{ 
                 y: -10, 
@@ -161,7 +229,6 @@ const Services = () => {
                 rotateY: 2,
                 transition: { duration: 0.3, ease: "easeOut" }
               }}
-              transition={{ duration: 0.3 }}
             >
               <div className="rounded-xl p-8 h-full relative overflow-hidden cursor-pointer group-hover:bg-black/10 transition-all duration-300 backdrop-blur-sm">
                 {/* Background Gradient - Only visible on hover */}
@@ -243,15 +310,26 @@ const Services = () => {
           ))}
         </motion.div>
 
-        {/* Call to Action */}
+        {/* Enhanced Call to Action */}
         <motion.div
-          variants={cardVariants}
           className="text-center mt-20"
+          initial={{ opacity: 0, y: 50, scale: 0.9 }}
+          animate={inView ? { 
+            opacity: 1, 
+            y: 0, 
+            scale: 1,
+            transition: { delay: 1.8, duration: 0.6 }
+          } : { opacity: 0, y: 50, scale: 0.9 }}
         >
-          <Button variant="hero" size="xl" className="group">
-            Explore Our Solutions
-            <Rocket className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
+          <motion.div
+            whileHover={{ scale: 1.05, y: -5 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Button variant="hero" size="xl" className="group">
+              Explore Our Solutions
+              <Rocket className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </motion.div>
         </motion.div>
       </motion.div>
     </section>

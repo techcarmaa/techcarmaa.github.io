@@ -8,7 +8,7 @@ import ankitImage from "@/assets/team/ankit-kumar-patel.jpg";
 
 const TeamSection = () => {
   const [ref, inView] = useInView({
-    threshold: 0.1,
+    threshold: 0.2,
     triggerOnce: true,
   });
 
@@ -75,14 +75,34 @@ const TeamSection = () => {
       >
         {/* Section Header */}
         <div className="text-center mb-20">
+          <motion.div
+            initial={{ width: 0 }}
+            animate={inView ? { 
+              width: "120px",
+              transition: { delay: 0.2, duration: 0.8 }
+            } : { width: 0 }}
+            className="h-1 bg-gradient-to-r from-primary to-primary/50 mx-auto mb-8 rounded-full"
+          />
+          
           <motion.h2
-            variants={cardVariants}
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            animate={inView ? { 
+              opacity: 1, 
+              y: 0, 
+              scale: 1,
+              transition: { delay: 0.3, duration: 0.8, ease: "easeOut" }
+            } : { opacity: 0, y: 50, scale: 0.9 }}
             className="text-4xl md:text-6xl font-bold mb-6"
           >
             <span className="text-white">Meet Our Expert Team</span>
           </motion.h2>
           <motion.p
-            variants={cardVariants}
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { 
+              opacity: 1, 
+              y: 0,
+              transition: { delay: 0.5, duration: 0.6 }
+            } : { opacity: 0, y: 30 }}
             className="text-xl text-muted-foreground max-w-3xl mx-auto"
           >
             Experienced IT professionals driving innovation in software development, cloud infrastructure, and digital transformation solutions.
@@ -90,17 +110,47 @@ const TeamSection = () => {
         </div>
 
 
-        {/* Team Cards */}
+        {/* Enhanced Team Cards */}
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-8"
-          variants={containerVariants}
+          initial={{ opacity: 0 }}
+          animate={inView ? { 
+            opacity: 1,
+            transition: { delay: 0.7, duration: 0.6 }
+          } : { opacity: 0 }}
         >
           {teamMembers.map((member, index) => (
             <motion.div
               key={index}
-              variants={cardVariants}
+              initial={{ 
+                opacity: 0, 
+                y: 100,
+                x: index === 0 ? -50 : index === 2 ? 50 : 0,
+                rotateY: index === 0 ? -15 : index === 2 ? 15 : 0,
+                scale: 0.8
+              }}
+              animate={inView ? { 
+                opacity: 1, 
+                y: 0,
+                x: 0,
+                rotateY: 0,
+                scale: 1,
+                transition: {
+                  delay: 0.9 + index * 0.2,
+                  duration: 0.8,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                  type: "spring",
+                  stiffness: 80
+                }
+              } : { 
+                opacity: 0, 
+                y: 100,
+                x: index === 0 ? -50 : index === 2 ? 50 : 0,
+                rotateY: index === 0 ? -15 : index === 2 ? 15 : 0,
+                scale: 0.8
+              }}
               className="group relative w-full"
-              whileHover={{ y: -10 }}
+              whileHover={{ y: -10, scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
               <div className="rounded-xl overflow-hidden h-[500px] relative cursor-pointer">
