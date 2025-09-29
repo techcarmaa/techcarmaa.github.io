@@ -103,7 +103,7 @@ const TeamSection = () => {
               whileHover={{ y: -10 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="glass rounded-xl overflow-hidden h-[500px] relative cursor-pointer">
+              <div className="rounded-xl overflow-hidden h-[500px] relative cursor-pointer">
                 {/* Profile Image */}
                 <div className="relative h-full">
                   <img
@@ -112,14 +112,16 @@ const TeamSection = () => {
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-300" />
+                  {/* Gradient Overlay - Only visible on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-90 transition-opacity duration-300" />
                 </div>
 
-                {/* Basic Info - Always Visible */}
+                {/* Basic Info - Always Visible with subtle background */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                  <h3 className="text-xl font-bold mb-1">{member.name}</h3>
-                  <p className="text-white/80 text-sm">{member.role}</p>
+                  <div className="bg-black/30 group-hover:bg-black/60 transition-all duration-300 rounded-lg p-3 backdrop-blur-sm">
+                    <h3 className="text-xl font-bold mb-1">{member.name}</h3>
+                    <p className="text-white/80 text-sm">{member.role}</p>
+                  </div>
                 </div>
 
                 {/* Detailed Info - Visible on Hover */}
