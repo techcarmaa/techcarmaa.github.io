@@ -216,12 +216,12 @@ const Services = () => {
                 transition: { duration: 0.2 }
               }}
             >
-              <div className="rounded-xl p-8 h-full relative overflow-hidden cursor-pointer transition-all duration-300 backdrop-blur-sm hover:bg-black/20">
+              <div className="rounded-xl p-8 h-full relative overflow-hidden cursor-pointer transition-all duration-300 border border-transparent hover:border-white/20 hover:bg-black/20">
                 {/* Background Gradient - Only visible on hover */}
                 <motion.div 
-                  className={`absolute inset-0 bg-gradient-to-br ${solution.color} opacity-0 hover:opacity-15 transition-opacity duration-300`}
+                  className={`absolute inset-0 bg-gradient-to-br ${solution.color} opacity-0 hover:opacity-10 transition-opacity duration-300`}
                   whileHover={{ 
-                    scale: 1.05,
+                    scale: 1.02,
                     transition: { duration: 0.3 }
                   }}
                 />
@@ -283,14 +283,6 @@ const Services = () => {
                   </div>
                 </div>
 
-                {/* Hover Effect */}
-                <motion.div 
-                  className="absolute inset-0 border border-transparent hover:border-white/20 rounded-xl transition-colors duration-300"
-                  whileHover={{
-                    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1)",
-                    transition: { duration: 0.3 }
-                  }}
-                />
               </div>
             </motion.div>
           ))}
