@@ -17,7 +17,7 @@ const About = () => {
   });
 
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [selectedBlog, setSelectedBlog] = useState(null);
+  const [selectedBlog, setSelectedBlog] = useState<any>(null);
 
   const scrollLeft = () => {
     if (scrollRef.current) {
@@ -440,11 +440,7 @@ const About = () => {
                   opacity: 0, 
                   y: 30
                 }}
-                className="group flex-shrink-0 w-[420px] h-[320px] rounded-xl p-8 transition-all duration-500 backdrop-blur-sm cursor-pointer relative overflow-hidden hover:bg-black/20"
-                style={{ 
-                  transformStyle: "preserve-3d",
-                  perspective: "1000px"
-                }}
+                className="group flex-shrink-0 w-[420px] h-[320px] p-8 transition-all duration-500 cursor-pointer relative"
                 whileHover={{ 
                   y: -8,
                   transition: { 
@@ -452,40 +448,9 @@ const About = () => {
                   }
                 }}
               >
-                {/* Animated background gradient - only visible on hover */}
-                <motion.div 
-                  className={`absolute inset-0 bg-gradient-to-br ${tech.color} opacity-0 rounded-xl`}
-                  whileHover={{ 
-                    opacity: 0.1,
-                    scale: 1.1,
-                    transition: { duration: 0.3 }
-                  }}
-                />
-                
-                {/* Glow effect on hover */}
-                <motion.div 
-                  className={`absolute inset-0 bg-gradient-to-br ${tech.color} opacity-0 rounded-xl blur-xl`}
-                  whileHover={{ 
-                    opacity: 0.3,
-                    scale: 1.2,
-                    transition: { duration: 0.3 }
-                  }}
-                  style={{ zIndex: -1 }}
-                />
-                
-                {/* Border with glow - only visible on hover */}
-                <motion.div 
-                  className="absolute inset-0 border border-transparent rounded-xl transition-all duration-300"
-                  whileHover={{ 
-                    borderColor: "rgba(255,255,255,0.3)",
-                    boxShadow: `0 0 30px rgba(255,255,255,0.1), 0 0 60px ${tech.color.includes('blue') ? '#3b82f6' : tech.color.includes('purple') ? '#8b5cf6' : tech.color.includes('pink') ? '#ec4899' : tech.color.includes('cyan') ? '#06b6d4' : '#10b981'}40`,
-                    transition: { duration: 0.3 }
-                  }}
-                />
-                
                 {/* Floating and rotating icon */}
                 <motion.div 
-                  className="mb-6 relative z-10"
+                  className="mb-6 relative"
                   initial={{ y: 20, opacity: 0 }}
                   animate={techInView ? {
                     y: 0,
@@ -547,9 +512,9 @@ const About = () => {
                   </motion.div>
                 </motion.div>
                 
-                {/* Title with enhanced hover effect */}
+                {/* Title */}
                 <motion.h4 
-                  className="text-2xl font-bold text-white mb-4 relative z-10 transition-colors duration-300"
+                  className="text-2xl font-bold text-white mb-4 relative transition-colors duration-300"
                   initial={{ opacity: 0, y: 20 }}
                   animate={techInView ? { 
                     opacity: 1, 
@@ -566,9 +531,9 @@ const About = () => {
                   {tech.title}
                 </motion.h4>
                 
-                {/* Skills list with stagger animation */}
+                {/* Skills list */}
                 <motion.ul 
-                  className="space-y-3 relative z-10"
+                  className="space-y-3 relative"
                   initial={{ opacity: 0 }}
                   animate={techInView ? {
                     opacity: 1,
@@ -629,43 +594,12 @@ const About = () => {
                     </motion.li>
                   ))}
                 </motion.ul>
-                
-                {/* Hover overlay with particle effect */}
-                <motion.div
-                  className="absolute inset-0 pointer-events-none"
-                  initial={{ opacity: 0 }}
-                  whileHover={{ 
-                    opacity: 1,
-                    transition: { duration: 0.3 }
-                  }}
-                >
-                  {[...Array(6)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      className="absolute w-1 h-1 bg-white/30 rounded-full"
-                      style={{
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`,
-                      }}
-                      animate={{
-                        y: [0, -20, 0],
-                        opacity: [0, 1, 0],
-                        scale: [0, 1, 0],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: i * 0.3,
-                        ease: "easeInOut"
-                      }}
-                    />
-                  ))}
-                </motion.div>
               </motion.div>
             ))}
           </motion.div>
         </motion.div>
 
+        {/* Continue with rest of the component... */}
         {/* Case Studies Section */}
         <motion.div
           variants={itemVariants}
@@ -756,8 +690,8 @@ const About = () => {
                       key={metricIndex}
                       className="flex items-center text-white/80"
                     >
-                      <div className="w-1 h-1 bg-primary rounded-full mr-3" />
-                      <span className="text-sm font-medium">{metric}</span>
+                      <div className="w-1 h-1 bg-primary rounded-full mr-2" />
+                      <span className="text-sm">{metric}</span>
                     </div>
                   ))}
                 </div>
@@ -804,7 +738,7 @@ const About = () => {
                   }
                 }
               }}
-              className="group rounded-2xl overflow-hidden hover:bg-black/20 transition-all duration-500 cursor-pointer hover:scale-[1.02] border border-transparent hover:border-white/30 h-[500px]"
+              className="group rounded-2xl overflow-hidden transition-all duration-500 cursor-pointer hover:scale-[1.02] border border-transparent hover:border-white/30 hover:bg-black/20 h-[500px]"
               whileHover={{ y: -10 }}
               onClick={() => setSelectedBlog(technicalBlogs[0])}
             >
@@ -881,10 +815,10 @@ const About = () => {
                       }
                     }
                   }}
-                className="group rounded-xl overflow-hidden transition-all duration-300 cursor-pointer hover:scale-105 border border-transparent hover:border-white/30 hover:bg-black/20"
-                whileHover={{ y: -8 }}
-                onClick={() => setSelectedBlog(blog)}
-              >
+                  className="group rounded-xl overflow-hidden transition-all duration-300 cursor-pointer hover:scale-105 border border-transparent hover:border-white/30 hover:bg-black/20"
+                  whileHover={{ y: -8 }}
+                  onClick={() => setSelectedBlog(blog)}
+                >
                   <div className="relative h-48 overflow-hidden">
                     <img 
                       src={blog.image} 

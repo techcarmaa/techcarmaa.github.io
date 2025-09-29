@@ -191,117 +191,107 @@ const Services = () => {
             } : { scaleX: 0 }}
           />
           
-          {solutions.map((solution, index) => (
-            <motion.div
-              key={index}
-              initial={{ 
-                opacity: 0, 
-                y: 30
-              }}
-              animate={inView ? { 
-                opacity: 1, 
-                y: 0,
-                transition: {
-                  delay: 0.5 + index * 0.1,
-                  duration: 0.5,
-                  ease: "easeOut"
-                }
-              } : { 
-                opacity: 0, 
-                y: 30
-              }}
-              className="group relative flex-shrink-0 w-96"
-              whileHover={{ 
-                y: -5,
-                transition: { duration: 0.2 }
-              }}
-            >
-              <div className="rounded-xl p-8 h-full relative overflow-hidden cursor-pointer transition-all duration-300 border border-transparent hover:border-white/20 hover:bg-black/20">
-                {/* Background Gradient - Only visible on hover */}
-                <motion.div 
-                  className={`absolute inset-0 bg-gradient-to-br ${solution.color} opacity-0 hover:opacity-10 transition-opacity duration-300`}
-                  whileHover={{ 
-                    scale: 1.02,
-                    transition: { duration: 0.3 }
-                  }}
-                />
-                
-                {/* Icon */}
-                <motion.div 
-                  className="relative z-10 mb-6"
-                  whileHover={{ 
-                    scale: 1.1, 
-                    rotate: 5,
-                    transition: { duration: 0.3 }
-                  }}
-                >
-                  <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${solution.color} p-4 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/25 transition-all duration-300`}>
-                    <motion.div
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.6 }}
-                    >
-                      <solution.icon className="w-full h-full text-white" />
-                    </motion.div>
-                  </div>
-                </motion.div>
-
-                {/* Solution Content */}
-                <div className="relative z-10">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">
-                      {solution.category}
-                    </span>
-                  </div>
-                  
-                  <motion.h3 
-                    className="text-2xl font-bold mb-4 text-white"
+            {solutions.map((solution, index) => (
+              <motion.div
+                key={index}
+                initial={{ 
+                  opacity: 0, 
+                  y: 30
+                }}
+                animate={inView ? { 
+                  opacity: 1, 
+                  y: 0,
+                  transition: {
+                    delay: 0.5 + index * 0.1,
+                    duration: 0.5,
+                    ease: "easeOut"
+                  }
+                } : { 
+                  opacity: 0, 
+                  y: 30
+                }}
+                className="group relative flex-shrink-0 w-96"
+                whileHover={{ 
+                  y: -5,
+                  transition: { duration: 0.2 }
+                }}
+              >
+                <div className="p-8 h-full relative cursor-pointer transition-all duration-300">
+                  {/* Icon */}
+                  <motion.div 
+                    className="relative mb-6"
                     whileHover={{ 
-                      scale: 1.02,
-                      transition: { duration: 0.2 }
+                      scale: 1.1, 
+                      rotate: 5,
+                      transition: { duration: 0.3 }
                     }}
                   >
-                    {solution.title}
-                  </motion.h3>
-                  
-                  <p className="text-white/80 mb-6 leading-relaxed">
-                    {solution.description}
-                  </p>
-
-                  {/* Solution Details - Shown on Hover */}
-                  <div className="transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                    <div className="border-t border-white/10 pt-4">
-                      <p className="text-sm text-white/70 mb-4">
-                        {solution.details}
-                      </p>
-                      <Button 
-                        variant="ghost" 
-                        className="text-white hover:bg-white/10 p-0 h-auto font-semibold group-hover:text-primary transition-colors"
+                    <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${solution.color} p-4 hover:scale-110 hover:shadow-lg hover:shadow-primary/25 transition-all duration-300`}>
+                      <motion.div
+                        whileHover={{ rotate: 360 }}
+                        transition={{ duration: 0.6 }}
                       >
-                        Learn More →
-                      </Button>
+                        <solution.icon className="w-full h-full text-white" />
+                      </motion.div>
+                    </div>
+                  </motion.div>
+
+                  {/* Solution Content */}
+                  <div className="relative">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">
+                        {solution.category}
+                      </span>
+                    </div>
+                    
+                    <motion.h3 
+                      className="text-2xl font-bold mb-4 text-white"
+                      whileHover={{ 
+                        scale: 1.02,
+                        transition: { duration: 0.2 }
+                      }}
+                    >
+                      {solution.title}
+                    </motion.h3>
+                    
+                    <p className="text-white/80 mb-6 leading-relaxed">
+                      {solution.description}
+                    </p>
+
+                    {/* Solution Details - Shown on Hover */}
+                    <div className="transform translate-y-2 opacity-0 hover:translate-y-0 hover:opacity-100 transition-all duration-300">
+                      <div className="border-t border-white/10 pt-4">
+                        <p className="text-sm text-white/70 mb-4">
+                          {solution.details}
+                        </p>
+                        <Button 
+                          variant="ghost" 
+                          className="text-white hover:bg-white/10 p-0 h-auto font-semibold hover:text-primary transition-colors"
+                        >
+                          Learn More →
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </div>
+              </motion.div>
+            ))}
+          </motion.div>
 
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Enhanced Call to Action */}
-        <motion.div
-          className="text-center mt-20"
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { 
-            opacity: 1, 
-            y: 0,
-            transition: { delay: 0.8, duration: 0.5 }
-          } : { opacity: 0, y: 20 }}
-        >
+          {/* Enhanced Call to Action */}
           <motion.div
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.98 }}
+            className="text-center mt-20"
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { 
+              opacity: 1, 
+              y: 0,
+              transition: { delay: 0.8, duration: 0.5 }
+            } : { opacity: 0, y: 20 }}
           >
+            <motion.div
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
+            >
             <Button variant="hero" size="xl" className="group">
               Explore Our Solutions
               <Rocket className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
