@@ -348,65 +348,151 @@ const About = () => {
               <motion.div
                 key={index}
                 variants={{
-                  hidden: { opacity: 0, y: 50, rotateX: -15 },
+                  hidden: { 
+                    opacity: 0, 
+                    x: index % 3 === 0 ? -100 : index % 3 === 1 ? 0 : 100,
+                    y: index % 3 === 1 ? 100 : 0,
+                    rotateX: -15,
+                    scale: 0.8
+                  },
                   visible: { 
                     opacity: 1, 
+                    x: 0,
                     y: 0, 
                     rotateX: 0,
+                    scale: 1,
                     transition: {
                       delay: index * 0.15,
-                      duration: 0.6,
-                      ease: "easeOut"
+                      duration: 0.8,
+                      ease: [0.25, 0.46, 0.45, 0.94],
+                      type: "spring",
+                      stiffness: 100
                     }
                   }
                 }}
-                className="group flex-shrink-0 w-[420px] h-[320px] rounded-xl p-8 hover:bg-black/20 transition-all duration-300 backdrop-blur-sm cursor-pointer relative hover:shadow-2xl hover:shadow-primary/10"
-                whileHover={{ 
-                  y: -15,
-                  rotateY: 8,
-                  scale: 1.02,
-                  transition: { duration: 0.3, ease: "easeOut" }
+                className="group flex-shrink-0 w-[420px] h-[320px] rounded-xl p-8 transition-all duration-500 backdrop-blur-sm cursor-pointer relative overflow-hidden"
+                style={{ 
+                  transformStyle: "preserve-3d",
+                  perspective: "1000px"
                 }}
-                style={{ transformStyle: "preserve-3d" }}
+                whileHover={{ 
+                  scale: 1.05,
+                  rotateY: 8,
+                  z: 50,
+                  transition: { 
+                    duration: 0.3,
+                    ease: "easeOut"
+                  }
+                }}
+                onHoverStart={() => {}}
+                onHoverEnd={() => {}}
               >
-                {/* Hover border effect with glow */}
-                <div className="absolute inset-0 border border-transparent group-hover:border-white/30 rounded-xl transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]" />
-                
-                {/* Background gradient overlay on hover */}
+                {/* Animated background gradient */}
                 <motion.div 
-                  className={`absolute inset-0 bg-gradient-to-br ${technicalExpertise[0]?.color || 'from-blue-500 to-purple-500'} opacity-0 group-hover:opacity-5 rounded-xl transition-opacity duration-300`}
+                  className={`absolute inset-0 bg-gradient-to-br ${tech.color} opacity-0 rounded-xl`}
+                  whileHover={{ 
+                    opacity: 0.1,
+                    scale: 1.1,
+                    transition: { duration: 0.3 }
+                  }}
                 />
+                
+                {/* Glow effect on hover */}
+                <motion.div 
+                  className={`absolute inset-0 bg-gradient-to-br ${tech.color} opacity-0 rounded-xl blur-xl`}
+                  whileHover={{ 
+                    opacity: 0.3,
+                    scale: 1.2,
+                    transition: { duration: 0.3 }
+                  }}
+                  style={{ zIndex: -1 }}
+                />
+                
+                {/* Border with glow */}
+                <motion.div 
+                  className="absolute inset-0 border border-transparent rounded-xl transition-all duration-300"
+                  whileHover={{ 
+                    borderColor: "rgba(255,255,255,0.3)",
+                    boxShadow: `0 0 30px rgba(255,255,255,0.1), 0 0 60px ${tech.color.includes('blue') ? '#3b82f6' : tech.color.includes('purple') ? '#8b5cf6' : tech.color.includes('pink') ? '#ec4899' : tech.color.includes('cyan') ? '#06b6d4' : '#10b981'}40`,
+                    transition: { duration: 0.3 }
+                  }}
+                />
+                
+                {/* Floating and rotating icon */}
                 <motion.div 
                   className="mb-6 relative z-10"
                   whileHover={{ 
-                    scale: 1.15,
-                    rotate: 10,
-                    transition: { duration: 0.3 }
+                    y: -10,
+                    transition: { 
+                      duration: 0.3,
+                      ease: "easeOut"
+                    }
                   }}
                 >
-                  <div className={`w-20 h-20 rounded-lg bg-gradient-to-br ${tech.color} p-5 group-hover:shadow-glow group-hover:shadow-lg transition-all duration-300`}>
+                  <motion.div 
+                    className={`w-20 h-20 rounded-lg bg-gradient-to-br ${tech.color} p-5 transition-all duration-300 relative`}
+                    whileHover={{ 
+                      scale: 1.15,
+                      rotate: 10,
+                      boxShadow: `0 10px 30px ${tech.color.includes('blue') ? '#3b82f6' : tech.color.includes('purple') ? '#8b5cf6' : tech.color.includes('pink') ? '#ec4899' : tech.color.includes('cyan') ? '#06b6d4' : '#10b981'}40`,
+                      transition: { duration: 0.3 }
+                    }}
+                  >
+                    {/* Icon with bounce and rotation */}
                     <motion.div
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.6 }}
+                      whileHover={{ 
+                        rotate: 360,
+                        scale: 1.1,
+                        transition: { 
+                          rotate: { duration: 0.6, ease: "easeInOut" },
+                          scale: { duration: 0.2 }
+                        }
+                      }}
+                      animate={{
+                        y: [0, -2, 0],
+                        transition: {
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }
+                      }}
                     >
                       <tech.icon className="w-full h-full text-white" />
                     </motion.div>
-                  </div>
+                    
+                    {/* Subtle pulse effect */}
+                    <motion.div
+                      className={`absolute inset-0 rounded-lg bg-gradient-to-br ${tech.color} opacity-50`}
+                      animate={{
+                        scale: [1, 1.1, 1],
+                        opacity: [0.5, 0.2, 0.5],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
+                  </motion.div>
                 </motion.div>
                 
+                {/* Title with enhanced hover effect */}
                 <motion.h4 
-                  className="text-2xl font-bold text-white mb-4 relative z-10 group-hover:text-primary transition-colors duration-300"
+                  className="text-2xl font-bold text-white mb-4 relative z-10 transition-colors duration-300"
                   initial={{ opacity: 0 }}
                   animate={inView ? { opacity: 1 } : { opacity: 0 }}
                   transition={{ delay: index * 0.15 + 0.3, duration: 0.4 }}
                   whileHover={{ 
                     scale: 1.05,
+                    color: "#ffffff",
+                    textShadow: "0 0 20px rgba(255,255,255,0.5)",
                     transition: { duration: 0.2 }
                   }}
                 >
                   {tech.title}
                 </motion.h4>
                 
+                {/* Skills list with stagger animation */}
                 <motion.ul 
                   className="space-y-3 relative z-10"
                   variants={{
@@ -424,30 +510,85 @@ const About = () => {
                   {tech.skills.map((skill, skillIndex) => (
                     <motion.li 
                       key={skillIndex} 
-                      className="text-white/70 text-base flex items-center group-hover:text-white/90 transition-colors duration-300"
+                      className="text-white/70 text-base flex items-center transition-colors duration-300"
                       variants={{
-                        hidden: { opacity: 0, x: -20 },
+                        hidden: { opacity: 0, x: -20, scale: 0.8 },
                         visible: { 
                           opacity: 1,
                           x: 0,
-                          transition: { duration: 0.4 }
+                          scale: 1,
+                          transition: { 
+                            duration: 0.4,
+                            ease: "easeOut"
+                          }
                         }
                       }}
                       whileHover={{ 
-                        x: 5,
-                        color: "rgba(255, 255, 255, 0.9)",
+                        x: 8,
+                        color: "rgba(255, 255, 255, 0.95)",
                         transition: { duration: 0.2 }
                       }}
                     >
                       <motion.div 
-                        className="w-1 h-1 bg-primary rounded-full mr-2 flex-shrink-0"
-                        whileHover={{ scale: 1.5 }}
-                        transition={{ duration: 0.2 }}
+                        className="w-1 h-1 bg-primary rounded-full mr-3 flex-shrink-0"
+                        whileHover={{ 
+                          scale: 2,
+                          backgroundColor: "#ffffff",
+                          transition: { duration: 0.2 }
+                        }}
+                        animate={{
+                          scale: [1, 1.2, 1],
+                          transition: {
+                            duration: 2,
+                            repeat: Infinity,
+                            delay: skillIndex * 0.3,
+                            ease: "easeInOut"
+                          }
+                        }}
                       />
-                      {skill}
+                      <motion.span
+                        whileHover={{
+                          scale: 1.02,
+                          transition: { duration: 0.2 }
+                        }}
+                      >
+                        {skill}
+                      </motion.span>
                     </motion.li>
                   ))}
                 </motion.ul>
+                
+                {/* Hover overlay with particle effect */}
+                <motion.div
+                  className="absolute inset-0 pointer-events-none"
+                  initial={{ opacity: 0 }}
+                  whileHover={{ 
+                    opacity: 1,
+                    transition: { duration: 0.3 }
+                  }}
+                >
+                  {[...Array(6)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute w-1 h-1 bg-white/30 rounded-full"
+                      style={{
+                        left: `${Math.random() * 100}%`,
+                        top: `${Math.random() * 100}%`,
+                      }}
+                      animate={{
+                        y: [0, -20, 0],
+                        opacity: [0, 1, 0],
+                        scale: [0, 1, 0],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        delay: i * 0.3,
+                        ease: "easeInOut"
+                      }}
+                    />
+                  ))}
+                </motion.div>
               </motion.div>
             ))}
           </motion.div>
