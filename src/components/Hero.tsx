@@ -32,9 +32,9 @@ const Hero = () => {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Blue-Black Gradient Background */}
-      <div className="absolute inset-0 animated-bg" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-muted/50 to-secondary/20">
+      {/* Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/5 to-secondary/10" />
       
       {/* Subtle Geometric Pattern */}
       <div className="absolute inset-0 opacity-10">
@@ -44,7 +44,7 @@ const Hero = () => {
               <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" strokeWidth="0.5"/>
             </pattern>
           </defs>
-          <rect width="100" height="100" fill="url(#grid)" className="text-white/20" />
+          <rect width="100" height="100" fill="url(#grid)" className="text-foreground/20" />
         </svg>
       </div>
       
@@ -66,7 +66,7 @@ const Hero = () => {
               ease: "linear",
             }}
           >
-            <Icon size={32} className="text-white" />
+            <Icon size={32} className="text-primary/40" />
           </motion.div>
         ))}
       </div>
@@ -80,7 +80,7 @@ const Hero = () => {
         animate={inView ? "visible" : "hidden"}
       >
         <motion.div variants={itemVariants} className="mb-8">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight text-white">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight text-foreground">
             <span className="block mb-4">Hardcore IT.</span>
             <span className="block text-primary">Scalable SaaS.</span>
           </h1>
@@ -88,7 +88,7 @@ const Hero = () => {
 
         <motion.p
           variants={itemVariants}
-          className="text-xl md:text-2xl text-white/80 mb-12 max-w-4xl mx-auto leading-relaxed font-light"
+          className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed font-light"
         >
           From code to cloud—we build, manage & scale your digital world. 
           End-to-end software and infrastructure solutions for businesses across industries.
@@ -103,7 +103,7 @@ const Hero = () => {
             <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </Button>
           
-          <Button variant="ghost" size="xl" className="text-white border-white/30 hover:bg-white/10">
+          <Button variant="outline" size="xl" className="border-primary/30 text-foreground hover:bg-primary/10">
             View Solutions
           </Button>
         </motion.div>
@@ -115,9 +115,9 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5, duration: 0.8 }}
         >
-          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+          <div className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex justify-center">
             <motion.div
-              className="w-1 h-3 bg-white/60 rounded-full mt-2"
+              className="w-1 h-3 bg-primary/60 rounded-full mt-2"
               animate={{ y: [0, 12, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
