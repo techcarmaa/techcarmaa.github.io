@@ -208,7 +208,7 @@ const About = () => {
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
-            <h3 className="text-4xl md:text-5xl font-bold mb-6">
+            <h3 className="text-5xl md:text-7xl font-bold mb-6">
               <span className="text-white">Our Technical Expertise</span>
             </h3>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
