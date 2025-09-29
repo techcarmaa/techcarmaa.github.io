@@ -196,25 +196,15 @@ const Services = () => {
                 key={index}
                 className="group relative flex-shrink-0 w-96"
               >
-                <div className="p-8 h-full relative cursor-pointer transition-all duration-300">
+                <div className="p-8 h-full relative cursor-pointer">
                   {/* Icon */}
-                  <motion.div 
-                    className="relative mb-6"
-                    whileHover={{ 
-                      scale: 1.1, 
-                      rotate: 5,
-                      transition: { duration: 0.3 }
-                    }}
-                  >
-                    <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${solution.color} p-4 hover:scale-110 hover:shadow-lg hover:shadow-primary/25 transition-all duration-300`}>
-                      <motion.div
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.6 }}
-                      >
+                  <div className="relative mb-6">
+                    <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${solution.color} p-4`}>
+                      <div>
                         <solution.icon className="w-full h-full text-white" />
-                      </motion.div>
+                      </div>
                     </div>
-                  </motion.div>
+                  </div>
 
                   {/* Solution Content */}
                   <div className="relative">
@@ -224,29 +214,23 @@ const Services = () => {
                       </span>
                     </div>
                     
-                    <motion.h3 
-                      className="text-2xl font-bold mb-4 text-white"
-                      whileHover={{ 
-                        scale: 1.02,
-                        transition: { duration: 0.2 }
-                      }}
-                    >
+                    <h3 className="text-2xl font-bold mb-4 text-white">
                       {solution.title}
-                    </motion.h3>
+                    </h3>
                     
                     <p className="text-white/80 mb-6 leading-relaxed">
                       {solution.description}
                     </p>
 
-                    {/* Solution Details - Shown on Hover */}
-                    <div className="transform translate-y-2 opacity-0 hover:translate-y-0 hover:opacity-100 transition-all duration-300">
+                    {/* Solution Details */}
+                    <div>
                       <div className="border-t border-white/10 pt-4">
                         <p className="text-sm text-white/70 mb-4">
                           {solution.details}
                         </p>
                         <Button 
                           variant="ghost" 
-                          className="text-white hover:bg-white/10 p-0 h-auto font-semibold hover:text-primary transition-colors"
+                          className="text-white hover:bg-white/10 p-0 h-auto font-semibold hover:text-primary"
                         >
                           Learn More →
                         </Button>

@@ -424,154 +424,37 @@ const About = () => {
             {technicalExpertise.map((tech, index) => (
               <div
                 key={index}
-                className="group flex-shrink-0 w-[420px] h-[320px] p-8 transition-all duration-500 cursor-pointer relative"
+                className="group flex-shrink-0 w-[420px] h-[320px] p-8 cursor-pointer relative"
               >
-                {/* Floating and rotating icon */}
-                <motion.div 
-                  className="mb-6 relative"
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={techInView ? {
-                    y: 0,
-                    opacity: 1,
-                    transition: { delay: 1 + index * 0.2, duration: 0.6 }
-                  } : { y: 20, opacity: 0 }}
-                  whileHover={{ 
-                    y: -10,
-                    transition: { 
-                      duration: 0.3,
-                      ease: "easeOut"
-                    }
-                  }}
-                >
-                  <motion.div 
-                    className={`w-20 h-20 rounded-lg bg-gradient-to-br ${tech.color} p-5 transition-all duration-300 relative`}
-                    whileHover={{ 
-                      scale: 1.15,
-                      rotate: 10,
-                      boxShadow: `0 10px 30px ${tech.color.includes('blue') ? '#3b82f6' : tech.color.includes('purple') ? '#8b5cf6' : tech.color.includes('pink') ? '#ec4899' : tech.color.includes('cyan') ? '#06b6d4' : '#10b981'}40`,
-                      transition: { duration: 0.3 }
-                    }}
-                  >
-                    {/* Icon with bounce and rotation */}
-                    <motion.div
-                      whileHover={{ 
-                        rotate: 360,
-                        scale: 1.1,
-                        transition: { 
-                          rotate: { duration: 0.6, ease: "easeInOut" },
-                          scale: { duration: 0.2 }
-                        }
-                      }}
-                      animate={{
-                        y: [0, -2, 0],
-                        transition: {
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }
-                      }}
-                    >
+                {/* Icon */}
+                <div className="mb-6 relative">
+                  <div className={`w-20 h-20 rounded-lg bg-gradient-to-br ${tech.color} p-5 relative`}>
+                    {/* Icon */}
+                    <div>
                       <tech.icon className="w-full h-full text-white" />
-                    </motion.div>
-                    
-                    {/* Subtle pulse effect */}
-                    <motion.div
-                      className={`absolute inset-0 rounded-lg bg-gradient-to-br ${tech.color} opacity-50`}
-                      animate={{
-                        scale: [1, 1.1, 1],
-                        opacity: [0.5, 0.2, 0.5],
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                    />
-                  </motion.div>
-                </motion.div>
+                    </div>
+                  </div>
+                </div>
                 
                 {/* Title */}
-                <motion.h4 
-                  className="text-2xl font-bold text-white mb-4 relative transition-colors duration-300"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={techInView ? { 
-                    opacity: 1, 
-                    y: 0,
-                    transition: { delay: 1.2 + index * 0.2, duration: 0.5 }
-                  } : { opacity: 0, y: 20 }}
-                  whileHover={{ 
-                    scale: 1.05,
-                    color: "#ffffff",
-                    textShadow: "0 0 20px rgba(255,255,255,0.5)",
-                    transition: { duration: 0.2 }
-                  }}
-                >
+                <h4 className="text-2xl font-bold text-white mb-4 relative">
                   {tech.title}
-                </motion.h4>
+                </h4>
                 
                 {/* Skills list */}
-                <motion.ul 
-                  className="space-y-3 relative"
-                  initial={{ opacity: 0 }}
-                  animate={techInView ? {
-                    opacity: 1,
-                    transition: {
-                      delay: 1.4 + index * 0.2,
-                      staggerChildren: 0.1,
-                      delayChildren: 0.2
-                    }
-                  } : { opacity: 0 }}
-                >
+                <ul className="space-y-3 relative">
                   {tech.skills.map((skill, skillIndex) => (
-                    <motion.li 
+                    <li 
                       key={skillIndex} 
-                      className="text-white/70 text-base flex items-center transition-colors duration-300"
-                      variants={{
-                        hidden: { opacity: 0, x: -20, scale: 0.8 },
-                        visible: { 
-                          opacity: 1,
-                          x: 0,
-                          scale: 1,
-                          transition: { 
-                            duration: 0.4,
-                            ease: "easeOut"
-                          }
-                        }
-                      }}
-                      whileHover={{ 
-                        x: 8,
-                        color: "rgba(255, 255, 255, 0.95)",
-                        transition: { duration: 0.2 }
-                      }}
+                      className="text-white/70 text-base flex items-center"
                     >
-                      <motion.div 
-                        className="w-1 h-1 bg-primary rounded-full mr-3 flex-shrink-0"
-                        whileHover={{ 
-                          scale: 2,
-                          backgroundColor: "#ffffff",
-                          transition: { duration: 0.2 }
-                        }}
-                        animate={{
-                          scale: [1, 1.2, 1],
-                          transition: {
-                            duration: 2,
-                            repeat: Infinity,
-                            delay: skillIndex * 0.3,
-                            ease: "easeInOut"
-                          }
-                        }}
-                      />
-                      <motion.span
-                        whileHover={{
-                          scale: 1.02,
-                          transition: { duration: 0.2 }
-                        }}
-                      >
+                      <div className="w-1 h-1 bg-primary rounded-full mr-3 flex-shrink-0" />
+                      <span>
                         {skill}
-                      </motion.span>
-                    </motion.li>
+                      </span>
+                    </li>
                   ))}
-                </motion.ul>
+                </ul>
               </div>
             ))}
           </motion.div>
