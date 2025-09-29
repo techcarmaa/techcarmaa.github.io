@@ -185,100 +185,161 @@ const About = () => {
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
           >
-            {technicalExpertise.map((tech, index) => (
-              <motion.div
-                key={index}
-                variants={{
-                  hidden: { opacity: 0, y: 50, rotateX: -15 },
-                  visible: { 
-                    opacity: 1, 
-                    y: 0, 
-                    rotateX: 0,
+            {technicalExpertise.map((tech, index) => {
+              // Define scattered starting positions for each card
+              const scatteredPositions = [
+                { x: -400, y: -200, rotate: -45, scale: 0.3 }, // Top left
+                { x: 400, y: -300, rotate: 30, scale: 0.2 },  // Top right
+                { x: -500, y: 100, rotate: -60, scale: 0.4 },  // Middle left
+                { x: 600, y: 50, rotate: 45, scale: 0.3 },     // Middle right
+                { x: -300, y: 400, rotate: -30, scale: 0.2 },  // Bottom left
+                { x: 350, y: 350, rotate: 60, scale: 0.4 },    // Bottom right
+              ];
+
+              const startPosition = scatteredPositions[index] || { x: 0, y: -100, rotate: 0, scale: 0.5 };
+
+              return (
+                <motion.div
+                  key={index}
+                  className="glass rounded-xl p-8 group hover:scale-105 transition-all duration-300"
+                  initial={{
+                    x: startPosition.x,
+                    y: startPosition.y,
+                    rotate: startPosition.rotate,
+                    scale: startPosition.scale,
+                    opacity: 0,
+                  }}
+                  animate={inView ? {
+                    x: 0,
+                    y: 0,
+                    rotate: 0,
+                    scale: 1,
+                    opacity: 1,
                     transition: {
-                      delay: index * 0.15,
-                      duration: 0.6,
-                      ease: "easeOut"
+                      delay: index * 0.2 + 0.5,
+                      duration: 1.2,
+                      ease: [0.23, 1, 0.320, 1], // Custom easing for smooth convergence
+                      type: "spring",
+                      stiffness: 60,
+                      damping: 15,
                     }
-                  }
-                }}
-                className="glass rounded-xl p-8 group hover:scale-105 transition-all duration-300"
-                whileHover={{ 
-                  y: -10,
-                  rotateY: 5,
-                  transition: { duration: 0.3 }
-                }}
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <motion.div 
-                  className="mb-6"
+                  } : {
+                    x: startPosition.x,
+                    y: startPosition.y,
+                    rotate: startPosition.rotate,
+                    scale: startPosition.scale,
+                    opacity: 0,
+                  }}
                   whileHover={{ 
-                    scale: 1.1,
-                    rotate: 5,
+                    y: -10,
+                    rotateY: 5,
+                    scale: 1.05,
                     transition: { duration: 0.3 }
                   }}
+                  style={{ transformStyle: "preserve-3d" }}
                 >
-                  <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${tech.color} p-4 group-hover:shadow-glow transition-all duration-300`}>
-                    <motion.div
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.6 }}
-                    >
-                      <tech.icon className="w-full h-full text-white" />
-                    </motion.div>
-                  </div>
-                </motion.div>
-                
-                <motion.h4 
-                  className="text-xl font-bold text-white mb-4"
-                  initial={{ opacity: 0 }}
-                  animate={inView ? { opacity: 1 } : { opacity: 0 }}
-                  transition={{ delay: index * 0.15 + 0.3, duration: 0.4 }}
-                >
-                  {tech.title}
-                </motion.h4>
-                
-                <motion.ul 
-                  className="space-y-2"
-                  variants={{
-                    hidden: {},
-                    visible: {
+                  <motion.div 
+                    className="mb-6"
+                    initial={{ rotate: 180, scale: 0 }}
+                    animate={inView ? { 
+                      rotate: 0, 
+                      scale: 1,
                       transition: {
-                        staggerChildren: 0.1,
-                        delayChildren: index * 0.15 + 0.4
+                        delay: index * 0.2 + 1,
+                        duration: 0.8,
+                        type: "spring",
+                        stiffness: 100,
                       }
-                    }
-                  }}
-                  initial="hidden"
-                  animate={inView ? "visible" : "hidden"}
-                >
-                  {tech.skills.map((skill, skillIndex) => (
-                    <motion.li 
-                      key={skillIndex} 
-                      className="text-white/70 text-sm flex items-center"
-                      variants={{
-                        hidden: { opacity: 0, x: -20 },
-                        visible: { 
-                          opacity: 1, 
-                          x: 0,
-                          transition: { duration: 0.4 }
+                    } : { rotate: 180, scale: 0 }}
+                    whileHover={{ 
+                      scale: 1.1,
+                      rotate: 5,
+                      transition: { duration: 0.3 }
+                    }}
+                  >
+                    <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${tech.color} p-4 group-hover:shadow-glow transition-all duration-300`}>
+                      <motion.div
+                        whileHover={{ rotate: 360 }}
+                        transition={{ duration: 0.6 }}
+                      >
+                        <tech.icon className="w-full h-full text-white" />
+                      </motion.div>
+                    </div>
+                  </motion.div>
+                  
+                  <motion.h4 
+                    className="text-xl font-bold text-white mb-4"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={inView ? { 
+                      opacity: 1, 
+                      y: 0,
+                      transition: {
+                        delay: index * 0.2 + 1.2,
+                        duration: 0.6
+                      }
+                    } : { opacity: 0, y: 20 }}
+                  >
+                    {tech.title}
+                  </motion.h4>
+                  
+                  <motion.ul 
+                    className="space-y-2"
+                    variants={{
+                      hidden: {},
+                      visible: {
+                        transition: {
+                          staggerChildren: 0.1,
+                          delayChildren: index * 0.2 + 1.4
                         }
-                      }}
-                      whileHover={{ 
-                        x: 5,
-                        color: "rgba(255, 255, 255, 0.9)",
-                        transition: { duration: 0.2 }
-                      }}
-                    >
-                      <motion.div 
-                        className="w-1 h-1 bg-primary rounded-full mr-2 flex-shrink-0"
-                        whileHover={{ scale: 1.5 }}
-                        transition={{ duration: 0.2 }}
-                      />
-                      {skill}
-                    </motion.li>
-                  ))}
-                </motion.ul>
-              </motion.div>
-            ))}
+                      }
+                    }}
+                    initial="hidden"
+                    animate={inView ? "visible" : "hidden"}
+                  >
+                    {tech.skills.map((skill, skillIndex) => (
+                      <motion.li 
+                        key={skillIndex} 
+                        className="text-white/70 text-sm flex items-center"
+                        variants={{
+                          hidden: { opacity: 0, x: -30, scale: 0.8 },
+                          visible: { 
+                            opacity: 1, 
+                            x: 0,
+                            scale: 1,
+                            transition: { 
+                              duration: 0.5,
+                              type: "spring",
+                              stiffness: 100
+                            }
+                          }
+                        }}
+                        whileHover={{ 
+                          x: 5,
+                          color: "rgba(255, 255, 255, 0.9)",
+                          transition: { duration: 0.2 }
+                        }}
+                      >
+                        <motion.div 
+                          className="w-1 h-1 bg-primary rounded-full mr-2 flex-shrink-0"
+                          initial={{ scale: 0 }}
+                          animate={inView ? { 
+                            scale: 1,
+                            transition: {
+                              delay: index * 0.2 + 1.5 + skillIndex * 0.1,
+                              duration: 0.3,
+                              type: "spring",
+                              stiffness: 200
+                            }
+                          } : { scale: 0 }}
+                          whileHover={{ scale: 1.5 }}
+                        />
+                        {skill}
+                      </motion.li>
+                    ))}
+                  </motion.ul>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </motion.div>
 
