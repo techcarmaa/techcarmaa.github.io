@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, Linkedin, Mail } from "lucide-react";
-import { useRef } from "react";
+import { Linkedin, Mail } from "lucide-react";
 import anirudhImage from "@/assets/team/anirudh-dhobal.jpg";
 import sandeepImage from "@/assets/team/sandeep-singh.jpg";
 import ankitImage from "@/assets/team/ankit-kumar-patel.jpg";
@@ -12,20 +11,6 @@ const TeamSection = () => {
     threshold: 0.1,
     triggerOnce: true,
   });
-
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const scrollLeft = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: -400, behavior: 'smooth' });
-    }
-  };
-
-  const scrollRight = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: 400, behavior: 'smooth' });
-    }
-  };
 
   const teamMembers = [
     {
@@ -83,7 +68,7 @@ const TeamSection = () => {
       
       <motion.div
         ref={ref}
-        className="relative z-10 max-w-7xl mx-auto"
+        className="relative z-10 max-w-[1400px] mx-auto"
         variants={containerVariants}
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
@@ -104,39 +89,17 @@ const TeamSection = () => {
           </motion.p>
         </div>
 
-        {/* Navigation Controls */}
-        <div className="flex justify-center items-center gap-4 mb-8">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={scrollLeft}
-            className="text-white hover:bg-white/10 border border-white/20"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </Button>
-          <span className="text-white/60 text-sm">Meet our experts</span>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={scrollRight}
-            className="text-white hover:bg-white/10 border border-white/20"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </Button>
-        </div>
 
         {/* Team Cards */}
-        <motion.div 
-          ref={scrollRef}
-          className="flex gap-8 overflow-x-auto scrollbar-hide pb-8"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-8"
           variants={containerVariants}
         >
           {teamMembers.map((member, index) => (
             <motion.div
               key={index}
               variants={cardVariants}
-              className="group relative flex-shrink-0 w-[450px]"
+              className="group relative w-full"
               whileHover={{ y: -10 }}
               transition={{ duration: 0.3 }}
             >
