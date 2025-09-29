@@ -252,7 +252,7 @@ const About = () => {
               <motion.div
                 key={index}
                 variants={statsVariants}
-                className="glass rounded-xl p-8 text-center group hover:scale-105 transition-transform duration-300"
+                className="rounded-xl p-8 text-center group hover:scale-105 transition-transform duration-300 border border-transparent hover:border-white/20 hover:bg-black/20"
                 whileHover={{ y: -5 }}
               >
                 <div className="mb-6">
@@ -440,7 +440,7 @@ const About = () => {
                   opacity: 0, 
                   y: 30
                 }}
-                className="group flex-shrink-0 w-[420px] h-[320px] rounded-xl p-8 transition-all duration-500 backdrop-blur-sm cursor-pointer relative overflow-hidden"
+                className="group flex-shrink-0 w-[420px] h-[320px] rounded-xl p-8 transition-all duration-500 backdrop-blur-sm cursor-pointer relative overflow-hidden hover:bg-black/20"
                 style={{ 
                   transformStyle: "preserve-3d",
                   perspective: "1000px"
@@ -452,7 +452,7 @@ const About = () => {
                   }
                 }}
               >
-                {/* Animated background gradient */}
+                {/* Animated background gradient - only visible on hover */}
                 <motion.div 
                   className={`absolute inset-0 bg-gradient-to-br ${tech.color} opacity-0 rounded-xl`}
                   whileHover={{ 
@@ -473,7 +473,7 @@ const About = () => {
                   style={{ zIndex: -1 }}
                 />
                 
-                {/* Border with glow */}
+                {/* Border with glow - only visible on hover */}
                 <motion.div 
                   className="absolute inset-0 border border-transparent rounded-xl transition-all duration-300"
                   whileHover={{ 
@@ -728,7 +728,7 @@ const About = () => {
                     }
                   }
                 }}
-                className="group rounded-xl p-8 hover:bg-black/20 transition-all duration-300 cursor-pointer hover:scale-105 border border-transparent hover:border-white/30"
+                className="group rounded-xl p-8 transition-all duration-300 cursor-pointer hover:scale-105 border border-transparent hover:border-white/30 hover:bg-black/20"
                 whileHover={{ y: -10 }}
               >
                 <motion.div 
@@ -881,10 +881,10 @@ const About = () => {
                       }
                     }
                   }}
-                  className="group rounded-xl overflow-hidden hover:bg-black/20 transition-all duration-300 cursor-pointer hover:scale-105 border border-transparent hover:border-white/30"
-                  whileHover={{ y: -8 }}
-                  onClick={() => setSelectedBlog(blog)}
-                >
+                className="group rounded-xl overflow-hidden transition-all duration-300 cursor-pointer hover:scale-105 border border-transparent hover:border-white/30 hover:bg-black/20"
+                whileHover={{ y: -8 }}
+                onClick={() => setSelectedBlog(blog)}
+              >
                   <div className="relative h-48 overflow-hidden">
                     <img 
                       src={blog.image} 
@@ -976,7 +976,7 @@ const About = () => {
                       initial={{ opacity: 0, x: 50 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 + 0.5, duration: 0.5 }}
-                      className="group flex-shrink-0 w-[320px] rounded-xl overflow-hidden hover:bg-black/20 transition-all duration-300 cursor-pointer hover:scale-105 border border-transparent hover:border-white/30"
+                      className="group flex-shrink-0 w-[320px] rounded-xl overflow-hidden transition-all duration-300 cursor-pointer hover:scale-105 border border-transparent hover:border-white/30 hover:bg-black/20"
                       whileHover={{ y: -5 }}
                       onClick={() => setSelectedBlog(blog)}
                     >

@@ -205,7 +205,7 @@ const TeamSection = () => {
                 </div>
 
                 {/* Border Effect */}
-                <div className="absolute inset-0 border border-white/10 rounded-xl group-hover:border-white/30 transition-colors duration-300" />
+                <div className="absolute inset-0 border border-transparent group-hover:border-white/30 rounded-xl transition-colors duration-300" />
               </div>
             </motion.div>
           ))}

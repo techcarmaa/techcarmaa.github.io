@@ -128,13 +128,13 @@ const Contact = () => {
             
             <div className="space-y-8 mb-12">
               {contactInfo.map((item, index) => (
-                <motion.a
-                  key={index}
-                  href={item.href}
-                  className="flex items-center space-x-6 group p-6 rounded-xl glass hover:bg-white/10 transition-all duration-300"
-                  whileHover={{ x: 10 }}
-                  transition={{ duration: 0.2 }}
-                >
+                  <motion.a
+                    key={index}
+                    href={item.href}
+                    className="flex items-center space-x-6 group p-6 rounded-xl transition-all duration-300 hover:bg-white/10"
+                    whileHover={{ x: 10 }}
+                    transition={{ duration: 0.2 }}
+                  >
                   <div className="w-14 h-14 rounded-lg bg-gradient-primary p-3 group-hover:scale-110 transition-transform duration-300">
                     <item.icon className="w-full h-full text-white" />
                   </div>
@@ -181,7 +181,7 @@ const Contact = () => {
             } : { opacity: 0, x: 30 }}
           >
             <motion.div 
-              className="glass rounded-2xl p-8"
+              className="rounded-2xl p-8 border border-transparent hover:border-white/10 transition-all duration-300 hover:bg-black/20"
               whileHover={{ y: -2 }}
               transition={{ duration: 0.2 }}
             >
