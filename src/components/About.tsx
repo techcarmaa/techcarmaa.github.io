@@ -310,46 +310,42 @@ const About = () => {
         >
           <motion.div 
             className="text-center mb-16"
-            initial={{ opacity: 0, y: 60, scale: 0.8 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={techInView ? { 
               opacity: 1, 
-              y: 0, 
-              scale: 1,
-              transition: {
-                duration: 0.8,
-                ease: [0.25, 0.46, 0.45, 0.94]
-              }
-            } : { opacity: 0, y: 60, scale: 0.8 }}
+              y: 0,
+              transition: { duration: 0.5 }
+            } : { opacity: 0, y: 20 }}
           >
             <motion.div
               initial={{ width: 0 }}
               animate={techInView ? { 
-                width: "100px",
-                transition: { delay: 0.3, duration: 0.6 }
+                width: "80px",
+                transition: { delay: 0.2, duration: 0.5 }
               } : { width: 0 }}
-              className="h-1 bg-gradient-to-r from-primary to-primary/50 mx-auto mb-8 rounded-full"
+              className="h-1 bg-gradient-to-r from-primary to-primary/50 mx-auto mb-6 rounded-full"
             />
             
             <motion.h3 
               className="text-5xl md:text-7xl font-bold mb-6"
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={techInView ? { 
                 opacity: 1, 
                 y: 0,
-                transition: { delay: 0.2, duration: 0.6 }
-              } : { opacity: 0, y: 30 }}
+                transition: { delay: 0.2, duration: 0.5 }
+              } : { opacity: 0, y: 20 }}
             >
               <span className="text-white">Our Technical Expertise</span>
             </motion.h3>
             
             <motion.p 
               className="text-xl text-muted-foreground max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={techInView ? { 
                 opacity: 1, 
                 y: 0,
-                transition: { delay: 0.4, duration: 0.6 }
-              } : { opacity: 0, y: 20 }}
+                transition: { delay: 0.3, duration: 0.5 }
+              } : { opacity: 0, y: 15 }}
             >
               Deep technical knowledge across modern technologies and frameworks that power enterprise-grade solutions.
             </motion.p>
@@ -430,34 +426,19 @@ const About = () => {
                 key={index}
                 initial={{ 
                   opacity: 0, 
-                  x: index % 3 === 0 ? -150 : index % 3 === 1 ? 0 : 150,
-                  y: index % 3 === 1 ? 150 : 50,
-                  rotateX: -20,
-                  rotateY: index % 2 === 0 ? -20 : 20,
-                  scale: 0.7
+                  y: 30
                 }}
                 animate={techInView ? { 
                   opacity: 1, 
-                  x: 0,
-                  y: 0, 
-                  rotateX: 0,
-                  rotateY: 0,
-                  scale: 1,
+                  y: 0,
                   transition: {
-                    delay: 0.8 + index * 0.2,
-                    duration: 1,
-                    ease: [0.25, 0.46, 0.45, 0.94],
-                    type: "spring",
-                    stiffness: 80,
-                    damping: 12
+                    delay: 0.5 + index * 0.1,
+                    duration: 0.5,
+                    ease: "easeOut"
                   }
                 } : {
                   opacity: 0, 
-                  x: index % 3 === 0 ? -150 : index % 3 === 1 ? 0 : 150,
-                  y: index % 3 === 1 ? 150 : 50,
-                  rotateX: -20,
-                  rotateY: index % 2 === 0 ? -20 : 20,
-                  scale: 0.7
+                  y: 30
                 }}
                 className="group flex-shrink-0 w-[420px] h-[320px] rounded-xl p-8 transition-all duration-500 backdrop-blur-sm cursor-pointer relative overflow-hidden"
                 style={{ 
@@ -465,12 +446,9 @@ const About = () => {
                   perspective: "1000px"
                 }}
                 whileHover={{ 
-                  scale: 1.05,
-                  rotateY: 8,
-                  z: 50,
+                  y: -8,
                   transition: { 
-                    duration: 0.3,
-                    ease: "easeOut"
+                    duration: 0.2
                   }
                 }}
               >

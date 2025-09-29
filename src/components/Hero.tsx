@@ -81,16 +81,13 @@ const Hero = () => {
       >
         <motion.div 
           variants={{
-            hidden: { opacity: 0, y: 100, scale: 0.8 },
+            hidden: { opacity: 0, y: 20 },
             visible: { 
               opacity: 1, 
-              y: 0, 
-              scale: 1,
+              y: 0,
               transition: { 
-                duration: 1,
-                ease: [0.25, 0.46, 0.45, 0.94],
-                type: "spring",
-                stiffness: 100
+                duration: 0.6,
+                ease: "easeOut"
               }
             }
           }} 
@@ -99,32 +96,32 @@ const Hero = () => {
           <motion.div
             initial={{ width: 0 }}
             animate={inView ? { 
-              width: "120px",
-              transition: { delay: 0.5, duration: 0.8 }
+              width: "80px",
+              transition: { delay: 0.3, duration: 0.5 }
             } : { width: 0 }}
-            className="h-1 bg-gradient-to-r from-primary to-primary/50 mx-auto mb-8 rounded-full"
+            className="h-1 bg-gradient-to-r from-primary to-primary/50 mx-auto mb-6 rounded-full"
           />
           
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight text-white">
             <motion.span 
               className="block mb-4"
-              initial={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={inView ? { 
                 opacity: 1, 
-                x: 0,
-                transition: { delay: 0.3, duration: 0.6 }
-              } : { opacity: 0, x: -50 }}
+                y: 0,
+                transition: { delay: 0.2, duration: 0.5 }
+              } : { opacity: 0, y: 20 }}
             >
               Hardcore IT.
             </motion.span>
             <motion.span 
               className="block text-primary"
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={inView ? { 
                 opacity: 1, 
-                x: 0,
-                transition: { delay: 0.5, duration: 0.6 }
-              } : { opacity: 0, x: 50 }}
+                y: 0,
+                transition: { delay: 0.3, duration: 0.5 }
+              } : { opacity: 0, y: 20 }}
             >
               Scalable SaaS.
             </motion.span>
@@ -133,11 +130,11 @@ const Hero = () => {
 
         <motion.p
           variants={{
-            hidden: { opacity: 0, y: 30 },
+            hidden: { opacity: 0, y: 15 },
             visible: { 
               opacity: 1, 
               y: 0,
-              transition: { delay: 0.7, duration: 0.6 }
+              transition: { delay: 0.4, duration: 0.5 }
             }
           }}
           className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed font-light"
@@ -148,18 +145,18 @@ const Hero = () => {
 
         <motion.div
           variants={{
-            hidden: { opacity: 0, scale: 0.8 },
+            hidden: { opacity: 0, y: 15 },
             visible: { 
               opacity: 1, 
-              scale: 1,
-              transition: { delay: 0.9, duration: 0.5 }
+              y: 0,
+              transition: { delay: 0.5, duration: 0.5 }
             }
           }}
           className="flex flex-col sm:flex-row gap-6 justify-center items-center"
         >
           <motion.div
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.98 }}
           >
             <Button variant="default" size="xl" className="bg-primary hover:bg-primary-hover">
               Get Started
@@ -168,8 +165,8 @@ const Hero = () => {
           </motion.div>
           
           <motion.div
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.98 }}
           >
             <Button variant="outline" size="xl" className="border-primary/30 text-foreground hover:bg-primary/10">
               View Solutions

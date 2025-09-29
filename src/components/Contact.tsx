@@ -97,10 +97,10 @@ const Contact = () => {
           <motion.div
             initial={{ width: 0 }}
             animate={inView ? { 
-              width: "120px",
-              transition: { delay: 0.3, duration: 0.8 }
+              width: "80px",
+              transition: { delay: 0.2, duration: 0.5 }
             } : { width: 0 }}
-            className="h-1 bg-gradient-to-r from-primary to-primary/50 mx-auto mb-8 rounded-full"
+            className="h-1 bg-gradient-to-r from-primary to-primary/50 mx-auto mb-6 rounded-full"
           />
           
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
@@ -115,12 +115,12 @@ const Contact = () => {
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Enhanced Contact Information */}
           <motion.div 
-            initial={{ opacity: 0, x: -100 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={inView ? { 
               opacity: 1, 
               x: 0,
-              transition: { delay: 0.5, duration: 0.8, ease: "easeOut" }
-            } : { opacity: 0, x: -100 }}
+              transition: { delay: 0.3, duration: 0.5 }
+            } : { opacity: 0, x: -30 }}
           >
             <h3 className="text-3xl font-bold mb-12 text-white">
               Get In Touch
@@ -173,17 +173,17 @@ const Contact = () => {
 
           {/* Enhanced Contact Form */}
           <motion.div 
-            initial={{ opacity: 0, x: 100 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={inView ? { 
               opacity: 1, 
               x: 0,
-              transition: { delay: 0.7, duration: 0.8, ease: "easeOut" }
-            } : { opacity: 0, x: 100 }}
+              transition: { delay: 0.4, duration: 0.5 }
+            } : { opacity: 0, x: 30 }}
           >
             <motion.div 
               className="glass rounded-2xl p-8"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
+              whileHover={{ y: -2 }}
+              transition={{ duration: 0.2 }}
             >
               <h3 className="text-3xl font-bold mb-8 text-white">
                 Start Your Project

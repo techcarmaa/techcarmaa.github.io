@@ -111,31 +111,30 @@ const Services = () => {
           <motion.div
             initial={{ width: 0 }}
             animate={inView ? { 
-              width: "120px",
-              transition: { delay: 0.2, duration: 0.8 }
+              width: "80px",
+              transition: { delay: 0.2, duration: 0.5 }
             } : { width: 0 }}
-            className="h-1 bg-gradient-to-r from-primary to-primary/50 mx-auto mb-8 rounded-full"
+            className="h-1 bg-gradient-to-r from-primary to-primary/50 mx-auto mb-6 rounded-full"
           />
           
           <motion.h2
-            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={inView ? { 
               opacity: 1, 
-              y: 0, 
-              scale: 1,
-              transition: { delay: 0.3, duration: 0.8, ease: "easeOut" }
-            } : { opacity: 0, y: 50, scale: 0.9 }}
+              y: 0,
+              transition: { delay: 0.2, duration: 0.5 }
+            } : { opacity: 0, y: 20 }}
             className="text-4xl md:text-6xl font-bold mb-6"
           >
             <span className="text-white">IT & SaaS Solutions</span>
           </motion.h2>
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={inView ? { 
               opacity: 1, 
               y: 0,
-              transition: { delay: 0.5, duration: 0.6 }
-            } : { opacity: 0, y: 30 }}
+              transition: { delay: 0.3, duration: 0.5 }
+            } : { opacity: 0, y: 15 }}
             className="text-xl text-muted-foreground max-w-3xl mx-auto"
           >
             Your technology growth partner—apps, web, SaaS & infrastructure. Hardcore IT company powering digital transformation from startups to enterprises.
@@ -197,37 +196,24 @@ const Services = () => {
               key={index}
               initial={{ 
                 opacity: 0, 
-                y: 100,
-                x: index % 2 === 0 ? -50 : 50,
-                rotateY: index % 2 === 0 ? -20 : 20,
-                scale: 0.8
+                y: 30
               }}
               animate={inView ? { 
                 opacity: 1, 
                 y: 0,
-                x: 0,
-                rotateY: 0,
-                scale: 1,
                 transition: {
-                  delay: 1.1 + index * 0.15,
-                  duration: 0.8,
-                  ease: [0.25, 0.46, 0.45, 0.94],
-                  type: "spring",
-                  stiffness: 80
+                  delay: 0.5 + index * 0.1,
+                  duration: 0.5,
+                  ease: "easeOut"
                 }
               } : { 
                 opacity: 0, 
-                y: 100,
-                x: index % 2 === 0 ? -50 : 50,
-                rotateY: index % 2 === 0 ? -20 : 20,
-                scale: 0.8
+                y: 30
               }}
               className="group relative flex-shrink-0 w-96"
               whileHover={{ 
-                y: -10, 
-                scale: 1.02, 
-                rotateY: 2,
-                transition: { duration: 0.3, ease: "easeOut" }
+                y: -5,
+                transition: { duration: 0.2 }
               }}
             >
               <div className="rounded-xl p-8 h-full relative overflow-hidden cursor-pointer group-hover:bg-black/10 transition-all duration-300 backdrop-blur-sm">
@@ -313,17 +299,16 @@ const Services = () => {
         {/* Enhanced Call to Action */}
         <motion.div
           className="text-center mt-20"
-          initial={{ opacity: 0, y: 50, scale: 0.9 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { 
             opacity: 1, 
-            y: 0, 
-            scale: 1,
-            transition: { delay: 1.8, duration: 0.6 }
-          } : { opacity: 0, y: 50, scale: 0.9 }}
+            y: 0,
+            transition: { delay: 0.8, duration: 0.5 }
+          } : { opacity: 0, y: 20 }}
         >
           <motion.div
-            whileHover={{ scale: 1.05, y: -5 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.98 }}
           >
             <Button variant="hero" size="xl" className="group">
               Explore Our Solutions
