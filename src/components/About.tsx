@@ -1,13 +1,28 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Button } from "@/components/ui/button";
-import { Award, Users, Lightbulb, Globe, Code, Cloud, Database, Smartphone, Server, Settings } from "lucide-react";
+import { Award, Users, Lightbulb, Globe, Code, Cloud, Database, Smartphone, Server, Settings, ChevronLeft, ChevronRight } from "lucide-react";
+import { useRef } from "react";
 
 const About = () => {
   const [ref, inView] = useInView({
     threshold: 0.1,
     triggerOnce: true,
   });
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -400, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 400, behavior: 'smooth' });
+    }
+  };
 
   const stats = [
     { number: "500+", label: "Projects Delivered", icon: Award },
@@ -201,8 +216,31 @@ const About = () => {
             </p>
           </motion.div>
 
+          {/* Navigation Controls */}
+          <div className="flex justify-center items-center gap-4 mb-8">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={scrollLeft}
+              className="text-white hover:bg-white/10 border border-white/20"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </Button>
+            <span className="text-white/60 text-sm">Explore our expertise</span>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={scrollRight}
+              className="text-white hover:bg-white/10 border border-white/20"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </Button>
+          </div>
+
           <motion.div 
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            ref={scrollRef}
+            className="flex gap-8 overflow-x-auto scrollbar-hide pb-8"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             variants={containerVariants}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
@@ -223,7 +261,7 @@ const About = () => {
                     }
                   }
                 }}
-                className="glass rounded-xl p-8 group hover:scale-105 transition-all duration-300"
+                className="group flex-shrink-0 w-[380px] rounded-xl p-8 hover:bg-black/10 transition-all duration-300 backdrop-blur-sm cursor-pointer relative"
                 whileHover={{ 
                   y: -10,
                   rotateY: 5,
@@ -231,6 +269,8 @@ const About = () => {
                 }}
                 style={{ transformStyle: "preserve-3d" }}
               >
+                {/* Hover border effect */}
+                <div className="absolute inset-0 border border-transparent group-hover:border-white/20 rounded-xl transition-colors duration-300" />
                 <motion.div 
                   className="mb-6"
                   whileHover={{ 
