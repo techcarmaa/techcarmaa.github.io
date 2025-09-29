@@ -33,28 +33,40 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0 animated-bg" />
+      {/* Professional Navy Background */}
+      <div className="absolute inset-0 bg-background" />
       
-      {/* Floating Geometric Shapes */}
+      {/* Subtle Geometric Pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <defs>
+            <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+              <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+            </pattern>
+          </defs>
+          <rect width="100" height="100" fill="url(#grid)" className="text-white/20" />
+        </svg>
+      </div>
+      
+      {/* Floating Elements - More Subtle */}
       <div className="absolute inset-0 overflow-hidden">
         {floatingIcons.map(({ Icon, delay, x, y }, index) => (
           <motion.div
             key={index}
-            className="absolute opacity-20"
+            className="absolute opacity-10"
             style={{ left: `${50 + x}px`, top: `${50 + y}%` }}
             animate={{
-              y: [0, -20, 0],
-              rotate: [0, 180, 360],
+              y: [0, -15, 0],
+              rotate: [0, 90, 180, 270, 360],
             }}
             transition={{
-              duration: 6,
+              duration: 12,
               repeat: Infinity,
               delay,
-              ease: "easeInOut",
+              ease: "linear",
             }}
           >
-            <Icon size={48} className="text-white" />
+            <Icon size={32} className="text-white" />
           </motion.div>
         ))}
       </div>
@@ -68,31 +80,31 @@ const Hero = () => {
         animate={inView ? "visible" : "hidden"}
       >
         <motion.div variants={itemVariants} className="mb-8">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight">
-            <span className="block text-white mb-4">Future-Ready</span>
-            <span className="block gradient-text">Technology</span>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight text-white">
+            <span className="block mb-4">Where innovation</span>
+            <span className="block text-primary">drives performance</span>
           </h1>
         </motion.div>
 
         <motion.p
           variants={itemVariants}
-          className="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed"
+          className="text-xl md:text-2xl text-white/80 mb-12 max-w-4xl mx-auto leading-relaxed font-light"
         >
-          Transforming industries through cutting-edge automotive technology, 
-          AI-powered solutions, and innovative digital experiences that drive tomorrow's world.
+          With CarmaaTech's cutting-edge platform, technology teams can build, manage, 
+          and optimize intelligent automotive systems that drive real business results.
         </motion.p>
 
         <motion.div
           variants={itemVariants}
           className="flex flex-col sm:flex-row gap-6 justify-center items-center"
         >
-          <Button variant="hero" size="xl" className="group">
-            Explore Solutions
+          <Button variant="default" size="xl" className="bg-primary hover:bg-primary-hover">
+            Watch Demo
             <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </Button>
           
-          <Button variant="glass" size="xl">
-            Watch Demo
+          <Button variant="ghost" size="xl" className="text-white border-white/30 hover:bg-white/10">
+            Talk to Sales
           </Button>
         </motion.div>
 

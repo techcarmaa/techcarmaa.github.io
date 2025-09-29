@@ -6,28 +6,28 @@
 
 @layer base {
   :root {
-    /* Core Brand Colors */
-    --background: 240 10% 3.9%;
+    /* Core Brand Colors - Webflow Inspired */
+    --background: 217 33% 8%;
     --foreground: 0 0% 98%;
 
-    --card: 240 10% 3.9%;
+    --card: 217 33% 8%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 240 10% 3.9%;
+    --popover: 217 33% 8%;
     --popover-foreground: 0 0% 98%;
 
-    /* Primary Brand - Electric Purple */
-    --primary: 258 90% 66%;
+    /* Primary Brand - Webflow Blue */
+    --primary: 213 94% 68%;
     --primary-foreground: 0 0% 98%;
-    --primary-hover: 258 90% 76%;
+    --primary-hover: 213 94% 78%;
 
-    /* Secondary - Cyber Cyan */
-    --secondary: 189 95% 65%;
-    --secondary-foreground: 240 10% 3.9%;
-    --secondary-hover: 189 95% 75%;
+    /* Secondary - Clean Navy */
+    --secondary: 220 26% 18%;
+    --secondary-foreground: 0 0% 98%;
+    --secondary-hover: 220 26% 28%;
 
-    /* Accent - Electric Blue */
-    --accent: 237 100% 70%;
+    /* Accent - Bright Blue */
+    --accent: 213 94% 68%;
     --accent-foreground: 0 0% 98%;
 
     /* Muted & Support */
@@ -47,11 +47,11 @@
     --radius-lg: 1.5rem;
     --radius-xl: 2rem;
 
-    /* Gradient Definitions */
+    /* Gradient Definitions - Professional Blue Theme */
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(258 90% 66%) 0%, hsl(237 100% 70%) 50%, hsl(189 95% 65%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(217 33% 8%) 0%, hsl(220 26% 12%) 50%, hsl(217 33% 6%) 100%);
     --gradient-accent: linear-gradient(90deg, hsl(var(--accent)) 0%, hsl(var(--primary)) 100%);
-    --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
 
     /* Shadow System */
     --shadow-glow: 0 0 50px hsl(var(--primary) / 0.3);
