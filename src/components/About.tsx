@@ -353,23 +353,6 @@ const About = () => {
             ))}
           </motion.div>
         </motion.div>
-
-        {/* Mission Statement */}
-        <motion.div
-          variants={itemVariants}
-          className="mt-24 text-center max-w-4xl mx-auto"
-        >
-          <div className="glass rounded-2xl p-12">
-            <h3 className="text-3xl md:text-4xl font-bold mb-8">
-              <span className="text-white">Our Mission</span>
-            </h3>
-            <p className="text-xl text-white/90 leading-relaxed">
-              "To empower businesses across industries with hardcore IT solutions, scalable SaaS platforms, 
-              and robust infrastructure that transforms digital capabilities and accelerates growth. 
-              We're your technology growth partner—from code to cloud."
-            </p>
-          </div>
-        </motion.div>
       </motion.div>
     </section>
   );
