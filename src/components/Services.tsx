@@ -192,29 +192,9 @@ const Services = () => {
           />
           
             {solutions.map((solution, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ 
-                  opacity: 0, 
-                  y: 30
-                }}
-                animate={inView ? { 
-                  opacity: 1, 
-                  y: 0,
-                  transition: {
-                    delay: 0.5 + index * 0.1,
-                    duration: 0.5,
-                    ease: "easeOut"
-                  }
-                } : { 
-                  opacity: 0, 
-                  y: 30
-                }}
                 className="group relative flex-shrink-0 w-96"
-                whileHover={{ 
-                  y: -5,
-                  transition: { duration: 0.2 }
-                }}
               >
                 <div className="p-8 h-full relative cursor-pointer transition-all duration-300">
                   {/* Icon */}
@@ -274,7 +254,7 @@ const Services = () => {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </motion.div>
 

@@ -119,27 +119,9 @@ const TeamSection = () => {
           } : { opacity: 0 }}
         >
           {teamMembers.map((member, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ 
-                opacity: 0, 
-                y: 30
-              }}
-              animate={inView ? { 
-                opacity: 1, 
-                y: 0,
-                transition: {
-                  delay: 0.4 + index * 0.1,
-                  duration: 0.5,
-                  ease: "easeOut"
-                }
-              } : { 
-                opacity: 0, 
-                y: 30
-              }}
               className="group relative w-full"
-              whileHover={{ y: -5 }}
-              transition={{ duration: 0.2 }}
             >
               <div className="rounded-xl overflow-hidden h-[500px] relative cursor-pointer">
                 {/* Profile Image */}
@@ -207,7 +189,7 @@ const TeamSection = () => {
                 {/* Border Effect */}
                 <div className="absolute inset-0 border border-transparent group-hover:border-white/30 rounded-xl transition-colors duration-300" />
               </div>
-            </motion.div>
+            </div>
           ))}
         </motion.div>
       </motion.div>

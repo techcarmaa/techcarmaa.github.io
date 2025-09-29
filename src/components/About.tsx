@@ -422,31 +422,9 @@ const About = () => {
             ))}
             
             {technicalExpertise.map((tech, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ 
-                  opacity: 0, 
-                  y: 30
-                }}
-                animate={techInView ? { 
-                  opacity: 1, 
-                  y: 0,
-                  transition: {
-                    delay: 0.5 + index * 0.1,
-                    duration: 0.5,
-                    ease: "easeOut"
-                  }
-                } : {
-                  opacity: 0, 
-                  y: 30
-                }}
                 className="group flex-shrink-0 w-[420px] h-[320px] p-8 transition-all duration-500 cursor-pointer relative"
-                whileHover={{ 
-                  y: -8,
-                  transition: { 
-                    duration: 0.2
-                  }
-                }}
               >
                 {/* Floating and rotating icon */}
                 <motion.div 
@@ -594,7 +572,7 @@ const About = () => {
                     </motion.li>
                   ))}
                 </motion.ul>
-              </motion.div>
+              </div>
             ))}
           </motion.div>
         </motion.div>
@@ -648,22 +626,9 @@ const About = () => {
                 color: "from-pink-500 to-cyan-500"
               }
             ].map((study, index) => (
-              <motion.div
+              <div
                 key={index}
-                variants={{
-                  hidden: { opacity: 0, y: 50 },
-                  visible: { 
-                    opacity: 1, 
-                    y: 0,
-                    transition: {
-                      delay: index * 0.2,
-                      duration: 0.6,
-                      ease: "easeOut"
-                    }
-                  }
-                }}
-                className="group rounded-xl p-8 transition-all duration-300 cursor-pointer hover:scale-105 border border-transparent hover:border-white/30 hover:bg-black/20"
-                whileHover={{ y: -10 }}
+                className="group rounded-xl p-8 transition-all duration-300 cursor-pointer border border-transparent hover:border-white/30 hover:bg-black/20"
               >
                 <motion.div 
                   className={`w-16 h-16 rounded-lg bg-gradient-to-br ${study.color} p-4 mb-6 group-hover:shadow-glow transition-all duration-300`}
@@ -695,7 +660,7 @@ const About = () => {
                     </div>
                   ))}
                 </div>
-              </motion.div>
+              </div>
             ))}
           </motion.div>
         </motion.div>
@@ -726,20 +691,8 @@ const About = () => {
             animate={inView ? "visible" : "hidden"}
           >
             {/* Hero Blog Card */}
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: 50 },
-                visible: { 
-                  opacity: 1, 
-                  y: 0,
-                  transition: {
-                    duration: 0.8,
-                    ease: "easeOut"
-                  }
-                }
-              }}
-              className="group rounded-2xl overflow-hidden transition-all duration-500 cursor-pointer hover:scale-[1.02] border border-transparent hover:border-white/30 hover:bg-black/20 h-[500px]"
-              whileHover={{ y: -10 }}
+            <div
+              className="group rounded-2xl overflow-hidden transition-all duration-500 cursor-pointer border border-transparent hover:border-white/30 hover:bg-black/20 h-[500px]"
               onClick={() => setSelectedBlog(technicalBlogs[0])}
             >
               <div className="grid lg:grid-cols-2 h-full">
@@ -785,7 +738,7 @@ const About = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Secondary Blogs Grid */}
             <motion.div 
@@ -802,21 +755,9 @@ const About = () => {
               }}
             >
               {technicalBlogs.slice(1, 3).map((blog, index) => (
-                <motion.div
+                <div
                   key={blog.id}
-                  variants={{
-                    hidden: { opacity: 0, y: 50 },
-                    visible: { 
-                      opacity: 1, 
-                      y: 0,
-                      transition: {
-                        duration: 0.6,
-                        ease: "easeOut"
-                      }
-                    }
-                  }}
-                  className="group rounded-xl overflow-hidden transition-all duration-300 cursor-pointer hover:scale-105 border border-transparent hover:border-white/30 hover:bg-black/20"
-                  whileHover={{ y: -8 }}
+                  className="group rounded-xl overflow-hidden transition-all duration-300 cursor-pointer border border-transparent hover:border-white/30 hover:bg-black/20"
                   onClick={() => setSelectedBlog(blog)}
                 >
                   <div className="relative h-48 overflow-hidden">
@@ -857,7 +798,7 @@ const About = () => {
                       </motion.div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </motion.div>
 
