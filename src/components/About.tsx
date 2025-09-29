@@ -261,25 +261,31 @@ const About = () => {
                     }
                   }
                 }}
-                className="group flex-shrink-0 w-[380px] rounded-xl p-8 hover:bg-black/10 transition-all duration-300 backdrop-blur-sm cursor-pointer relative"
+                className="group flex-shrink-0 w-[450px] h-[320px] rounded-xl p-8 hover:bg-black/20 transition-all duration-300 backdrop-blur-sm cursor-pointer relative hover:shadow-2xl hover:shadow-primary/10"
                 whileHover={{ 
-                  y: -10,
-                  rotateY: 5,
-                  transition: { duration: 0.3 }
+                  y: -15,
+                  rotateY: 8,
+                  scale: 1.02,
+                  transition: { duration: 0.3, ease: "easeOut" }
                 }}
                 style={{ transformStyle: "preserve-3d" }}
               >
-                {/* Hover border effect */}
-                <div className="absolute inset-0 border border-transparent group-hover:border-white/20 rounded-xl transition-colors duration-300" />
+                {/* Hover border effect with glow */}
+                <div className="absolute inset-0 border border-transparent group-hover:border-white/30 rounded-xl transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]" />
+                
+                {/* Background gradient overlay on hover */}
                 <motion.div 
-                  className="mb-6"
+                  className={`absolute inset-0 bg-gradient-to-br ${technicalExpertise[0]?.color || 'from-blue-500 to-purple-500'} opacity-0 group-hover:opacity-5 rounded-xl transition-opacity duration-300`}
+                />
+                <motion.div 
+                  className="mb-6 relative z-10"
                   whileHover={{ 
-                    scale: 1.1,
-                    rotate: 5,
+                    scale: 1.15,
+                    rotate: 10,
                     transition: { duration: 0.3 }
                   }}
                 >
-                  <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${tech.color} p-4 group-hover:shadow-glow transition-all duration-300`}>
+                  <div className={`w-20 h-20 rounded-lg bg-gradient-to-br ${tech.color} p-5 group-hover:shadow-glow group-hover:shadow-lg transition-all duration-300`}>
                     <motion.div
                       whileHover={{ rotate: 360 }}
                       transition={{ duration: 0.6 }}
@@ -290,16 +296,20 @@ const About = () => {
                 </motion.div>
                 
                 <motion.h4 
-                  className="text-xl font-bold text-white mb-4"
+                  className="text-2xl font-bold text-white mb-4 relative z-10 group-hover:text-primary transition-colors duration-300"
                   initial={{ opacity: 0 }}
                   animate={inView ? { opacity: 1 } : { opacity: 0 }}
                   transition={{ delay: index * 0.15 + 0.3, duration: 0.4 }}
+                  whileHover={{ 
+                    scale: 1.05,
+                    transition: { duration: 0.2 }
+                  }}
                 >
                   {tech.title}
                 </motion.h4>
                 
                 <motion.ul 
-                  className="space-y-2"
+                  className="space-y-3 relative z-10"
                   variants={{
                     hidden: {},
                     visible: {
@@ -315,11 +325,11 @@ const About = () => {
                   {tech.skills.map((skill, skillIndex) => (
                     <motion.li 
                       key={skillIndex} 
-                      className="text-white/70 text-sm flex items-center"
+                      className="text-white/70 text-base flex items-center group-hover:text-white/90 transition-colors duration-300"
                       variants={{
                         hidden: { opacity: 0, x: -20 },
                         visible: { 
-                          opacity: 1, 
+                          opacity: 1,
                           x: 0,
                           transition: { duration: 0.4 }
                         }
