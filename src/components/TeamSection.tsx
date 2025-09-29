@@ -128,7 +128,7 @@ const TeamSection = () => {
         {/* Team Cards */}
         <motion.div 
           ref={scrollRef}
-          className="flex gap-6 overflow-x-auto scrollbar-hide px-4 pb-8"
+          className="flex gap-8 overflow-x-auto scrollbar-hide pb-8"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           variants={containerVariants}
         >
@@ -136,7 +136,7 @@ const TeamSection = () => {
             <motion.div
               key={index}
               variants={cardVariants}
-              className="group relative flex-shrink-0 w-96"
+              className="group relative flex-shrink-0 w-[450px]"
               whileHover={{ y: -10 }}
               transition={{ duration: 0.3 }}
             >
