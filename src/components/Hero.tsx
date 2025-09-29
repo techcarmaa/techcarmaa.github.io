@@ -32,19 +32,16 @@ const Hero = () => {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-muted/50 to-secondary/20">
-      {/* Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/5 to-secondary/10" />
-      
-      {/* Subtle Geometric Pattern */}
-      <div className="absolute inset-0 opacity-10">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden" style={{ backgroundColor: '#0a0a0a' }}>
+      {/* Subtle Grid Pattern */}
+      <div className="absolute inset-0 opacity-[0.03]">
         <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
           <defs>
-            <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-              <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+            <pattern id="hero-grid" width="2" height="2" patternUnits="userSpaceOnUse">
+              <path d="M 2 0 L 0 0 0 2" fill="none" stroke="#ffffff" strokeWidth="0.1"/>
             </pattern>
           </defs>
-          <rect width="100" height="100" fill="url(#grid)" className="text-foreground/20" />
+          <rect width="100" height="100" fill="url(#hero-grid)" />
         </svg>
       </div>
       
