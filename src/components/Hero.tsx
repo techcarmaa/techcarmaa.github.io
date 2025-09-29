@@ -33,17 +33,6 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden" style={{ backgroundColor: '#0a0a0a' }}>
-      {/* Subtle Grid Pattern */}
-      <div className="absolute inset-0 opacity-[0.03]">
-        <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <defs>
-            <pattern id="hero-grid" width="2" height="2" patternUnits="userSpaceOnUse">
-              <path d="M 2 0 L 0 0 0 2" fill="none" stroke="#ffffff" strokeWidth="0.1"/>
-            </pattern>
-          </defs>
-          <rect width="100" height="100" fill="url(#hero-grid)" />
-        </svg>
-      </div>
       
       {/* Floating Elements - More Subtle */}
       <div className="absolute inset-0 overflow-hidden">
