@@ -165,44 +165,121 @@ const About = () => {
           variants={itemVariants}
           className="mt-32"
         >
-          <div className="text-center mb-16">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+          >
             <h3 className="text-4xl md:text-5xl font-bold mb-6">
               <span className="gradient-text">Our Technical Expertise</span>
             </h3>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Deep technical knowledge across modern technologies and frameworks that power enterprise-grade solutions.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div 
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+          >
             {technicalExpertise.map((tech, index) => (
               <motion.div
                 key={index}
-                variants={statsVariants}
+                variants={{
+                  hidden: { opacity: 0, y: 50, rotateX: -15 },
+                  visible: { 
+                    opacity: 1, 
+                    y: 0, 
+                    rotateX: 0,
+                    transition: {
+                      delay: index * 0.15,
+                      duration: 0.6,
+                      ease: "easeOut"
+                    }
+                  }
+                }}
                 className="glass rounded-xl p-8 group hover:scale-105 transition-all duration-300"
-                whileHover={{ y: -5 }}
+                whileHover={{ 
+                  y: -10,
+                  rotateY: 5,
+                  transition: { duration: 0.3 }
+                }}
+                style={{ transformStyle: "preserve-3d" }}
               >
-                <div className="mb-6">
-                  <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${tech.color} p-4 group-hover:scale-110 transition-transform duration-300`}>
-                    <tech.icon className="w-full h-full text-white" />
+                <motion.div 
+                  className="mb-6"
+                  whileHover={{ 
+                    scale: 1.1,
+                    rotate: 5,
+                    transition: { duration: 0.3 }
+                  }}
+                >
+                  <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${tech.color} p-4 group-hover:shadow-glow transition-all duration-300`}>
+                    <motion.div
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <tech.icon className="w-full h-full text-white" />
+                    </motion.div>
                   </div>
-                </div>
+                </motion.div>
                 
-                <h4 className="text-xl font-bold text-white mb-4">
+                <motion.h4 
+                  className="text-xl font-bold text-white mb-4"
+                  initial={{ opacity: 0 }}
+                  animate={inView ? { opacity: 1 } : { opacity: 0 }}
+                  transition={{ delay: index * 0.15 + 0.3, duration: 0.4 }}
+                >
                   {tech.title}
-                </h4>
+                </motion.h4>
                 
-                <ul className="space-y-2">
+                <motion.ul 
+                  className="space-y-2"
+                  variants={{
+                    hidden: {},
+                    visible: {
+                      transition: {
+                        staggerChildren: 0.1,
+                        delayChildren: index * 0.15 + 0.4
+                      }
+                    }
+                  }}
+                  initial="hidden"
+                  animate={inView ? "visible" : "hidden"}
+                >
                   {tech.skills.map((skill, skillIndex) => (
-                    <li key={skillIndex} className="text-white/70 text-sm flex items-center">
-                      <div className="w-1 h-1 bg-primary rounded-full mr-2 flex-shrink-0" />
+                    <motion.li 
+                      key={skillIndex} 
+                      className="text-white/70 text-sm flex items-center"
+                      variants={{
+                        hidden: { opacity: 0, x: -20 },
+                        visible: { 
+                          opacity: 1, 
+                          x: 0,
+                          transition: { duration: 0.4 }
+                        }
+                      }}
+                      whileHover={{ 
+                        x: 5,
+                        color: "rgba(255, 255, 255, 0.9)",
+                        transition: { duration: 0.2 }
+                      }}
+                    >
+                      <motion.div 
+                        className="w-1 h-1 bg-primary rounded-full mr-2 flex-shrink-0"
+                        whileHover={{ scale: 1.5 }}
+                        transition={{ duration: 0.2 }}
+                      />
                       {skill}
-                    </li>
+                    </motion.li>
                   ))}
-                </ul>
+                </motion.ul>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </motion.div>
 
         {/* Mission Statement */}
