@@ -155,19 +155,43 @@ const Services = () => {
               key={index}
               variants={cardVariants}
               className="group relative flex-shrink-0 w-96"
-              whileHover={{ y: -10 }}
+              whileHover={{ 
+                y: -10, 
+                scale: 1.02, 
+                rotateY: 2,
+                transition: { duration: 0.3, ease: "easeOut" }
+              }}
               transition={{ duration: 0.3 }}
             >
               <div className="glass rounded-xl p-8 h-full relative overflow-hidden cursor-pointer">
                 {/* Background Gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${solution.color} opacity-5 group-hover:opacity-10 transition-opacity duration-300`} />
+                <motion.div 
+                  className={`absolute inset-0 bg-gradient-to-br ${solution.color} opacity-5 transition-opacity duration-300`}
+                  whileHover={{ 
+                    opacity: 0.15,
+                    scale: 1.05,
+                    transition: { duration: 0.3 }
+                  }}
+                />
                 
                 {/* Icon */}
-                <div className="relative z-10 mb-6">
-                  <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${solution.color} p-4 group-hover:scale-110 transition-transform duration-300`}>
-                    <solution.icon className="w-full h-full text-white" />
+                <motion.div 
+                  className="relative z-10 mb-6"
+                  whileHover={{ 
+                    scale: 1.1, 
+                    rotate: 5,
+                    transition: { duration: 0.3 }
+                  }}
+                >
+                  <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${solution.color} p-4 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/25 transition-all duration-300`}>
+                    <motion.div
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <solution.icon className="w-full h-full text-white" />
+                    </motion.div>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Solution Content */}
                 <div className="relative z-10">
@@ -177,9 +201,15 @@ const Services = () => {
                     </span>
                   </div>
                   
-                  <h3 className="text-2xl font-bold mb-4 text-white">
+                  <motion.h3 
+                    className="text-2xl font-bold mb-4 text-white"
+                    whileHover={{ 
+                      scale: 1.02,
+                      transition: { duration: 0.2 }
+                    }}
+                  >
                     {solution.title}
-                  </h3>
+                  </motion.h3>
                   
                   <p className="text-white/80 mb-6 leading-relaxed">
                     {solution.description}
@@ -202,7 +232,13 @@ const Services = () => {
                 </div>
 
                 {/* Hover Effect */}
-                <div className="absolute inset-0 border border-white/10 rounded-xl group-hover:border-white/20 transition-colors duration-300" />
+                <motion.div 
+                  className="absolute inset-0 border border-white/10 rounded-xl group-hover:border-white/20 transition-colors duration-300"
+                  whileHover={{
+                    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1)",
+                    transition: { duration: 0.3 }
+                  }}
+                />
               </div>
             </motion.div>
           ))}
