@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Button } from "@/components/ui/button";
 import { Award, Users, Lightbulb, Globe, Code, Cloud, Database, Smartphone, Server, Settings, ChevronLeft, ChevronRight } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const About = () => {
   const [ref, inView] = useInView({
@@ -11,6 +11,7 @@ const About = () => {
   });
 
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [selectedBlog, setSelectedBlog] = useState(null);
 
   const scrollLeft = () => {
     if (scrollRef.current) {
@@ -68,6 +69,104 @@ const About = () => {
       skills: ["Legacy System Migration", "API Development", "Third-party Integrations", "Data Synchronization"],
       color: "from-green-500 to-purple-500",
     },
+  ];
+
+  const technicalBlogs = [
+    {
+      id: 1,
+      title: "Scaling Microservices with Kubernetes",
+      image: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?auto=format&fit=crop&w=800&q=80",
+      excerpt: "Deep dive into container orchestration and service mesh patterns for enterprise applications.",
+      category: "DevOps",
+      readTime: "8 min read",
+      date: "2024-01-15",
+      content: `
+        <h2>Introduction to Microservices Architecture</h2>
+        <p>Microservices architecture has revolutionized how we build and deploy modern applications. In this comprehensive guide, we'll explore how Kubernetes enables us to scale microservices effectively.</p>
+        
+        <h3>Key Benefits of Kubernetes for Microservices</h3>
+        <ul>
+          <li>Automated deployment and scaling</li>
+          <li>Service discovery and load balancing</li>
+          <li>Rolling updates and rollbacks</li>
+          <li>Health monitoring and self-healing</li>
+        </ul>
+        
+        <h3>Implementation Strategy</h3>
+        <p>When implementing microservices with Kubernetes, it's crucial to follow these best practices:</p>
+        <p>1. <strong>Container Optimization:</strong> Ensure your containers are lightweight and follow the single responsibility principle.</p>
+        <p>2. <strong>Resource Management:</strong> Define appropriate resource limits and requests for each service.</p>
+        <p>3. <strong>Monitoring:</strong> Implement comprehensive logging and monitoring across all services.</p>
+        
+        <h3>Conclusion</h3>
+        <p>Kubernetes provides a robust platform for scaling microservices, but success requires careful planning and adherence to best practices.</p>
+      `
+    },
+    {
+      id: 2,
+      title: "AWS Lambda Best Practices for Serverless",
+      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
+      excerpt: "Optimize your serverless functions for performance, cost, and reliability in production environments.",
+      category: "AWS",
+      readTime: "12 min read",
+      date: "2024-01-10",
+      content: `
+        <h2>Serverless Architecture with AWS Lambda</h2>
+        <p>AWS Lambda has transformed how we think about backend infrastructure. This article covers essential best practices for production-ready serverless applications.</p>
+        
+        <h3>Performance Optimization</h3>
+        <p>To get the most out of your Lambda functions, consider these optimization techniques:</p>
+        <ul>
+          <li>Cold start mitigation strategies</li>
+          <li>Memory allocation optimization</li>
+          <li>Connection pooling for databases</li>
+          <li>Efficient error handling</li>
+        </ul>
+        
+        <h3>Cost Management</h3>
+        <p>Serverless doesn't mean cost-free. Here are strategies to optimize your AWS bills:</p>
+        <p>1. <strong>Right-size your functions:</strong> Monitor memory usage and adjust allocations accordingly.</p>
+        <p>2. <strong>Use provisioned concurrency wisely:</strong> Only for functions that need consistent low latency.</p>
+        <p>3. <strong>Implement efficient retry logic:</strong> Avoid unnecessary invocations due to transient failures.</p>
+        
+        <h3>Security Considerations</h3>
+        <p>Security in serverless requires a different approach than traditional applications. Key areas to focus on include IAM roles, VPC configuration, and environment variable encryption.</p>
+      `
+    },
+    {
+      id: 3,
+      title: "React Performance: Beyond the Basics",
+      image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=800&q=80",
+      excerpt: "Advanced techniques for optimizing React applications including profiling, memoization, and bundle optimization.",
+      category: "Frontend",
+      readTime: "10 min read",
+      date: "2024-01-05",
+      content: `
+        <h2>Advanced React Performance Optimization</h2>
+        <p>Building fast React applications requires understanding both React's rendering behavior and modern JavaScript performance characteristics.</p>
+        
+        <h3>Profiling and Measurement</h3>
+        <p>Before optimizing, you need to measure. React Developer Tools provides powerful profiling capabilities:</p>
+        <ul>
+          <li>Component render times</li>
+          <li>Re-render causes</li>
+          <li>Props and state changes</li>
+          <li>Interaction tracking</li>
+        </ul>
+        
+        <h3>Memoization Strategies</h3>
+        <p>React.memo, useMemo, and useCallback are powerful tools when used correctly:</p>
+        <p>1. <strong>React.memo:</strong> Prevent unnecessary re-renders of functional components.</p>
+        <p>2. <strong>useMemo:</strong> Cache expensive calculations between renders.</p>
+        <p>3. <strong>useCallback:</strong> Stabilize function references to prevent child re-renders.</p>
+        
+        <h3>Bundle Optimization</h3>
+        <p>Modern bundlers offer sophisticated optimization techniques including code splitting, tree shaking, and dynamic imports. Learn how to leverage these tools effectively.</p>
+        
+        <h3>Real-world Case Study</h3>
+        <p>We optimized a data-heavy dashboard application and achieved 70% faster initial load times and 40% better runtime performance through systematic application of these techniques.</p>
+      `
+    }
   ];
 
   const containerVariants = {
@@ -453,6 +552,143 @@ const About = () => {
             ))}
           </motion.div>
         </motion.div>
+
+        {/* Technical Blogs Section */}
+        <motion.div
+          variants={itemVariants}
+          className="mt-32"
+        >
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+          >
+            <h3 className="text-5xl md:text-7xl font-bold mb-6">
+              <span className="text-white">Technical Blogs</span>
+            </h3>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Insights, tutorials, and deep dives into the latest technologies and development practices from our engineering team.
+            </p>
+          </motion.div>
+
+          <motion.div 
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+          >
+            {technicalBlogs.map((blog, index) => (
+              <motion.div
+                key={blog.id}
+                variants={{
+                  hidden: { opacity: 0, y: 50 },
+                  visible: { 
+                    opacity: 1, 
+                    y: 0,
+                    transition: {
+                      delay: index * 0.2,
+                      duration: 0.6,
+                      ease: "easeOut"
+                    }
+                  }
+                }}
+                className="group rounded-xl overflow-hidden hover:bg-black/20 transition-all duration-300 cursor-pointer hover:scale-105 border border-transparent hover:border-white/30"
+                whileHover={{ y: -10 }}
+                onClick={() => setSelectedBlog(blog)}
+              >
+                <div className="relative h-48 overflow-hidden">
+                  <img 
+                    src={blog.image} 
+                    alt={blog.title}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-xs bg-primary/20 text-primary px-2 py-1 rounded-full">
+                        {blog.category}
+                      </span>
+                      <span className="text-xs text-white/60">{blog.readTime}</span>
+                    </div>
+                    <h4 className="text-xl font-bold text-white group-hover:text-primary transition-colors duration-300">
+                      {blog.title}
+                    </h4>
+                  </div>
+                </div>
+                
+                <div className="p-6">
+                  <p className="text-white/70 text-sm mb-4 leading-relaxed">
+                    {blog.excerpt}
+                  </p>
+                  
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-white/50">{blog.date}</span>
+                    <motion.div 
+                      className="text-primary text-sm font-medium group-hover:text-white transition-colors duration-300"
+                      whileHover={{ x: 5 }}
+                    >
+                      Read More →
+                    </motion.div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
+
+        {/* Blog Modal */}
+        {selectedBlog && (
+          <motion.div
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedBlog(null)}
+          >
+            <motion.div
+              className="bg-background border border-white/10 rounded-xl max-w-4xl max-h-[90vh] overflow-y-auto"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="relative h-64 overflow-hidden">
+                <img 
+                  src={selectedBlog.image} 
+                  alt={selectedBlog.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                <button
+                  onClick={() => setSelectedBlog(null)}
+                  className="absolute top-4 right-4 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-colors duration-200"
+                >
+                  ✕
+                </button>
+                <div className="absolute bottom-6 left-6 right-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-sm bg-primary/20 text-primary px-3 py-1 rounded-full">
+                      {selectedBlog.category}
+                    </span>
+                    <span className="text-sm text-white/60">{selectedBlog.readTime}</span>
+                    <span className="text-sm text-white/60">{selectedBlog.date}</span>
+                  </div>
+                  <h1 className="text-3xl md:text-4xl font-bold text-white">
+                    {selectedBlog.title}
+                  </h1>
+                </div>
+              </div>
+              
+              <div className="p-8">
+                <div 
+                  className="prose prose-invert max-w-none prose-headings:text-white prose-h2:text-2xl prose-h3:text-xl prose-p:text-white/80 prose-li:text-white/80 prose-strong:text-white"
+                  dangerouslySetInnerHTML={{ __html: selectedBlog.content }}
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
       </motion.div>
     </section>
   );
