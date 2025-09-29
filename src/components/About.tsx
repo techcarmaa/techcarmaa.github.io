@@ -573,67 +573,236 @@ const About = () => {
           </motion.div>
 
           <motion.div 
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="space-y-12"
             variants={containerVariants}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
           >
-            {technicalBlogs.map((blog, index) => (
+            {/* Hero Blog Card */}
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 50 },
+                visible: { 
+                  opacity: 1, 
+                  y: 0,
+                  transition: {
+                    duration: 0.8,
+                    ease: "easeOut"
+                  }
+                }
+              }}
+              className="group rounded-2xl overflow-hidden hover:bg-black/20 transition-all duration-500 cursor-pointer hover:scale-[1.02] border border-transparent hover:border-white/30 h-[500px]"
+              whileHover={{ y: -10 }}
+              onClick={() => setSelectedBlog(technicalBlogs[0])}
+            >
+              <div className="grid lg:grid-cols-2 h-full">
+                <div className="relative overflow-hidden">
+                  <img 
+                    src={technicalBlogs[0].image} 
+                    alt={technicalBlogs[0].title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent lg:hidden" />
+                </div>
+                
+                <div className="p-8 lg:p-12 flex flex-col justify-center relative lg:static absolute inset-0 lg:bg-transparent bg-gradient-to-t from-black/90 via-black/50 to-transparent">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="text-sm bg-primary/20 text-primary px-3 py-1 rounded-full font-medium">
+                      FEATURED • {technicalBlogs[0].category}
+                    </span>
+                    <span className="text-sm text-white/60">{technicalBlogs[0].readTime}</span>
+                  </div>
+                  
+                  <h3 className="text-3xl lg:text-4xl font-bold text-white mb-4 group-hover:text-primary transition-colors duration-300 leading-tight">
+                    {technicalBlogs[0].title}
+                  </h3>
+                  
+                  <p className="text-white/80 text-lg mb-6 leading-relaxed line-clamp-3">
+                    {technicalBlogs[0].excerpt}
+                  </p>
+                  
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-white/50">{technicalBlogs[0].date}</span>
+                    <motion.div 
+                      className="flex items-center gap-2 text-primary text-lg font-medium group-hover:text-white transition-colors duration-300"
+                      whileHover={{ x: 5 }}
+                    >
+                      Read Full Article
+                      <motion.span
+                        animate={{ x: [0, 5, 0] }}
+                        transition={{ repeat: Infinity, duration: 1.5 }}
+                      >
+                        →
+                      </motion.span>
+                    </motion.div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Secondary Blogs Grid */}
+            <motion.div 
+              className="grid md:grid-cols-2 gap-8"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.3,
+                    delayChildren: 0.2
+                  }
+                }
+              }}
+            >
+              {technicalBlogs.slice(1, 3).map((blog, index) => (
+                <motion.div
+                  key={blog.id}
+                  variants={{
+                    hidden: { opacity: 0, y: 50 },
+                    visible: { 
+                      opacity: 1, 
+                      y: 0,
+                      transition: {
+                        duration: 0.6,
+                        ease: "easeOut"
+                      }
+                    }
+                  }}
+                  className="group rounded-xl overflow-hidden hover:bg-black/20 transition-all duration-300 cursor-pointer hover:scale-105 border border-transparent hover:border-white/30"
+                  whileHover={{ y: -8 }}
+                  onClick={() => setSelectedBlog(blog)}
+                >
+                  <div className="relative h-48 overflow-hidden">
+                    <img 
+                      src={blog.image} 
+                      alt={blog.title}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <div className="absolute top-4 left-4">
+                      <span className="text-xs bg-primary/20 text-primary px-2 py-1 rounded-full">
+                        {blog.category}
+                      </span>
+                    </div>
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h4 className="text-xl font-bold text-white group-hover:text-primary transition-colors duration-300 line-clamp-2">
+                        {blog.title}
+                      </h4>
+                    </div>
+                  </div>
+                  
+                  <div className="p-6">
+                    <p className="text-white/70 text-sm mb-4 leading-relaxed line-clamp-2">
+                      {blog.excerpt}
+                    </p>
+                    
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-xs text-white/50">
+                        <span>{blog.date}</span>
+                        <span>•</span>
+                        <span>{blog.readTime}</span>
+                      </div>
+                      <motion.div 
+                        className="text-primary text-sm font-medium group-hover:text-white transition-colors duration-300"
+                        whileHover={{ x: 3 }}
+                      >
+                        Read More →
+                      </motion.div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            {/* Older Blogs Carousel */}
+            {technicalBlogs.length > 3 && (
               <motion.div
-                key={blog.id}
                 variants={{
-                  hidden: { opacity: 0, y: 50 },
+                  hidden: { opacity: 0, y: 30 },
                   visible: { 
                     opacity: 1, 
                     y: 0,
                     transition: {
-                      delay: index * 0.2,
                       duration: 0.6,
-                      ease: "easeOut"
+                      delay: 0.4
                     }
                   }
                 }}
-                className="group rounded-xl overflow-hidden hover:bg-black/20 transition-all duration-300 cursor-pointer hover:scale-105 border border-transparent hover:border-white/30"
-                whileHover={{ y: -10 }}
-                onClick={() => setSelectedBlog(blog)}
+                className="mt-16"
               >
-                <div className="relative h-48 overflow-hidden">
-                  <img 
-                    src={blog.image} 
-                    alt={blog.title}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xs bg-primary/20 text-primary px-2 py-1 rounded-full">
-                        {blog.category}
-                      </span>
-                      <span className="text-xs text-white/60">{blog.readTime}</span>
-                    </div>
-                    <h4 className="text-xl font-bold text-white group-hover:text-primary transition-colors duration-300">
-                      {blog.title}
-                    </h4>
+                <div className="flex items-center justify-between mb-8">
+                  <h4 className="text-2xl font-bold text-white">More Articles</h4>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={scrollLeft}
+                      className="text-white hover:bg-white/10 border border-white/20"
+                    >
+                      <ChevronLeft className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={scrollRight}
+                      className="text-white hover:bg-white/10 border border-white/20"
+                    >
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
                   </div>
                 </div>
-                
-                <div className="p-6">
-                  <p className="text-white/70 text-sm mb-4 leading-relaxed">
-                    {blog.excerpt}
-                  </p>
-                  
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-white/50">{blog.date}</span>
-                    <motion.div 
-                      className="text-primary text-sm font-medium group-hover:text-white transition-colors duration-300"
-                      whileHover={{ x: 5 }}
+
+                <div 
+                  ref={scrollRef}
+                  className="flex gap-6 overflow-x-auto scrollbar-hide pb-4"
+                  style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                >
+                  {technicalBlogs.slice(3).map((blog, index) => (
+                    <motion.div
+                      key={blog.id}
+                      initial={{ opacity: 0, x: 50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 + 0.5, duration: 0.5 }}
+                      className="group flex-shrink-0 w-[320px] rounded-xl overflow-hidden hover:bg-black/20 transition-all duration-300 cursor-pointer hover:scale-105 border border-transparent hover:border-white/30"
+                      whileHover={{ y: -5 }}
+                      onClick={() => setSelectedBlog(blog)}
                     >
-                      Read More →
+                      <div className="relative h-40 overflow-hidden">
+                        <img 
+                          src={blog.image} 
+                          alt={blog.title}
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                        <div className="absolute top-3 left-3">
+                          <span className="text-xs bg-primary/20 text-primary px-2 py-1 rounded-full">
+                            {blog.category}
+                          </span>
+                        </div>
+                        <div className="absolute bottom-3 left-3 right-3">
+                          <h5 className="text-lg font-bold text-white group-hover:text-primary transition-colors duration-300 line-clamp-2">
+                            {blog.title}
+                          </h5>
+                        </div>
+                      </div>
+                      
+                      <div className="p-4">
+                        <p className="text-white/70 text-sm mb-3 leading-relaxed line-clamp-2">
+                          {blog.excerpt}
+                        </p>
+                        
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2 text-xs text-white/50">
+                            <span>{blog.readTime}</span>
+                          </div>
+                          <span className="text-xs text-white/40">{blog.date}</span>
+                        </div>
+                      </div>
                     </motion.div>
-                  </div>
+                  ))}
                 </div>
               </motion.div>
-            ))}
+            )}
           </motion.div>
         </motion.div>
 
