@@ -17,13 +17,13 @@ const TeamSection = () => {
 
   const scrollLeft = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: -320, behavior: 'smooth' });
+      scrollRef.current.scrollBy({ left: -400, behavior: 'smooth' });
     }
   };
 
   const scrollRight = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: 320, behavior: 'smooth' });
+      scrollRef.current.scrollBy({ left: 400, behavior: 'smooth' });
     }
   };
 
@@ -136,11 +136,11 @@ const TeamSection = () => {
             <motion.div
               key={index}
               variants={cardVariants}
-              className="group relative flex-shrink-0 w-80"
+              className="group relative flex-shrink-0 w-96"
               whileHover={{ y: -10 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="glass rounded-xl overflow-hidden h-96 relative cursor-pointer">
+              <div className="glass rounded-xl overflow-hidden h-[500px] relative cursor-pointer">
                 {/* Profile Image */}
                 <div className="relative h-full">
                   <img
