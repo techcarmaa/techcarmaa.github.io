@@ -33,8 +33,8 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Professional Navy Background */}
-      <div className="absolute inset-0 bg-background" />
+      {/* Blue-Black Gradient Background */}
+      <div className="absolute inset-0 animated-bg" />
       
       {/* Subtle Geometric Pattern */}
       <div className="absolute inset-0 opacity-10">
