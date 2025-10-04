@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Button } from "@/components/ui/button";
-import { Mail, Phone, MapPin, Send, Linkedin, Twitter, Github } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Linkedin, Facebook,Instagram  } from "lucide-react";
 
 const Contact = () => {
   const [ref, inView] = useInView({
@@ -25,16 +25,16 @@ const Contact = () => {
     {
       icon: MapPin,
       title: "Visit Us",
-      value: "Silicon Valley, CA",
+      value: "Dehradun, India",
       href: "#",
     },
   ];
 
-  const socialLinks = [
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Github, href: "#", label: "GitHub" },
-  ];
+ const socialLinks = [
+  { icon: Linkedin, href: "https://www.linkedin.com/company/yourcompany", label: "LinkedIn" },
+  { icon: Instagram, href: "https://www.instagram.com/carmaa_official?igsh=MzJ6dXV2MXUxemZh", label: "Instagram" },
+  { icon: Facebook, href: "https://www.facebook.com/yourpage", label: "Facebook" },
+];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -53,10 +53,10 @@ const Contact = () => {
   };
 
   return (
-    <section className="py-24 px-6 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-secondary/5" />
-      
+    <section className="py-32 px-4 relative overflow-hidden bg-black">
+  {/* Background */}
+  <div className="absolute inset-0 bg-black" />
+
       {/* Floating Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
@@ -160,6 +160,8 @@ const Contact = () => {
                   <motion.a
                     key={index}
                     href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-12 h-12 rounded-lg bg-gradient-primary p-3 hover:scale-110 hover:shadow-glow transition-all duration-300"
                     whileHover={{ y: -5 }}
                     aria-label={social.label}

@@ -197,9 +197,10 @@ const About = () => {
   };
 
   return (
-    <section className="py-32 px-4 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-t from-muted/20 to-transparent" />
+    <section className="py-32 px-4 relative overflow-hidden bg-black">
+  {/* Background */}
+  <div className="absolute inset-0 bg-black" />
+
       
       <motion.div
         ref={ref}

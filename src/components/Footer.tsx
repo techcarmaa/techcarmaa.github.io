@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
+import { motion } from "framer-motion"; 
 import { useInView } from "react-intersection-observer";
-import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import { Mail, Phone, MapPin, Facebook, Linkedin, Instagram } from "lucide-react";
 
 const Footer = () => {
   const [ref, inView] = useInView({
@@ -52,24 +52,13 @@ const Footer = () => {
   };
 
   const socialLinks = [
-    { icon: Facebook, href: "#", label: "Facebook" },
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Instagram, href: "#", label: "Instagram" },
+    { icon: Facebook, href: "https://www.facebook.com/yourpage", label: "Facebook" },
+    { icon: Linkedin, href: "https://www.linkedin.com/company/yourcompany", label: "LinkedIn" },
+    { icon: Instagram, href: "https://www.instagram.com/carmaa_official?igsh=MzJ6dXV2MXUxemZh", label: "Instagram" },
   ];
 
   return (
-    <footer className="bg-background border-t border-white/10 pt-20 pb-8 relative overflow-hidden">
-      {/* Floating background elements */}
-      <motion.div
-        className="absolute top-10 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.2, 0.4, 0.2],
-        }}
-        transition={{ duration: 10, repeat: Infinity }}
-      />
-      
+    <footer className="bg-[#0a0a0a] border-t border-white/10 pt-20 pb-8 relative overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-4">
         <motion.div
           ref={ref}
@@ -78,7 +67,7 @@ const Footer = () => {
           animate={inView ? "visible" : "hidden"}
           className="grid lg:grid-cols-6 gap-12 lg:gap-8 mb-12"
         >
-          {/* Enhanced Company Info */}
+          {/* Company Info */}
           <motion.div 
             variants={{
               hidden: { opacity: 0, y: 30, x: -50 },
@@ -113,7 +102,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-3 text-white/80">
                 <MapPin className="w-4 h-4 text-primary" />
-                <span className="text-sm">Bangalore, India & Global</span>
+                <span className="text-sm">Dehradun, India </span>
               </div>
             </div>
 
@@ -123,6 +112,8 @@ const Footer = () => {
                 <motion.a
                   key={index}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={social.label}
                   className="w-10 h-10 bg-white/10 hover:bg-primary/20 rounded-full flex items-center justify-center text-white/60 hover:text-primary transition-all duration-300"
                   whileHover={{ scale: 1.1, y: -2 }}
