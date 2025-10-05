@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"; 
+import { motion } from "framer-motion";  
 import { useInView } from "react-intersection-observer";
 import { Mail, Phone, MapPin, Facebook, Linkedin, Instagram } from "lucide-react";
 
@@ -64,9 +64,9 @@ const Footer = () => {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="grid lg:grid-cols-6 gap-12 lg:gap-8 mb-12"
+          className="mb-12"
         >
-          {/* Company Info */}
+          {/* Company Info (Full Width) */}
           <motion.div 
             variants={{
               hidden: { opacity: 0, y: 30, x: -50 },
@@ -77,7 +77,7 @@ const Footer = () => {
                 transition: { delay: 0.2, duration: 0.6 }
               }
             }} 
-            className="lg:col-span-2"
+            className="mb-12"
           >
             <motion.h3 
               className="text-2xl font-bold text-white mb-4"
@@ -124,73 +124,76 @@ const Footer = () => {
             </div>
           </motion.div>
 
-          {/* Company Links */}
-          <motion.div variants={itemVariants}>
-            <h4 className="text-lg font-semibold text-white mb-6">Company</h4>
-            <ul className="space-y-3">
-              {footerLinks.company.map((link, index) => (
-                <li key={index}>
-                  <a
-                    href={link.href}
-                    className="text-white/70 hover:text-primary transition-colors duration-300 text-sm"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+          {/* Footer Links (Side by Side) */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8">
+            {/* Company Links */}
+            <motion.div variants={itemVariants}>
+              <h4 className="text-lg font-semibold text-white mb-6">Company</h4>
+              <ul className="space-y-3">
+                {footerLinks.company.map((link, index) => (
+                  <li key={index}>
+                    <a
+                      href={link.href}
+                      className="text-white/70 hover:text-primary transition-colors duration-300 text-sm"
+                    >
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
 
-          {/* Services Links */}
-          <motion.div variants={itemVariants}>
-            <h4 className="text-lg font-semibold text-white mb-6">Services</h4>
-            <ul className="space-y-3">
-              {footerLinks.services.map((link, index) => (
-                <li key={index}>
-                  <a
-                    href={link.href}
-                    className="text-white/70 hover:text-primary transition-colors duration-300 text-sm"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+            {/* Services Links */}
+            <motion.div variants={itemVariants}>
+              <h4 className="text-lg font-semibold text-white mb-6">Services</h4>
+              <ul className="space-y-3">
+                {footerLinks.services.map((link, index) => (
+                  <li key={index}>
+                    <a
+                      href={link.href}
+                      className="text-white/70 hover:text-primary transition-colors duration-300 text-sm"
+                    >
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
 
-          {/* Resources Links */}
-          <motion.div variants={itemVariants}>
-            <h4 className="text-lg font-semibold text-white mb-6">Resources</h4>
-            <ul className="space-y-3">
-              {footerLinks.resources.map((link, index) => (
-                <li key={index}>
-                  <a
-                    href={link.href}
-                    className="text-white/70 hover:text-primary transition-colors duration-300 text-sm"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+            {/* Resources Links */}
+            <motion.div variants={itemVariants}>
+              <h4 className="text-lg font-semibold text-white mb-6">Resources</h4>
+              <ul className="space-y-3">
+                {footerLinks.resources.map((link, index) => (
+                  <li key={index}>
+                    <a
+                      href={link.href}
+                      className="text-white/70 hover:text-primary transition-colors duration-300 text-sm"
+                    >
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
 
-          {/* Legal Links */}
-          <motion.div variants={itemVariants}>
-            <h4 className="text-lg font-semibold text-white mb-6">Legal</h4>
-            <ul className="space-y-3">
-              {footerLinks.legal.map((link, index) => (
-                <li key={index}>
-                  <a
-                    href={link.href}
-                    className="text-white/70 hover:text-primary transition-colors duration-300 text-sm"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+            {/* Legal Links */}
+            <motion.div variants={itemVariants}>
+              <h4 className="text-lg font-semibold text-white mb-6">Legal</h4>
+              <ul className="space-y-3">
+                {footerLinks.legal.map((link, index) => (
+                  <li key={index}>
+                    <a
+                      href={link.href}
+                      className="text-white/70 hover:text-primary transition-colors duration-300 text-sm"
+                    >
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </div>
         </motion.div>
 
         {/* Bottom Bar */}

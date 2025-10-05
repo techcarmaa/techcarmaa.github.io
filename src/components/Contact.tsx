@@ -53,7 +53,7 @@ const Contact = () => {
   };
 
   return (
-    <section className="py-32 px-4 relative overflow-hidden bg-black">
+    <section className="py-10 px-4 relative overflow-hidden bg-black">
   {/* Background */}
   <div className="absolute inset-0 bg-black" />
 

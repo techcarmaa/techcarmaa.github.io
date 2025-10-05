@@ -32,7 +32,12 @@ const Hero = () => {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden" style={{ backgroundColor: '#0a0a0a' }}>
+   <section 
+  className="relative min-h-screen flex items-center justify-center overflow-hidden pb-0 md:pb-0 mb-[-100px] sm:mb-[-120px]" 
+  style={{ backgroundColor: '#0a0a0a' }}
+>
+
+
       
       {/* Floating Elements - More Subtle */}
       <div className="absolute inset-0 overflow-hidden">
@@ -123,7 +128,7 @@ const Hero = () => {
               transition: { delay: 0.4, duration: 0.5 }
             }
           }}
-          className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed font-light"
+          className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed font-light mt-30"
         >
           From code to cloud—we build, manage & scale your digital world. 
           End-to-end software and infrastructure solutions for businesses across industries.
@@ -140,65 +145,7 @@ const Hero = () => {
           }}
           className="flex flex-col sm:flex-row gap-6 justify-center items-center"
         >
-          <motion.div
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <Button variant="default" size="xl" className="bg-primary hover:bg-primary-hover">
-              Get Started
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </motion.div>
           
-          <motion.div
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <Button variant="outline" size="xl" className="border-primary/30 text-foreground hover:bg-primary/10">
-              View Solutions
-            </Button>
-          </motion.div>
-        </motion.div>
-
-        {/* Enhanced Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          initial={{ opacity: 0, y: 30, scale: 0.8 }}
-          animate={inView ? { 
-            opacity: 1, 
-            y: 0, 
-            scale: 1,
-            transition: { delay: 1.5, duration: 0.8 }
-          } : { opacity: 0, y: 30, scale: 0.8 }}
-        >
-          <motion.div
-            className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex justify-center relative"
-            whileHover={{ scale: 1.1 }}
-          >
-            <motion.div
-              className="w-1 h-3 bg-primary/60 rounded-full mt-2"
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            
-            {/* Glow effect */}
-            <motion.div
-              className="absolute inset-0 border-2 border-primary/20 rounded-full"
-              animate={{ 
-                scale: [1, 1.2, 1],
-                opacity: [0.3, 0.6, 0.3]
-              }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-          </motion.div>
-          
-          <motion.p 
-            className="text-xs text-white/50 mt-2"
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            Scroll to explore
-          </motion.p>
         </motion.div>
       </motion.div>
     </section>
