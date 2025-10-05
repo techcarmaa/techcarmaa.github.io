@@ -62,11 +62,10 @@ const TeamSection = () => {
   };
 
   return (
-    <section className="py-24 px-6 relative bg-black">
-  {/* Background */}
-  <div className="absolute inset-0 bg-black" />
+    <section className="py-10 md:py-10 px-6 relative bg-black">
+      {/* Background */}
+      <div className="absolute inset-0 bg-black" />
 
-      
       <motion.div
         ref={ref}
         className="relative z-10 max-w-[1400px] mx-auto"
@@ -109,10 +108,10 @@ const TeamSection = () => {
           </motion.p>
         </div>
 
-
         {/* Enhanced Team Cards */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-8"
+          className="flex gap-6 overflow-x-auto scrollbar-hide pb-8 snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           initial={{ opacity: 0 }}
           animate={inView ? { 
             opacity: 1,
@@ -122,7 +121,7 @@ const TeamSection = () => {
           {teamMembers.map((member, index) => (
             <div
               key={index}
-              className="group relative w-full"
+              className="flex-shrink-0 w-[90%] sm:w-[75%] md:w-auto group relative snap-center"
             >
               <div className="rounded-xl overflow-hidden h-[500px] relative cursor-pointer">
                 {/* Profile Image */}

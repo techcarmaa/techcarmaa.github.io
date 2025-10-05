@@ -109,14 +109,14 @@ const Services = () => {
 
         {/* Horizontal Scrolling Solutions */}
         <div 
-          ref={scrollRef}
-          className="flex gap-6 overflow-x-auto scrollbar-hide px-4 pb-8 relative"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-        >
+  ref={scrollRef}
+  className="flex gap-6 overflow-x-auto overflow-y-visible scrollbar-hide px-4 py-8 relative snap-x snap-mandatory"
+  style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+>
           {solutions.map((solution, index) => (
             <div
               key={index}
-              className="group relative flex-shrink-0 w-96 
+              className="group relative flex-shrink-0 w-[85vw] sm:w-[75vw] md:w-96 snap-center
                          bg-transparent rounded-2xl 
                          border border-white/5 
                          transition-all duration-300 
@@ -167,7 +167,7 @@ const Services = () => {
         </div>
 
         {/* Call to Action */}
-        <div className="text-center mt-20">
+        <div className="text-center mt-5 md:mt-20 ">
           <Button variant="hero" size="xl" className="group">
             Explore Our Solutions
             <Rocket className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
