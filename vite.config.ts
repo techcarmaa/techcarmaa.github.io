@@ -15,4 +15,6 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // :point_down: IMPORTANT for GitHub Pages
+  base: "/techcarmaa.github.io",
 }));
