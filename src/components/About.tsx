@@ -492,7 +492,7 @@ const About = () => {
             {/* Hero Blog Card */}
             <div
               className="group rounded-2xl overflow-hidden transition-all duration-500 cursor-pointer border border-transparent hover:border-white/30 hover:bg-black/20 h-[500px]"
-              onClick={() => setSelectedBlog(technicalBlogs[0])}
+              //onClick={() => setSelectedBlog(technicalBlogs[0])}
             >
               <div className="grid lg:grid-cols-2 h-full">
                 <div className="relative overflow-hidden">
@@ -558,7 +558,7 @@ const About = () => {
     <div
       key={blog.id}
       className="flex-shrink-0 w-[90%] sm:w-[70%] md:w-auto snap-center group rounded-xl overflow-hidden transition-all duration-300 cursor-pointer border border-transparent hover:border-white/30 hover:bg-black/20"
-      onClick={() => setSelectedBlog(blog)}
+      //onClick={() => setSelectedBlog(blog)}
     >
 
                   <div className="relative h-48 overflow-hidden">
