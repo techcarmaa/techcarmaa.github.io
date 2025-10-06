@@ -1,19 +1,17 @@
 {
   "name": "vite_react_shadcn_ts",
-  
-  "homepage":"https://techcarmaa.github.io/",
+  "homepage": "https://techcarmaa.github.io/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "predeploy":"npm run build",
-    "deploy":"gh-pages -d dist",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview"
-    
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
