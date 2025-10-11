@@ -9,7 +9,7 @@ lerna-debug.log*
 
 node_modules
 
-
+CNAME
 dist-ssr
 *.local
 
