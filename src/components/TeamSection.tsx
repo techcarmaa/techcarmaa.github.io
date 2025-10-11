@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Button } from "@/components/ui/button";
 import { Linkedin, Mail } from "lucide-react";
-import anirudhImage from "@/assets/team/anirudh-dhobal.jpg";
-import sandeepImage from "@/assets/team/sandeep-singh.jpg";
-import ankitImage from "@/assets/team/ankit-kumar-patel.jpg";
+import anirudhImage from "@/assets/team/Anirudh .png";
+import sandeepImage from "@/assets/team/Sandeep.png";
+import ankitImage from "@/assets/team/ankit.jpg";
 
 const TeamSection = () => {
   const [ref, inView] = useInView({
@@ -14,34 +14,38 @@ const TeamSection = () => {
 
   const teamMembers = [
     {
-      name: "Anirudh Dhobal",
-      role: "Chief Technology Officer",
-      image: anirudhImage,
-      expertise: "SaaS Architecture & Custom Development",
-      experience: "15+ years",
-      description: "Leading end-to-end software solutions with expertise in scalable SaaS platforms and enterprise application development.",
-      email: "anirudh@carmaatech.com",
-      linkedin: "#"
+      name: "Anirudh Dobhal",
+    image: anirudhImage,
+    expertise: "Cloud Architecture & AI-driven Systems",
+    experience: "13+ years",
+    description:
+      "Leading Carmaa’s tech vision with expertise in cloud-native architectures, AI/ML integrations, and scalable SaaS platforms. Ex–McKinsey, Samsung, and Clearwater Analytics.",
+    email: "anirudh@carmaatech.com",
+    linkedin: "#",
     },
     {
       name: "Sandeep Singh",
-      role: "AWS Infrastructure Specialist",
-      image: sandeepImage,
-      expertise: "Cloud Infrastructure & DevOps",
-      experience: "12+ years",
-      description: "Expert in AWS infrastructure management, cloud optimization, and enterprise-grade deployment solutions.",
-      email: "sandeep@carmaatech.com",
-      linkedin: "#"
+ 
+  image: sandeepImage,
+  expertise: "Operations, Automation & Team Scaling",
+  experience: "12+ years",
+  description:
+    "Driving Carmaa’s operations and growth with a focus on scalable systems, team excellence, and tech-enabled service delivery. Ex-Adobe, Dedalus, and Wipro — expert in QA automation, SaaS workflows, and operational strategy.",
+  email: "sandeep@carmaacarcare.com",
+  linkedin: "#",
     },
     {
-      name: "Ankit Kumar Patel",
-      role: "Lead Full-Stack Developer",
-      image: ankitImage,
-      expertise: "Enterprise Web & Mobile Development",
-      experience: "10+ years",
-      description: "Specializes in full-stack development, API integrations, and building scalable web and mobile applications.",
-      email: "ankit@carmaatech.com",
-      linkedin: "#"
+      
+  name: "Ankit Patel",
+  image: ankitImage,
+  expertise: "Web Architecture & Scalable Systems",
+  experience: "6+ years",
+  description:
+    "Architecting scalable web and mobile applications with expertise in Node.js, React, and AWS. Experienced in leading dev teams, automation, and digital product delivery. Ex–Eazy ERP, Brillica Services, and DEZKA.",
+  email: "ankit@carmaatech.com",
+  linkedin: "https://www.linkedin.com/in/ankit-kumar-patel-1707a8246/",
+
+
     },
   ];
 
@@ -140,7 +144,7 @@ const TeamSection = () => {
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                   <div className="bg-black/30 group-hover:bg-black/60 transition-all duration-300 rounded-lg p-3 backdrop-blur-sm">
                     <h3 className="text-xl font-bold mb-1">{member.name}</h3>
-                    <p className="text-white/80 text-sm">{member.role}</p>
+                    
                   </div>
                 </div>
 
@@ -148,7 +152,7 @@ const TeamSection = () => {
                 <div className="absolute inset-0 p-6 flex flex-col justify-center text-white transform translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-gradient-to-br from-black/90 to-black/70">
                   <div className="text-center">
                     <h3 className="text-2xl font-bold mb-2">{member.name}</h3>
-                    <p className="text-primary text-sm font-semibold mb-3">{member.role}</p>
+                    
                     
                     <div className="space-y-3 mb-6">
                       <div>
