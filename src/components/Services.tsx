@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Car, Brain, Shield, Rocket, Smartphone, Cpu, ChevronLeft, ChevronRight } from "lucide-react";
+import { Car, Brain, Shield, Rocket, Smartphone, Cpu, ChevronLeft, ChevronRight,Cloud,Layers,Settings } from "lucide-react";
 import { useRef } from "react";
 
 const Services = () => {
@@ -18,55 +18,68 @@ const Services = () => {
   };
 
   const solutions = [
-    {
-      icon: Brain,
-      title: "Custom App & Web Development",
-      description: "Tailored software solutions that scale with your business needs.",
-      details: "React, Node.js, Python • Cloud-native architecture • API development • Mobile & web platforms",
-      category: "Development",
-      color: "from-blue-500 to-purple-500",
-    },
-    {
-      icon: Shield,
-      title: "SaaS Solutions for Businesses",
-      description: "Complete SaaS platforms designed to accelerate your digital transformation.",
-      details: "Multi-tenant architecture • Subscription management • Auto-scaling • Enterprise integrations",
-      category: "SaaS",
-      color: "from-purple-500 to-pink-500",
-    },
-    {
-      icon: Cpu,
-      title: "AWS Infrastructure Management",
-      description: "Expert cloud infrastructure setup, optimization, and ongoing management.",
-      details: "EC2, RDS, Lambda, S3 • DevOps automation • Cost optimization • 24/7 monitoring",
-      category: "Cloud",
-      color: "from-pink-500 to-blue-500",
-    },
-    {
-      icon: Smartphone,
-      title: "Enterprise IT & Digital Transformation",
-      description: "Comprehensive IT modernization and digital transformation services.",
-      details: "Legacy system migration • Process automation • Change management • Staff training",
-      category: "Enterprise",
-      color: "from-blue-500 to-cyan-500",
-    },
-    {
-      icon: Car,
-      title: "API Integration & Microservices",
-      description: "Seamless integration solutions connecting your business ecosystem.",
-      details: "REST & GraphQL APIs • Microservices architecture • Third-party integrations • Data synchronization",
-      category: "Integration",
-      color: "from-cyan-500 to-purple-500",
-    },
-    {
-      icon: Rocket,
-      title: "DevOps & Continuous Deployment",
-      description: "Streamlined development workflows and automated deployment pipelines.",
-      details: "CI/CD pipelines • Docker & Kubernetes • Infrastructure as Code • Performance monitoring",
-      category: "DevOps",
-      color: "from-purple-500 to-blue-500",
-    },
-  ];
+  {
+    icon: Brain,
+    title: "Foundation & Core Programming",
+    description:
+      "Strengthen your technical base with problem-solving and coding fundamentals.",
+    details:
+      "C • C++ • Data Structures • Algorithms • Git Basics • Debugging Techniques",
+    category: "Programming",
+    color: "from-blue-500 to-purple-500",
+  },
+  {
+    icon: Cloud,
+    title: "DevOps & Cloud Essentials",
+    description:
+      "Master the tools and workflows used in modern cloud-based development environments.",
+    details:
+      "Git • Jenkins • Docker • CI/CD Pipelines • AWS Cloud • Automation Scripts",
+    category: "DevOps",
+    color: "from-indigo-500 to-cyan-500",
+  },
+  {
+    icon: Layers,
+    title: "Full-Stack Web Development",
+    description:
+      "Build and deploy real-world web applications with industry-grade technologies.",
+    details:
+      "HTML • CSS • JavaScript • React.js • Node.js • Express.js • MongoDB",
+    category: "Web Development",
+    color: "from-pink-500 to-orange-500",
+  },
+  {
+    icon: Rocket,
+    title: "Career Readiness & Placement",
+    description:
+      "Develop confidence and soft skills to ace interviews and excel in professional environments.",
+    details:
+      "Interview Preparation • Resume Building • Communication Skills • Mock Interviews",
+    category: "Professional Growth",
+    color: "from-emerald-500 to-blue-500",
+  },
+  {
+    icon: Cpu,
+    title: "AWS Cloud & Infrastructure Mastery",
+    description:
+      "Design, deploy, and manage scalable cloud infrastructure using AWS best practices.",
+    details:
+      "EC2 • S3 • Lambda • CloudFormation • Cost Optimization • Monitoring",
+    category: "Cloud",
+    color: "from-yellow-500 to-orange-500",
+  },
+  {
+    icon: Settings,
+    title: "Kubernetes & Container Orchestration",
+    description:
+      "Gain hands-on expertise in containerized deployments and microservice scaling.",
+    details:
+      "Kubernetes • Docker Swarm • Helm • Load Balancing • Service Mesh • CI/CD Integration",
+    category: "DevOps",
+    color: "from-sky-500 to-blue-600",
+  },
+];
+
 
   return (
     <section className="py-24 px-6 relative bg-black">
@@ -79,10 +92,10 @@ const Services = () => {
           <div className="h-1 bg-gradient-to-r from-primary to-primary/50 mx-auto mb-6 rounded-full w-20" />
           
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="text-white">IT & SaaS Solutions</span>
+            <span className="text-white">Industry-Ready Programs</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Your technology growth partner—apps, web, SaaS & infrastructure. Hardcore IT company powering digital transformation from startups to enterprises.
+            Practical, hands-on learning designed to make you workplace-ready from day one.
           </p>
         </div>
 
@@ -96,7 +109,7 @@ const Services = () => {
           >
             <ChevronLeft className="h-5 w-5" />
           </Button>
-          <span className="text-white/60 text-sm">Scroll to explore solutions</span>
+          <span className="text-white/60 text-sm">Scroll to explore courses</span>
           <Button
             variant="ghost"
             size="icon"
@@ -169,7 +182,7 @@ const Services = () => {
         {/* Call to Action */}
         <div className="text-center mt-5 md:mt-20 ">
           <Button variant="hero" size="xl" className="group">
-            Explore Our Solutions
+            Explore Our Courses
             <Rocket className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </Button>
         </div>

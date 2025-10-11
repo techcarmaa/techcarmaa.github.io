@@ -214,8 +214,8 @@ const About = () => {
           <div>
             <motion.div variants={itemVariants} className="mb-8">
               <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white">
-                Full-Scale 
-                <span className="text-white block">Technology Powerhouse</span>
+                Where Education Stops, 
+                <span className="text-white block">We Begin</span>
               </h2>
             </motion.div>
 
@@ -223,19 +223,31 @@ const About = () => {
               variants={itemVariants}
               className="text-xl text-muted-foreground mb-8 leading-relaxed"
             >
-              Carmaatech is not limited to any single industry—we're a hardcore IT company 
-              providing end-to-end software and infrastructure solutions that enable businesses 
-              to scale with innovative technology across all sectors.
+              Turning academic knowledge into real-world skills that employers value.
             </motion.p>
 
-            <motion.p
-              variants={itemVariants}
-              className="text-lg text-muted-foreground mb-12 leading-relaxed"
-            >
-              From custom applications to enterprise SaaS platforms, AWS infrastructure management 
-              to complete digital transformation—we build, manage, and scale your digital world 
-              with cutting-edge solutions that drive real business results.
-            </motion.p>
+            <motion.div
+  variants={itemVariants}
+  className="text-muted-foreground mb-12 leading-relaxed space-y-3"
+>
+  <motion.p variants={itemVariants} className="text-lg">
+     <span className="font-semibold text-white">Graduates Struggling</span> — Degrees ≠ Jobs anymore.
+  </motion.p>
+
+  <motion.p variants={itemVariants} className="text-lg">
+     <span className="font-semibold text-white">Outdated Skills</span> — Curricula can’t keep up with industry.
+  </motion.p>
+
+  <motion.p variants={itemVariants} className="text-lg">
+    <span className="font-semibold text-white">Low Confidence</span> — Interviews expose practical gaps.
+  </motion.p>
+
+  <motion.p variants={itemVariants} className="text-lg">
+     <span className="font-semibold text-white">Parents Worried</span> — Education’s promise feels uncertain.
+  </motion.p>
+</motion.div>
+
+
 
             <motion.div variants={itemVariants}>
               <Button variant="hero" size="xl">
@@ -282,26 +294,31 @@ const About = () => {
         </div>
 
         {/* Tagline Section */}
-        <motion.div
-          variants={itemVariants}
-          className="mt-24 mb-24"
-        >
-          <div className="relative h-[50vh] flex items-center">
-            {/* Content */}
-            <div className="relative z-10">
-              <motion.h3 
-                className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-relaxed tracking-wide"
-                initial={{ opacity: 0, x: -50 }}
-                animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-                transition={{ delay: 0.3, duration: 0.8 }}
-              >
-                Building Tomorrow's
-                <br />
-                <span className="text-white/90 font-light">Technology Today</span>
-              </motion.h3>
-            </div>
-          </div>
-        </motion.div>
+       <motion.div variants={itemVariants} className="mt-24 mb-24">
+  <div className="relative h-[50vh] flex items-center">
+    {/* Content */}
+    <div className="relative z-10">
+      <motion.h3
+        className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight tracking-wide"
+        initial={{ opacity: 0, x: -50 }}
+        animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+        transition={{ delay: 0.3, duration: 0.8 }}
+      >
+        Transforming Learning into Launchpads.
+      </motion.h3>
+
+      <motion.p
+        className="text-xl md:text-3xl text-white/85 font-light mt-6 leading-relaxed tracking-wide"
+        initial={{ opacity: 0, y: 20 }}
+        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+        transition={{ delay: 0.6, duration: 0.8 }}
+      >
+        From classrooms to cloud careers — we build what the future hires.
+      </motion.p>
+    </div>
+  </div>
+</motion.div>
+
 
         {/* Technical Expertise Section */}
         <motion.div

@@ -103,7 +103,7 @@ const Hero = () => {
                 transition: { delay: 0.2, duration: 0.5 }
               } : { opacity: 0, y: 20 }}
             >
-              Hardcore IT.
+              Bridging the Gap 
             </motion.span>
             <motion.span 
               className="block text-primary"
@@ -114,7 +114,7 @@ const Hero = () => {
                 transition: { delay: 0.3, duration: 0.5 }
               } : { opacity: 0, y: 20 }}
             >
-              Scalable SaaS.
+              Between Education & Industry
             </motion.span>
           </h1>
         </motion.div>
@@ -130,8 +130,7 @@ const Hero = () => {
           }}
           className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed font-light mt-30"
         >
-          From code to cloud—we build, manage & scale your digital world. 
-          End-to-end software and infrastructure solutions for businesses across industries.
+          Empowering students with real-world, industry-ready skills through practical learning, mentorship, and professional growth opportunities.
         </motion.p>
 
         <motion.div
