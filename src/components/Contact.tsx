@@ -25,14 +25,14 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email Us",
-      value: "hello@carmaatech.com",
-      href: "mailto:hello@carmaatech.com",
+      value: "techcarmaa@gmail.com",
+      href: "mailto:techcarmaa@gmail.com",
     },
     {
       icon: Phone,
       title: "Call Us",
-      value: "+1 (555) 123-4567",
-      href: "tel:+15551234567",
+      value: "+91 8979620136",
+      href: "tel: 8979620136",
     },
     {
       icon: MapPin,
