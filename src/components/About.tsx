@@ -321,11 +321,12 @@ const About = () => {
 
 
         {/* Technical Expertise Section */}
-        <motion.div
+       <motion.div
   ref={techRef}
   variants={itemVariants}
   className="mt-32"
 >
+  {/* Heading */}
   <motion.div 
     className="text-center mb-16"
     initial={{ opacity: 0, y: 20 }}
@@ -337,54 +338,80 @@ const About = () => {
       className="h-1 bg-gradient-to-r from-primary to-primary/50 mx-auto mb-6 rounded-full"
     />
     
-    <motion.h3 
-      className="text-4xl sm:text-4xl md:text-6xl font-bold mb-6"
-    >
+    <motion.h3 className="text-4xl sm:text-4xl md:text-6xl font-bold mb-6">
       <span className="text-white">Our Technical Expertise</span>
     </motion.h3>
     
-    <motion.p 
-      className="text-xl text-muted-foreground max-w-3xl mx-auto"
-    >
+    <motion.p className="text-xl text-muted-foreground max-w-3xl mx-auto">
       Deep technical knowledge across modern technologies and frameworks that power enterprise-grade solutions.
     </motion.p>
   </motion.div>
 
-  {/* Horizontal Scroll Cards */}
-  <div 
-    ref={scrollRef}
-    className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-8 px-2"
-    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-  >
-    {technicalExpertise.map((tech, index) => (
-      <div
-        key={index}
-        className="flex-shrink-0 w-72 md:w-[28rem] snap-center rounded-xl p-8 cursor-pointer border border-white/10 hover:border-primary/60 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:bg-black/10 transition-all duration-300"
+  {/* Continuous Auto-Scrolling Cards */}
+  <div className="expertise-slider">
+    <div className="expertise-track">
+      {[...technicalExpertise, ...technicalExpertise].map((tech, index) => (
+        <div
+          key={index}
+          className="flex-shrink-0 w-72 md:w-[28rem] snap-center rounded-xl p-8 cursor-pointer border border-white/10 
+                     hover:border-primary/60 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:bg-black/10 
+                     transition-all duration-300 mx-3"
+        >
+          {/* Icon */}
+          <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${tech.color} p-4 mb-6`}>
+            <tech.icon className="w-full h-full text-white" />
+          </div>
 
-      >
-        {/* Icon */}
-        <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${tech.color} p-4 mb-6`}>
-          <tech.icon className="w-full h-full text-white" />
+          {/* Title */}
+          <h4 className="text-2xl font-bold text-white mb-4">
+            {tech.title}
+          </h4>
+
+          {/* Skills List */}
+          <ul className="space-y-2">
+            {tech.skills.map((skill, skillIndex) => (
+              <li key={skillIndex} className="text-white/70 text-base flex items-center">
+                <div className="w-1 h-1 bg-primary rounded-full mr-2" />
+                <span>{skill}</span>
+              </li>
+            ))}
+          </ul>
         </div>
-
-        {/* Title */}
-        <h4 className="text-2xl font-bold text-white mb-4">
-          {tech.title}
-        </h4>
-
-        {/* Skills list */}
-        <ul className="space-y-2">
-          {tech.skills.map((skill, skillIndex) => (
-            <li key={skillIndex} className="text-white/70 text-base flex items-center">
-              <div className="w-1 h-1 bg-primary rounded-full mr-2" />
-              <span>{skill}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    ))}
+      ))}
+    </div>
   </div>
+
+  {/* Inline animation styles */}
+  <style jsx>{`
+    .expertise-slider {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      margin-top: 2rem;
+    }
+
+    .expertise-track {
+      display: flex;
+      width: max-content;
+      gap: 1.5rem;
+      animation: scroll-left 100s linear infinite; /* slow, smooth strip */
+    }
+
+    .expertise-slider:hover .expertise-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes scroll-left {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+  `}</style>
 </motion.div>
+
 
 
         {/* Continue with rest of the component... */}
