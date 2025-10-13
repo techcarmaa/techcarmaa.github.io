@@ -1,18 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"; 
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Zap } from "lucide-react";
-
-declare global {
-  interface Window {
-    grecaptcha: any;
-  }
-}
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState("");
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -35,10 +31,7 @@ const Navigation = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // ✅ Get token from visible checkbox
-    const token = window.grecaptcha.getResponse();
-
-    if (!token) {
+    if (!captchaToken) {
       alert("⚠️ Please complete the CAPTCHA before submitting.");
       return;
     }
@@ -49,7 +42,7 @@ const Navigation = () => {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...formData, token }),
+          body: JSON.stringify({ ...formData, token: captchaToken }),
         }
       );
 
@@ -57,7 +50,7 @@ const Navigation = () => {
 
       if (result.success) {
         alert("✅ Message sent successfully!");
-        window.grecaptcha.reset(); // reset checkbox
+        setCaptchaToken("");
         setFormData({
           firstName: "",
           lastName: "",
@@ -209,13 +202,17 @@ const Navigation = () => {
                 ></textarea>
               </div>
 
-              {/* ✅ reCAPTCHA v2 checkbox */}
+              {/* ✅ React Google reCAPTCHA */}
               <div className="flex justify-center mt-6 mb-4">
-                <div className="g-recaptcha" data-sitekey="6Ld8h-crAAAAAAG5_b_Pbin54QYl_6GJr40MNq2Z"></div>
+                <ReCAPTCHA
+                  sitekey="6Ld8h-crAAAAAAG5_b_Pbin54QYl_6GJr40MNq2Z"
+                  onChange={(token) => setCaptchaToken(token || "")}
+                />
               </div>
 
               <Button
                 type="submit"
+                disabled={!captchaToken}
                 className="w-full py-4 text-lg font-semibold bg-gradient-to-r from-blue-600 to-blue-400 text-white rounded-lg shadow-md hover:shadow-blue-500/30 hover:opacity-95 transition"
               >
                 Submit
