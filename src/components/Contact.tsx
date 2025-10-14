@@ -1,25 +1,101 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Mail, Phone, MapPin, Send, Linkedin, Facebook, Instagram } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  Linkedin,
+  Facebook,
+  Instagram,
+  CheckCircle,
+  AlertTriangle,
+} from "lucide-react";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Contact = () => {
-  const [ref, inView] = useInView({
-    threshold: 0.2,
-    triggerOnce: true,
-  });
+  const [ref, inView] = useInView({ threshold: 0.2, triggerOnce: true });
 
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
-    projectType: "",
-    message: "",
+    phone: "",
+    question: "",
   });
 
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [showDialog, setShowDialog] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState("");
+  const [dialog, setDialog] = useState({ open: false, success: true, message: "" });
+
+  useEffect(() => {
+    if (dialog.open) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "auto";
+    return () => (document.body.style.overflow = "auto");
+  }, [dialog.open]);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!captchaToken) {
+      setDialog({
+        open: true,
+        success: false,
+        message: "⚠️ Please complete the CAPTCHA before submitting.",
+      });
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        "https://hiaxmcgzo2trvgmpj6sgy53upy0iantl.lambda-url.ap-south-1.on.aws/",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...formData, token: captchaToken }),
+        }
+      );
+
+      const result = await response.json();
+
+      if (result.success) {
+        setDialog({
+          open: true,
+          success: true,
+          message: "✅ Message sent successfully!",
+        });
+        setCaptchaToken("");
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          question: "",
+        });
+      } else {
+        setDialog({
+          open: true,
+          success: false,
+          message: "❌ Verification failed or server error.",
+        });
+      }
+    } catch (err) {
+      console.error("Error submitting form:", err);
+      setDialog({
+        open: true,
+        success: false,
+        message: "⚠️ Something went wrong. Please try again.",
+      });
+    }
+  };
 
   const contactInfo = [
     {
@@ -32,12 +108,13 @@ const Contact = () => {
       icon: Phone,
       title: "Call Us",
       value: "+91 8979620136",
-      href: "tel: 8979620136",
+      href: "tel:8979620136",
     },
     {
       icon: MapPin,
       title: "Visit Us",
-      value: "Tea Estate, near Bhadri guest house, Banjarawala, Dehradun, Uttarakhand 248121",
+      value:
+        "Tea Estate, near Bhadri guest house, Banjarawala, Dehradun, Uttarakhand 248121",
       href: "#",
     },
   ];
@@ -50,45 +127,13 @@ const Contact = () => {
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { duration: 0.8, staggerChildren: 0.2 },
-    },
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const validateForm = () => {
-    const newErrors: Record<string, string> = {};
-    if (!formData.firstName.trim()) newErrors.firstName = "First name is required";
-    if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
-    if (!formData.email.trim()) newErrors.email = "Email is required";
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Invalid email";
-    if (!formData.projectType.trim()) newErrors.projectType = "Please select a project type";
-    if (!formData.message.trim()) newErrors.message = "Message cannot be empty";
-    return newErrors;
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const validationErrors = validateForm();
-    setErrors(validationErrors);
-
-    if (Object.keys(validationErrors).length === 0) {
-      console.log("✅ Form Data Submitted:", formData);
-      setShowDialog(true);
-      setFormData({ firstName: "", lastName: "", email: "", projectType: "", message: "" });
-    }
+    visible: { opacity: 1, transition: { duration: 0.8, staggerChildren: 0.2 } },
   };
 
   return (
     <section className="py-10 px-4 relative overflow-hidden bg-black">
+      {/* Background Animation */}
       <div className="absolute inset-0 bg-black" />
-
-      {/* Floating Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl"
@@ -113,22 +158,29 @@ const Contact = () => {
         <motion.div className="text-center mb-20">
           <motion.div
             initial={{ width: 0 }}
-            animate={inView ? { width: "80px", transition: { delay: 0.2, duration: 0.5 } } : { width: 0 }}
+            animate={
+              inView
+                ? { width: "80px", transition: { delay: 0.2, duration: 0.5 } }
+                : { width: 0 }
+            }
             className="h-1 bg-gradient-to-r from-primary to-primary/50 mx-auto mb-6 rounded-full"
           />
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="text-white">Let's Build Together</span>
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white">
+            Let's Build Together
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Ready to transform your vision into reality? Get in touch with our team and let's discuss how we can accelerate your digital transformation.
+            Ready to transform your vision into reality? Get in touch with our team and
+            let's discuss how we can accelerate your digital transformation.
           </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-16">
-          {/* Contact Info */}
-          <motion.div initial={{ opacity: 0, x: -30 }} animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}>
+          {/* Left Side */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+          >
             <h3 className="text-3xl font-bold mb-12 text-white">Get In Touch</h3>
-
             <div className="space-y-8 mb-12">
               {contactInfo.map((item, index) => (
                 <motion.a
@@ -147,7 +199,6 @@ const Contact = () => {
               ))}
             </div>
 
-            {/* Social Links */}
             <div>
               <h4 className="text-xl font-semibold text-white mb-6">Follow Us</h4>
               <div className="flex space-x-4">
@@ -167,89 +218,81 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          {/* Contact Form */}
-          <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}>
+          {/* Right Side Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+          >
             <motion.div className="rounded-2xl p-8 border border-transparent hover:border-white/10 hover:bg-black/20 transition-all duration-300">
               <h3 className="text-3xl font-bold mb-8 text-white">Start Your Project</h3>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-white mb-2 font-medium">First Name</label>
-                    <input
-                      name="firstName"
-                      type="text"
-                      value={formData.firstName}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:border-primary focus:ring-2 focus:ring-primary/20"
-                      placeholder="John"
-                    />
-                    {errors.firstName && <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
-                  </div>
-
-                  <div>
-                    <label className="block text-white mb-2 font-medium">Last Name</label>
-                    <input
-                      name="lastName"
-                      type="text"
-                      value={formData.lastName}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:border-primary focus:ring-2 focus:ring-primary/20"
-                      placeholder="Doe"
-                    />
-                    {errors.lastName && <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-white mb-2 font-medium">Email</label>
                   <input
-                    name="email"
-                    type="email"
-                    value={formData.email}
+                    name="firstName"
+                    type="text"
+                    value={formData.firstName}
                     onChange={handleChange}
+                    required
+                    placeholder="First Name"
                     className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:border-primary focus:ring-2 focus:ring-primary/20"
-                    placeholder="john@example.com"
                   />
-                  {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
-                </div>
-
-                <div>
-                  <label className="block text-white mb-2 font-medium">Project Type</label>
-                  <select
-                    name="projectType"
-                    value={formData.projectType}
+                  <input
+                    name="lastName"
+                    type="text"
+                    value={formData.lastName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
-                    style={{ color: "white", backgroundColor: "rgba(255,255,255,0.1)" }}
-                    onFocus={(e) => (e.target.style.color = "black")}
-                    onBlur={(e) => (e.target.style.color = "white")}
-                  >
-                    <option value="">Select a service</option>
-                    <option value="automotive">Automotive AI</option>
-                    <option value="analytics">Smart Analytics</option>
-                    <option value="security">Cybersecurity</option>
-                    <option value="innovation">Innovation Labs</option>
-                    <option value="mobile">Mobile Solutions</option>
-                    <option value="edge">Edge Computing</option>
-                  </select>
-                  {errors.projectType && <p className="text-red-500 text-sm mt-1">{errors.projectType}</p>}
-                </div>
-
-                <div>
-                  <label className="block text-white mb-2 font-medium">Message</label>
-                  <textarea
-                    name="message"
-                    rows={4}
-                    value={formData.message}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:border-primary focus:ring-2 focus:ring-primary/20 resize-none"
-                    placeholder="Tell us about your project..."
+                    required
+                    placeholder="Last Name"
+                    className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:border-primary focus:ring-2 focus:ring-primary/20"
                   />
-                  {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
                 </div>
 
-                <Button type="submit" variant="hero" size="xl" className="w-full group">
+                <input
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  placeholder="Email"
+                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:border-primary focus:ring-2 focus:ring-primary/20"
+                />
+
+                <input
+                  name="phone"
+                  type="text"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                  placeholder="Phone Number"
+                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:border-primary focus:ring-2 focus:ring-primary/20"
+                />
+
+                <textarea
+                  name="question"
+                  rows={4}
+                  value={formData.question}
+                  onChange={handleChange}
+                  required
+                  placeholder="Your Query"
+                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:border-primary focus:ring-2 focus:ring-primary/20 resize-none"
+                />
+
+                <div className="flex justify-center mt-4">
+                  <ReCAPTCHA
+                    sitekey="6Ld8h-crAAAAAAG5_b_Pbin54QYl_6GJr40MNq2Z"
+                    onChange={(token) => setCaptchaToken(token || "")}
+                    theme="dark"
+                  />
+                </div>
+
+                <Button
+                  type="submit"
+                  disabled={!captchaToken}
+                  variant="hero"
+                  size="xl"
+                  className="w-full group"
+                >
                   Send Message
                   <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
@@ -259,15 +302,27 @@ const Contact = () => {
         </div>
       </motion.div>
 
-      {/* Success Dialog */}
-      {showDialog && (
+      {/* Result Dialog */}
+      {dialog.open && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-sm z-50">
           <div className="bg-white rounded-2xl shadow-xl p-8 text-center max-w-sm">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Response Sent ✅</h2>
-            <p className="text-gray-600 mb-6">
-              Thank you for reaching out! Our team will get back to you soon.
-            </p>
-            <Button onClick={() => setShowDialog(false)} className="bg-blue-600 hover:bg-blue-700 text-white px-6">
+            {dialog.success ? (
+              <CheckCircle className="text-green-500 w-10 h-10 mx-auto mb-3" />
+            ) : (
+              <AlertTriangle className="text-yellow-400 w-10 h-10 mx-auto mb-3" />
+            )}
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+              {dialog.success ? "Success" : "Notice"}
+            </h2>
+            <p className="text-gray-600 mb-6">{dialog.message}</p>
+            <Button
+              onClick={() => setDialog({ ...dialog, open: false })}
+              className={`${
+                dialog.success
+                  ? "bg-green-600 hover:bg-green-700"
+                  : "bg-yellow-500 hover:bg-yellow-600"
+              } text-white px-6 w-full`}
+            >
               OK
             </Button>
           </div>
@@ -276,7 +331,5 @@ const Contact = () => {
     </section>
   );
 };
-
-
 
 export default Contact;
