@@ -19,14 +19,12 @@ const Navigation = () => {
     question: "",
   });
 
-  // Navbar scroll effect
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Prevent background scroll when form/dialog is open
   useEffect(() => {
     if (showForm || dialog.open) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "auto";
@@ -35,6 +33,16 @@ const Navigation = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // ✅ Smooth scroll helper
+  const scrollToSection = (id: string) => {
+    const section = document.getElementById(id);
+    if (section) {
+      const yOffset = -80; // offset for fixed navbar
+      const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -90,15 +98,6 @@ const Navigation = () => {
         success: false,
         message: "⚠️ Something went wrong. Please try again.",
       });
-    }
-  };
-
-  // Smooth scroll without changing URL
-  const scrollToSection = (id: string) => {
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-      window.history.replaceState(null, "", "/");
     }
   };
 
@@ -173,9 +172,50 @@ const Navigation = () => {
             </motion.button>
           </div>
         </div>
+
+        {/* ✅ Mobile Menu Dropdown */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              key="mobileMenu"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="md:hidden absolute top-20 left-0 w-full bg-black/95 backdrop-blur-md border-t border-white/10 z-40"
+            >
+              <div className="flex flex-col items-center gap-6 py-6 text-white">
+                {navItems.map((item) => (
+                  <button
+                    key={item.name}
+                    onClick={() => {
+                      scrollToSection(item.id);
+                      setIsOpen(false);
+                    }}
+                    className="text-lg font-medium hover:text-blue-400 transition"
+                  >
+                    {item.name}
+                  </button>
+                ))}
+
+                <Button
+                  variant="hero"
+                  size="lg"
+                  onClick={() => {
+                    setShowForm(true);
+                    setIsOpen(false);
+                  }}
+                  className="border border-blue-500/40 hover:border-blue-500/80 text-white shadow-[0_0_10px_rgba(37,99,235,0.3)] hover:shadow-[0_0_15px_rgba(37,99,235,0.6)] transition-all"
+                >
+                  Get Started
+                </Button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.nav>
 
-      {/* --- Black Form Dialog with Blue Glow --- */}
+      {/* --- White Form Dialog with Blue Glow --- */}
       <AnimatePresence>
         {showForm && (
           <motion.div
@@ -192,20 +232,20 @@ const Navigation = () => {
               exit={{ scale: 0.96, opacity: 0 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
               className="relative w-[90%] max-w-[540px]
-                         bg-[#050505] border border-[#2563EB]/40 hover:border-[#2563EB]/70
-                         rounded-2xl shadow-[0_0_20px_rgba(37,99,235,0.2)]
-                         p-6 sm:p-8 text-white transition-all duration-300"
+                         bg-white border border-[#3B82F6]/40
+                         rounded-2xl shadow-[0_0_25px_rgba(59,130,246,0.35)]
+                         p-6 sm:p-8 text-[#111111] transition-all duration-300"
             >
               {/* Close Button */}
               <button
                 onClick={() => setShowForm(false)}
-                className="absolute top-4 right-4 text-gray-400 hover:text-white transition"
+                className="absolute top-4 right-4 text-gray-500 hover:text-black transition"
               >
                 <X size={20} />
               </button>
 
               {/* Title */}
-              <h2 className="text-2xl font-semibold mb-6 text-center text-[#3B82F6]">
+              <h2 className="text-3xl font-extrabold mb-8 text-center text-[#4A90E2] tracking-tight">
                 Get Started
               </h2>
 
@@ -219,7 +259,7 @@ const Navigation = () => {
                     required
                     value={formData.firstName}
                     placeholder="First Name"
-                    className="w-full rounded-xl bg-[#0B0D10] border border-white/10 text-sm text-white px-3 py-2 focus:ring-2 focus:ring-[#3B82F6] outline-none transition"
+                    className="w-full rounded-xl bg-gray-100 border border-gray-300 text-sm text-black px-3 py-2 focus:ring-2 focus:ring-[#3B82F6] outline-none transition"
                   />
                   <input
                     type="text"
@@ -228,7 +268,7 @@ const Navigation = () => {
                     required
                     value={formData.lastName}
                     placeholder="Last Name"
-                    className="w-full rounded-xl bg-[#0B0D10] border border-white/10 text-sm text-white px-3 py-2 focus:ring-2 focus:ring-[#3B82F6] outline-none transition"
+                    className="w-full rounded-xl bg-gray-100 border border-gray-300 text-sm text-black px-3 py-2 focus:ring-2 focus:ring-[#3B82F6] outline-none transition"
                   />
                 </div>
 
@@ -239,7 +279,7 @@ const Navigation = () => {
                   required
                   value={formData.email}
                   placeholder="Email ID"
-                  className="w-full rounded-xl bg-[#0B0D10] border border-white/10 text-sm text-white px-3 py-2 focus:ring-2 focus:ring-[#3B82F6] outline-none transition"
+                  className="w-full rounded-xl bg-gray-100 border border-gray-300 text-sm text-black px-3 py-2 focus:ring-2 focus:ring-[#3B82F6] outline-none transition"
                 />
 
                 <input
@@ -249,7 +289,7 @@ const Navigation = () => {
                   required
                   value={formData.phone}
                   placeholder="Phone Number"
-                  className="w-full rounded-xl bg-[#0B0D10] border border-white/10 text-sm text-white px-3 py-2 focus:ring-2 focus:ring-[#3B82F6] outline-none transition"
+                  className="w-full rounded-xl bg-gray-100 border border-gray-300 text-sm text-black px-3 py-2 focus:ring-2 focus:ring-[#3B82F6] outline-none transition"
                 />
 
                 <textarea
@@ -258,7 +298,7 @@ const Navigation = () => {
                   required
                   value={formData.question}
                   placeholder="Your Query"
-                  className="w-full rounded-xl bg-[#0B0D10] border border-white/10 text-sm text-white px-3 py-2 h-20 focus:ring-2 focus:ring-[#3B82F6] outline-none resize-none transition"
+                  className="w-full rounded-xl bg-gray-100 border border-gray-300 text-sm text-black px-3 py-2 h-20 focus:ring-2 focus:ring-[#3B82F6] outline-none resize-none transition"
                 />
 
                 <div className="flex justify-center mt-3">
@@ -271,10 +311,9 @@ const Navigation = () => {
                 <Button
                   type="submit"
                   disabled={!captchaToken}
-                  className="w-full bg-[#1E3A8A] hover:bg-[#1D4ED8]
+                  className="w-full bg-gradient-to-r from-[#3B82F6] to-[#1E40AF] hover:from-[#2563EB] hover:to-[#1D4ED8]
                              text-white text-sm py-2.5 rounded-xl mt-3
-                             shadow-[0_0_10px_rgba(37,99,235,0.3)]
-                             hover:shadow-[0_0_15px_rgba(37,99,235,0.6)]
+                             shadow-[0_0_15px_rgba(59,130,246,0.35)]
                              transition-all"
                 >
                   Submit
@@ -299,17 +338,17 @@ const Navigation = () => {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-[#111418] border border-white/10 rounded-2xl p-6 max-w-sm w-[90%] text-center shadow-lg"
+              className="bg-white border border-[#3B82F6]/40 rounded-2xl p-6 max-w-sm w-[90%] text-center shadow-[0_0_25px_rgba(59,130,246,0.35)]"
             >
               {dialog.success ? (
                 <CheckCircle className="text-green-500 w-10 h-10 mx-auto mb-3" />
               ) : (
                 <AlertTriangle className="text-yellow-400 w-10 h-10 mx-auto mb-3" />
               )}
-              <h3 className="text-lg font-semibold mb-3 text-white">
+              <h3 className="text-lg font-semibold mb-3 text-[#111111]">
                 {dialog.success ? "Success" : "Notice"}
               </h3>
-              <p className="text-gray-300 mb-5 text-sm">{dialog.message}</p>
+              <p className="text-gray-600 mb-5 text-sm">{dialog.message}</p>
               <Button
                 className={`w-full ${
                   dialog.success
