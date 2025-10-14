@@ -37,7 +37,7 @@ const Contact = () => {
     {
       icon: MapPin,
       title: "Visit Us",
-      value: "Dehradun, India",
+      value: "Tea Estate, near Bhadri guest house, Banjarawala, Dehradun, Uttarakhand 248121",
       href: "#",
     },
   ];

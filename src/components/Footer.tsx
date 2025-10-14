@@ -101,7 +101,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-3 text-white/80">
                 <MapPin className="w-4 h-4 text-primary" />
-                <span className="text-sm">Dehradun, India </span>
+                <span className="text-sm">Tea Estate, near Bhadri guest house, Banjarawala, Dehradun, Uttarakhand 248121 </span>
               </div>
             </div>
 

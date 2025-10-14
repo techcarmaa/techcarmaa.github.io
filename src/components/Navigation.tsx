@@ -33,11 +33,11 @@ const Navigation = () => {
     return () => (document.body.style.overflow = "auto");
   }, [showForm, dialog.open]);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!captchaToken) {
@@ -93,12 +93,21 @@ const Navigation = () => {
     }
   };
 
+  // Smooth scroll without changing URL
+  const scrollToSection = (id: string) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+      window.history.replaceState(null, "", "/");
+    }
+  };
+
   const navItems = [
-    { name: "Home", href: "#home" },
-    { name: "Services", href: "#services" },
-    { name: "Team", href: "#team" },
-    { name: "About", href: "#about" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", id: "home" },
+    { name: "Services", id: "services" },
+    { name: "Team", id: "team" },
+    { name: "About", id: "about" },
+    { name: "Contact", id: "contact" },
   ];
 
   return (
@@ -114,9 +123,11 @@ const Navigation = () => {
       >
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between h-20">
+            {/* Logo */}
             <motion.div
-              className="flex items-center space-x-3"
+              className="flex items-center space-x-3 cursor-pointer"
               whileHover={{ scale: 1.05 }}
+              onClick={() => scrollToSection("home")}
             >
               <div className="w-10 h-10 rounded-lg bg-gradient-primary p-2">
                 <Zap className="w-full h-full text-white" />
@@ -124,24 +135,32 @@ const Navigation = () => {
               <span className="text-2xl font-bold text-white">CarmaaTech</span>
             </motion.div>
 
+            {/* Desktop Nav */}
             <div className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (
-                <a
+                <button
                   key={item.name}
-                  href={item.href}
-                  className="text-white/80 hover:text-white font-medium"
+                  onClick={() => scrollToSection(item.id)}
+                  className="text-white/80 hover:text-white font-medium transition"
                 >
                   {item.name}
-                </a>
+                </button>
               ))}
             </div>
 
+            {/* Get Started Button */}
             <div className="hidden md:block">
-              <Button variant="hero" size="lg" onClick={() => setShowForm(true)}>
+              <Button
+                variant="hero"
+                size="lg"
+                onClick={() => setShowForm(true)}
+                className="border border-blue-500/40 hover:border-blue-500/80 text-white shadow-[0_0_10px_rgba(37,99,235,0.3)] hover:shadow-[0_0_15px_rgba(37,99,235,0.6)] transition-all"
+              >
                 Get Started
               </Button>
             </div>
 
+            {/* Mobile Menu Button */}
             <motion.button
               className="md:hidden w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center"
               onClick={() => setIsOpen(!isOpen)}
@@ -156,7 +175,7 @@ const Navigation = () => {
         </div>
       </motion.nav>
 
-      {/* Form Dialog */}
+      {/* --- Black Form Dialog with Blue Glow --- */}
       <AnimatePresence>
         {showForm && (
           <motion.div
@@ -172,91 +191,77 @@ const Navigation = () => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.96, opacity: 0 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="relative w-[95%] max-w-2xl bg-[#181818] border border-gray-700 rounded-xl shadow-lg p-8 sm:p-10 text-white"
+              className="relative w-[90%] max-w-[540px]
+                         bg-[#050505] border border-[#2563EB]/40 hover:border-[#2563EB]/70
+                         rounded-2xl shadow-[0_0_20px_rgba(37,99,235,0.2)]
+                         p-6 sm:p-8 text-white transition-all duration-300"
             >
+              {/* Close Button */}
               <button
                 onClick={() => setShowForm(false)}
                 className="absolute top-4 right-4 text-gray-400 hover:text-white transition"
               >
-                <X size={22} />
+                <X size={20} />
               </button>
 
-              <h2 className="text-3xl font-bold mb-8 text-center text-blue-500">
+              {/* Title */}
+              <h2 className="text-2xl font-semibold mb-6 text-center text-[#3B82F6]">
                 Get Started
               </h2>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div className="flex flex-col">
-                    <label className="text-sm text-gray-300 font-semibold mb-2">
-                      First Name
-                    </label>
-                    <input
-                      type="text"
-                      name="firstName"
-                      onChange={handleChange}
-                      required
-                      placeholder="Enter your first name"
-                      className="bg-[#222] border border-gray-700 text-white rounded-lg p-4 focus:border-blue-500 outline-none transition"
-                    />
-                  </div>
-                  <div className="flex flex-col">
-                    <label className="text-sm text-gray-300 font-semibold mb-2">
-                      Last Name
-                    </label>
-                    <input
-                      type="text"
-                      name="lastName"
-                      onChange={handleChange}
-                      required
-                      placeholder="Enter your last name"
-                      className="bg-[#222] border border-gray-700 text-white rounded-lg p-4 focus:border-blue-500 outline-none transition"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex flex-col">
-                  <label className="text-sm text-gray-300 font-semibold mb-2">
-                    Email ID
-                  </label>
+              {/* Form */}
+              <form onSubmit={handleSubmit} className="space-y-3">
+                <div className="flex flex-col sm:flex-row gap-3">
                   <input
-                    type="email"
-                    name="email"
+                    type="text"
+                    name="firstName"
                     onChange={handleChange}
                     required
-                    placeholder="example@domain.com"
-                    className="bg-[#222] border border-gray-700 text-white rounded-lg p-4 focus:border-blue-500 outline-none transition"
+                    value={formData.firstName}
+                    placeholder="First Name"
+                    className="w-full rounded-xl bg-[#0B0D10] border border-white/10 text-sm text-white px-3 py-2 focus:ring-2 focus:ring-[#3B82F6] outline-none transition"
+                  />
+                  <input
+                    type="text"
+                    name="lastName"
+                    onChange={handleChange}
+                    required
+                    value={formData.lastName}
+                    placeholder="Last Name"
+                    className="w-full rounded-xl bg-[#0B0D10] border border-white/10 text-sm text-white px-3 py-2 focus:ring-2 focus:ring-[#3B82F6] outline-none transition"
                   />
                 </div>
 
-                <div className="flex flex-col">
-                  <label className="text-sm text-gray-300 font-semibold mb-2">
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    onChange={handleChange}
-                    required
-                    placeholder="Enter your phone number"
-                    className="bg-[#222] border border-gray-700 text-white rounded-lg p-4 focus:border-blue-500 outline-none transition"
-                  />
-                </div>
+                <input
+                  type="email"
+                  name="email"
+                  onChange={handleChange}
+                  required
+                  value={formData.email}
+                  placeholder="Email ID"
+                  className="w-full rounded-xl bg-[#0B0D10] border border-white/10 text-sm text-white px-3 py-2 focus:ring-2 focus:ring-[#3B82F6] outline-none transition"
+                />
 
-                <div className="flex flex-col">
-                  <label className="text-sm text-gray-300 font-semibold mb-2">
-                    Your Question
-                  </label>
-                  <textarea
-                    name="question"
-                    onChange={handleChange}
-                    required
-                    placeholder="Type your question here..."
-                    className="bg-[#222] border border-gray-700 text-white rounded-lg p-4 h-32 resize-none focus:border-blue-500 outline-none transition"
-                  ></textarea>
-                </div>
+                <input
+                  type="tel"
+                  name="phone"
+                  onChange={handleChange}
+                  required
+                  value={formData.phone}
+                  placeholder="Phone Number"
+                  className="w-full rounded-xl bg-[#0B0D10] border border-white/10 text-sm text-white px-3 py-2 focus:ring-2 focus:ring-[#3B82F6] outline-none transition"
+                />
 
-                <div className="flex justify-center mt-4 mb-4">
+                <textarea
+                  name="question"
+                  onChange={handleChange}
+                  required
+                  value={formData.question}
+                  placeholder="Your Query"
+                  className="w-full rounded-xl bg-[#0B0D10] border border-white/10 text-sm text-white px-3 py-2 h-20 focus:ring-2 focus:ring-[#3B82F6] outline-none resize-none transition"
+                />
+
+                <div className="flex justify-center mt-3">
                   <ReCAPTCHA
                     sitekey="6Ld8h-crAAAAAAG5_b_Pbin54QYl_6GJr40MNq2Z"
                     onChange={(token) => setCaptchaToken(token || "")}
@@ -266,7 +271,11 @@ const Navigation = () => {
                 <Button
                   type="submit"
                   disabled={!captchaToken}
-                  className="w-full py-4 text-lg font-semibold bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition"
+                  className="w-full bg-[#1E3A8A] hover:bg-[#1D4ED8]
+                             text-white text-sm py-2.5 rounded-xl mt-3
+                             shadow-[0_0_10px_rgba(37,99,235,0.3)]
+                             hover:shadow-[0_0_15px_rgba(37,99,235,0.6)]
+                             transition-all"
                 >
                   Submit
                 </Button>
@@ -276,7 +285,7 @@ const Navigation = () => {
         )}
       </AnimatePresence>
 
-      {/* Result Dialog */}
+      {/* --- Result Dialog --- */}
       <AnimatePresence>
         {dialog.open && (
           <motion.div
@@ -290,23 +299,23 @@ const Navigation = () => {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-[#181818] border border-gray-700 rounded-xl p-8 max-w-md w-[90%] text-center shadow-xl"
+              className="bg-[#111418] border border-white/10 rounded-2xl p-6 max-w-sm w-[90%] text-center shadow-lg"
             >
               {dialog.success ? (
-                <CheckCircle className="text-green-500 w-12 h-12 mx-auto mb-4" />
+                <CheckCircle className="text-green-500 w-10 h-10 mx-auto mb-3" />
               ) : (
-                <AlertTriangle className="text-yellow-400 w-12 h-12 mx-auto mb-4" />
+                <AlertTriangle className="text-yellow-400 w-10 h-10 mx-auto mb-3" />
               )}
-              <h3 className="text-xl font-semibold mb-4 text-white">
+              <h3 className="text-lg font-semibold mb-3 text-white">
                 {dialog.success ? "Success" : "Notice"}
               </h3>
-              <p className="text-gray-300 mb-6">{dialog.message}</p>
+              <p className="text-gray-300 mb-5 text-sm">{dialog.message}</p>
               <Button
                 className={`w-full ${
                   dialog.success
                     ? "bg-green-600 hover:bg-green-700"
                     : "bg-yellow-500 hover:bg-yellow-600"
-                } text-white font-semibold`}
+                } text-white text-sm font-semibold py-2.5 rounded-xl`}
                 onClick={() => setDialog({ ...dialog, open: false })}
               >
                 Close

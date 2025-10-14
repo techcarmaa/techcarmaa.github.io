@@ -3,6 +3,8 @@ import { useInView } from "react-intersection-observer";
 import { Button } from "@/components/ui/button";
 import { Award, Users, Lightbulb, Globe, Code, Cloud, Database, Smartphone, Server, Settings, ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef, useState } from "react";
+import TechnicalExpertiseSection from "./TechnicalExpertiseSection";
+import { Zap, Cpu } from "lucide-react";
 
 const About = () => {
   const [ref, inView] = useInView({
@@ -15,6 +17,13 @@ const About = () => {
     threshold: 0.2,
     triggerOnce: true,
   });
+
+  const [caseStudyRef, caseStudyInView] = useInView({
+  threshold: 0.2,
+  triggerOnce: true,
+});
+
+
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const [selectedBlog, setSelectedBlog] = useState<any>(null);
@@ -321,192 +330,178 @@ const About = () => {
 
 
         {/* Technical Expertise Section */}
-       <motion.div
-  ref={techRef}
-  variants={itemVariants}
-  className="mt-32"
+       
+
+
+
+<TechnicalExpertiseSection
+  techRef={techRef}
+  techInView={techInView}
+  technicalExpertise={technicalExpertise}
+/>
+
+
+{/* Case Studies Section */}
+<motion.section
+  ref={caseStudyRef}
+  className="relative mt-32 overflow-hidden"
 >
-  {/* Heading */}
-  <motion.div 
-    className="text-center mb-16"
-    initial={{ opacity: 0, y: 20 }}
-    animate={techInView ? { opacity: 1, y: 0, transition: { duration: 0.5 } } : { opacity: 0, y: 20 }}
-  >
+  {/* Floating Icons (optional subtle effect like Hero) */}
+  <div className="absolute inset-0 overflow-hidden">
     <motion.div
-      initial={{ width: 0 }}
-      animate={techInView ? { width: "80px", transition: { delay: 0.2, duration: 0.5 } } : { width: 0 }}
-      className="h-1 bg-gradient-to-r from-primary to-primary/50 mx-auto mb-6 rounded-full"
-    />
-    
-    <motion.h3 className="text-4xl sm:text-4xl md:text-6xl font-bold mb-6">
-      <span className="text-white">Our Technical Expertise</span>
-    </motion.h3>
-    
-    <motion.p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-      Deep technical knowledge across modern technologies and frameworks that power enterprise-grade solutions.
-    </motion.p>
-  </motion.div>
-
-  {/* Continuous Auto-Scrolling Cards */}
-  <div className="expertise-slider">
-    <div className="expertise-track">
-      {[...technicalExpertise, ...technicalExpertise].map((tech, index) => (
-        <div
-          key={index}
-          className="flex-shrink-0 w-72 md:w-[28rem] snap-center rounded-xl p-8 cursor-pointer border border-white/10 
-                     hover:border-primary/60 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:bg-black/10 
-                     transition-all duration-300 mx-3"
-        >
-          {/* Icon */}
-          <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${tech.color} p-4 mb-6`}>
-            <tech.icon className="w-full h-full text-white" />
-          </div>
-
-          {/* Title */}
-          <h4 className="text-2xl font-bold text-white mb-4">
-            {tech.title}
-          </h4>
-
-          {/* Skills List */}
-          <ul className="space-y-2">
-            {tech.skills.map((skill, skillIndex) => (
-              <li key={skillIndex} className="text-white/70 text-base flex items-center">
-                <div className="w-1 h-1 bg-primary rounded-full mr-2" />
-                <span>{skill}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </div>
+      className="absolute opacity-10"
+      style={{ left: "60%", top: "20%" }}
+      animate={{ y: [0, -15, 0], rotate: [0, 180, 360] }}
+      transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+    >
+      <Zap size={32} className="text-primary/40" />
+    </motion.div>
+    <motion.div
+      className="absolute opacity-10"
+      style={{ left: "30%", top: "60%" }}
+      animate={{ y: [0, 20, 0], rotate: [0, -180, -360] }}
+      transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+    >
+      <Cpu size={32} className="text-primary/40" />
+    </motion.div>
   </div>
 
-  {/* Inline animation styles */}
-  <style jsx>{`
-    .expertise-slider {
-      overflow: hidden;
-      position: relative;
-      width: 100%;
-      margin-top: 2rem;
-    }
+  {/* Heading Section */}
+  <motion.div
+    className="relative z-10 max-w-6xl mx-auto px-6 text-center"
+    initial="hidden"
+    animate={caseStudyInView ? "visible" : "hidden"}
+    variants={{
+      hidden: { opacity: 0 },
+      visible: {
+        opacity: 1,
+        transition: { duration: 0.8, staggerChildren: 0.2 },
+      },
+    }}
+  >
+    <motion.div
+      ref={caseStudyRef}
+      variants={{
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.6, ease: "easeOut" },
+        },
+      }}
+      className="mb-8"
+    >
+      {/* Underline Animation */}
+      <motion.div
+        initial={{ width: 0 }}
+        animate={
+          caseStudyInView
+            ? { width: "80px", transition: { delay: 0.3, duration: 0.5 } }
+            : { width: 0 }
+        }
+        className="h-1 bg-gradient-to-r from-primary to-primary/50 mx-auto mb-6 rounded-full"
+      />
 
-    .expertise-track {
-      display: flex;
-      width: max-content;
-      gap: 1.5rem;
-      animation: scroll-left 100s linear infinite; /* slow, smooth strip */
-    }
-
-    .expertise-slider:hover .expertise-track {
-      animation-play-state: paused;
-    }
-
-    @keyframes scroll-left {
-      from {
-        transform: translateX(0);
-      }
-      to {
-        transform: translateX(-50%);
-      }
-    }
-  `}</style>
-</motion.div>
-
-
-
-        {/* Continue with rest of the component... */}
-        {/* Case Studies Section */}
-        <motion.div
-          variants={itemVariants}
-          className="mt-10 md:mt-32"
+      {/* Heading Text */}
+      <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-white">
+        <motion.span
+          initial={{ opacity: 0, y: 20 }}
+          animate={
+            caseStudyInView
+              ? { opacity: 1, y: 0, transition: { delay: 0.2, duration: 0.5 } }
+              : { opacity: 0, y: 20 }
+          }
+          className="block"
         >
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-          >
-            <h3 className="text-4xl sm:text-4xl md:text-6xl font-bold mb-6">
-              <span className="text-white">Our Case Studies</span>
-            </h3>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Real-world success stories showcasing how we've transformed businesses through innovative technology solutions.
-            </p>
-          </motion.div>
+          Our Case Studies
+        </motion.span>
+      </h2>
 
-          <motion.div
-  className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory 
-             md:flex md:gap-8 md:overflow-x-auto"
-  style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-  variants={containerVariants}
-  initial="hidden"
-  animate={inView ? "visible" : "hidden"}
->
-  {[
-    {
-      title: "FinTech SaaS Platform",
-      category: "Financial Technology",
-      description: "Built a comprehensive financial management platform serving 10,000+ users with real-time analytics and automated reporting.",
-      metrics: ["300% ROI", "50K+ Users", "99.9% Uptime"],
-      color: "from-blue-500 to-purple-500"
-    },
-    {
-      title: "Healthcare Management System",
-      category: "Healthcare Tech",
-      description: "Developed an integrated patient management system that streamlined operations for 50+ medical facilities.",
-      metrics: ["40% Efficiency", "100K+ Patients", "HIPAA Compliant"],
-      color: "from-purple-500 to-pink-500"
-    },
-    {
-      title: "E-commerce Marketplace",
-      category: "Retail Technology",
-      description: "Created a multi-vendor marketplace platform handling millions in transactions with advanced inventory management.",
-      metrics: ["$5M+ Revenue", "1000+ Vendors", "24/7 Support"],
-      color: "from-pink-500 to-cyan-500"
-    }
-  ].map((study, index) => (
-    <div
-  key={index}
-  className="flex-shrink-0 w-72 md:w-[28rem] snap-center group rounded-xl p-8 
-             transition-all duration-300 cursor-pointer border border-white/20 
-             hover:border-white/30 hover:bg-black/10"
-  style={{ boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.08)" }}
->
-
-      <motion.div 
-        className={`w-16 h-16 rounded-lg bg-gradient-to-br ${study.color} p-4 mb-6 group-hover:shadow-glow transition-all duration-300`}
-        whileHover={{ scale: 1.1, rotate: 5 }}
+      {/* Subheading Text */}
+      <motion.p
+        initial={{ opacity: 0, y: 15 }}
+        animate={
+          caseStudyInView
+            ? { opacity: 1, y: 0, transition: { delay: 0.4, duration: 0.5 } }
+            : { opacity: 0, y: 15 }
+        }
+        className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-light"
       >
-        <div className="w-full h-full bg-white/20 rounded-sm" />
-      </motion.div>
-      
-      <div className="mb-3">
-        <span className="text-sm text-primary font-medium">{study.category}</span>
+        Real-world success stories showcasing how we've transformed businesses
+        through innovative technology solutions.
+      </motion.p>
+    </motion.div>
+  </motion.div>
+
+  {/* Static Cards (no animation) */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-16 place-items-center">
+    {[
+      {
+        title: "FinTech SaaS Platform",
+        category: "Financial Technology",
+        description:
+          "Built a comprehensive financial management platform serving 10,000+ users with real-time analytics and automated reporting.",
+        metrics: ["300% ROI", "50K+ Users", "99.9% Uptime"],
+        color: "from-blue-500 to-purple-500",
+      },
+      {
+        title: "Healthcare Management System",
+        category: "Healthcare Tech",
+        description:
+          "Developed an integrated patient management system that streamlined operations for 50+ medical facilities.",
+        metrics: ["40% Efficiency", "100K+ Patients", "HIPAA Compliant"],
+        color: "from-purple-500 to-pink-500",
+      },
+      {
+        title: "E-commerce Marketplace",
+        category: "Retail Technology",
+        description:
+          "Created a multi-vendor marketplace platform handling millions in transactions with advanced inventory management.",
+        metrics: ["$5M+ Revenue", "1000+ Vendors", "24/7 Support"],
+        color: "from-pink-500 to-cyan-500",
+      },
+    ].map((study, index) => (
+      <div
+        key={index}
+        className="w-80 md:w-[24rem] lg:w-[26rem] group rounded-xl p-8 
+                   transition-all duration-300 cursor-pointer border border-white/20 
+                   hover:border-white/30 hover:bg-black/10 backdrop-blur-sm"
+        style={{ boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.08)" }}
+      >
+        <div
+          className={`w-16 h-16 rounded-lg bg-gradient-to-br ${study.color} p-4 mb-6 
+                     group-hover:shadow-glow transition-all duration-300`}
+        >
+          <div className="w-full h-full bg-white/20 rounded-sm" />
+        </div>
+
+        <div className="mb-3">
+          <span className="text-sm text-primary font-medium">
+            {study.category}
+          </span>
+        </div>
+
+        <h4 className="text-2xl font-bold text-white mb-4 group-hover:text-primary transition-colors duration-300">
+          {study.title}
+        </h4>
+
+        <p className="text-white/70 text-base mb-6 leading-relaxed">
+          {study.description}
+        </p>
+
+        <div className="space-y-2">
+          {study.metrics.map((metric, metricIndex) => (
+            <div key={metricIndex} className="flex items-center text-white/80">
+              <div className="w-1 h-1 bg-primary rounded-full mr-2" />
+              <span className="text-sm">{metric}</span>
+            </div>
+          ))}
+        </div>
       </div>
-      
-      <h4 className="text-2xl font-bold text-white mb-4 group-hover:text-primary transition-colors duration-300">
-        {study.title}
-      </h4>
-      
-      <p className="text-white/70 text-base mb-6 leading-relaxed">
-        {study.description}
-      </p>
-      
-      <div className="space-y-2">
-        {study.metrics.map((metric, metricIndex) => (
-          <div 
-            key={metricIndex}
-            className="flex items-center text-white/80"
-          >
-            <div className="w-1 h-1 bg-primary rounded-full mr-2" />
-            <span className="text-sm">{metric}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  ))}
-</motion.div>
-</motion.div>
+    ))}
+  </div>
+</motion.section>
+
 
         {/* Technical Blogs Section */}
         <motion.div
