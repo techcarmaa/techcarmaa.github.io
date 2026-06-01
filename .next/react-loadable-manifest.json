@@ -1,15 +1,14 @@
 {
-  "app/devops-engineering-bootcamp/DevOpsLanding.tsx -> gsap": {
-    "id": 7605,
+  "app/devops-course/DevOpsLanding.tsx -> gsap": {
+    "id": "app/devops-course/DevOpsLanding.tsx -> gsap",
     "files": [
-      "static/chunks/c15bf2b0.ea334255f1a140fc.js",
-      "static/chunks/605.596b13dcde22bed6.js"
+      "static/chunks/_app-pages-browser_node_modules_gsap_index_js.js"
     ]
   },
-  "app/devops-engineering-bootcamp/DevOpsLanding.tsx -> gsap/ScrollTrigger": {
-    "id": 5580,
+  "app/devops-course/DevOpsLanding.tsx -> gsap/ScrollTrigger": {
+    "id": "app/devops-course/DevOpsLanding.tsx -> gsap/ScrollTrigger",
     "files": [
-      "static/chunks/580.823131c95794fd63.js"
+      "static/chunks/_app-pages-browser_node_modules_gsap_ScrollTrigger_js.js"
     ]
   }
 }

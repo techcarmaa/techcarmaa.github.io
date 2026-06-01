@@ -123,7 +123,7 @@ export default function EnrollmentPopup({ open, onOpen, onClose, hideTrigger }: 
     try {
       // Using Web3Forms (free, no backend needed) — replace access_key with yours
       // Or swap this fetch for your own API endpoint / EmailJS / Resend
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch("https://formsubmit.co/ajax/nitinbela100@gmail.com", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -139,7 +139,7 @@ Name:   ${formData.name}
 Phone:  ${formData.phone}
 Email:  ${formData.email}
 
-Course: Professional Auto Detailing — ₹35,000
+Course: Devops Bootcamp — ₹35,000
           `.trim(),
         }),
       });
@@ -154,6 +154,8 @@ Course: Professional Auto Detailing — ₹35,000
       setSubmitState("error");
     }
   };
+
+
 
   const handleClose = () => {
     closePopup();

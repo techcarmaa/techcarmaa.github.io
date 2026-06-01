@@ -56,7 +56,7 @@ export function CoursesSection() {
                 {/* Courses Grid */}
                 <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {filteredCourses.map((course, index) => {
-                        const courseLink = course.id === 'devops-bootcamp' ? '/devops-engineering-bootcamp' : null;
+                        const courseLink = course.id === 'devops-bootcamp' ? '/devops-course' : null;
                         const card = (
                             <CourseCard
                                 title={course.title}

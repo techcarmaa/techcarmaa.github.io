@@ -1,35 +1,20 @@
 {
   "pages": {
-    "/_not-found/page": [
-      "static/chunks/webpack-3328a3c84006d8e6.js",
-      "static/chunks/4bd1b696-c023c6e3521b1417.js",
-      "static/chunks/255-4f84124391a7dac4.js",
-      "static/chunks/main-app-985130b5f6ef348d.js",
-      "static/chunks/app/_not-found/page-8527ee5f93ba6e8e.js"
-    ],
     "/layout": [
-      "static/chunks/webpack-3328a3c84006d8e6.js",
-      "static/chunks/4bd1b696-c023c6e3521b1417.js",
-      "static/chunks/255-4f84124391a7dac4.js",
-      "static/chunks/main-app-985130b5f6ef348d.js",
-      "static/css/5bdbd9fe69994195.css",
-      "static/chunks/154-35ec48f766b71786.js",
-      "static/chunks/app/layout-fa3209c0f48f910c.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/layout.css",
+      "static/chunks/app/layout.js"
+    ],
+    "/devops-course/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/devops-course/page.js"
     ],
     "/page": [
-      "static/chunks/webpack-3328a3c84006d8e6.js",
-      "static/chunks/4bd1b696-c023c6e3521b1417.js",
-      "static/chunks/255-4f84124391a7dac4.js",
-      "static/chunks/main-app-985130b5f6ef348d.js",
-      "static/chunks/154-35ec48f766b71786.js",
-      "static/chunks/app/page-0299e48a4e065634.js"
-    ],
-    "/devops-engineering-bootcamp/page": [
-      "static/chunks/webpack-3328a3c84006d8e6.js",
-      "static/chunks/4bd1b696-c023c6e3521b1417.js",
-      "static/chunks/255-4f84124391a7dac4.js",
-      "static/chunks/main-app-985130b5f6ef348d.js",
-      "static/chunks/app/devops-engineering-bootcamp/page-437b1f5ec87e5f95.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/page.js"
     ]
   }
 }
