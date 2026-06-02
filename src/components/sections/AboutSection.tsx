@@ -114,7 +114,7 @@ export function AboutSection() {
                         <div className="pt-6 border-t border-border">
                             <p className="font-semibold text-foreground mb-3">Certifications & Awards</p>
                             <div className="flex flex-wrap gap-2">
-                                {['AWS Solutions Architect', 'Kubernetes Certified', 'Azure Fundamentals'].map((cert) => (
+                                {['AWS Solutions Architect', 'Kubernetes Certified'].map((cert) => (
                                     <span key={cert} className="px-3 py-1 rounded-full bg-primary/10 border border-primary/30 text-xs text-primary">
                                         {cert}
                                     </span>

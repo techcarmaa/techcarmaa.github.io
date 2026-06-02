@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { Menu, X, Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
+
 export function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [isDark, setIsDark] = useState(true);
@@ -79,7 +80,8 @@ export function Navbar() {
                 {/* Right Side Controls */}
                 <div className="flex items-center gap-4">
                     {/* Theme Toggle */}
-                    <motion.button
+
+                    {/* <motion.button
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => setIsDark(!isDark)}
@@ -87,7 +89,7 @@ export function Navbar() {
                         aria-label="Toggle theme"
                     >
                         {isDark ? <Sun size={20} /> : <Moon size={20} />}
-                    </motion.button>
+                    </motion.button> */}
 
                     {/* CTA Button */}
                     <Button variant="primary" size="md" className="hidden sm:flex"
@@ -132,6 +134,7 @@ export function Navbar() {
                         </Link>
                     ))}
                     <Button variant="primary" size="md" className="w-full"
+
                     >
                         Get Started
                     </Button>

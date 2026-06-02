@@ -127,10 +127,7 @@ export default function EnrollmentPopup({ open, onOpen, onClose, hideTrigger }: 
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          access_key: "YOUR_WEB3FORMS_KEY", // 🔑 Replace with your free key from web3forms.com
           subject: "New Enrollment Enquiry — Carmaa Tech",
-          from_name: formData.name,
-          email: "support@carmaacarcare.com",
           replyto: formData.email,
           message: `
 New enrollment enquiry received:

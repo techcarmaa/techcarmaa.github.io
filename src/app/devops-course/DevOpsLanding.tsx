@@ -1,37 +1,7 @@
 "use client";
 
-// ─────────────────────────────────────────────────────────────────────────────
-// HEADING HIERARCHY (was broken — multiple H1s implied, H2s used as H1):
-//   • ONE <h1> in Hero: "Master DevOps the Way Industry Actually Does It"
-//   • All SectionH2 → proper <h2> (was already h2, now keyword-enriched text)
-//   • Module names → <h3> (were <div>s — invisible to crawlers)
-//   • Card titles in Why/Outcomes → <h3> (were <div>s)
-//   • Instructor name → <h2> inside <section aria-label="Instructor">
-//
-// KEYWORD DENSITY — "devops course" and variants naturally woven in:
-//   • Hero subtext, hero H1, section headings, module descriptions
-//   • Outcome items, FAQ answers, CTA copy, footer
-//   • Target ~1.5–2% density (not stuffed)
-//
-// SEMANTIC HTML:
-//   • <article> wrapping each module card (crawlable discrete content)
-//   • <section> with aria-label on all major sections
-//   • <nav aria-label="Breadcrumb"> added before hero (hidden visually)
-//   • alt text on instructor image
-//   • <ul>/<li> for outcomes, features, tools (list semantics for crawlers)
-//   • <address> in footer for contact signals
-//   • role="list" on ticker items
-//
-// PERFORMANCE:
-//   • Instructor <img> gets fetchpriority="high" and explicit width/height
-//   • Noise overlay SVG inlined (no separate fetch)
-//   • GSAP imports remain lazy (already good)
-//   • Ticker: aria-hidden kept (decorative, not duplicate content)
-//
-// FAQ TEXT: keyword-enriched answers (also feeds FAQ schema in seo-metadata.ts)
-// ─────────────────────────────────────────────────────────────────────────────
-
 import { useEffect, useState } from "react";
+import EnrollmentPopup from "@/components/sections/EnrollmentPopup";
 
 const TICKER_ITEMS = [
   "🐳 Docker", "☸️ Kubernetes", "⚙️ Jenkins", "🚀 GitHub Actions",
@@ -260,12 +230,17 @@ function SectionH2({ children, className = "" }: { children: React.ReactNode; cl
   );
 }
 
-function BtnPrimary({ href, children, className = "" }: { href: string; children: React.ReactNode; className?: string }) {
+function BtnPrimary({ href, onClick, children, className = "" }: { href?: string; onClick?: () => void; children: React.ReactNode; className?: string }) {
+  const classes = `inline-flex items-center gap-2 px-7 py-3 bg-[var(--primary)] text-white rounded-lg font-body font-bold text-[0.95rem] tracking-[0.01em] transition-all duration-300 hover:bg-[var(--primary-glow)] hover:shadow-[0_0_36px_rgba(74,144,255,0.45)] hover:-translate-y-0.5 ${className}`;
+  if (onClick) {
+    return (
+      <button type="button" onClick={onClick} className={classes}>
+        {children}
+      </button>
+    );
+  }
   return (
-    <a
-      href={href}
-      className={`inline-flex items-center gap-2 px-7 py-3 bg-[var(--primary)] text-white rounded-lg font-body font-bold text-[0.95rem] tracking-[0.01em] transition-all duration-300 hover:bg-[var(--primary-glow)] hover:shadow-[0_0_36px_rgba(74,144,255,0.45)] hover:-translate-y-0.5 ${className}`}
-    >
+    <a href={href} className={classes}>
       {children}
     </a>
   );
@@ -333,6 +308,10 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function DevOpsLanding() {
+  const [isEnrollmentOpen, setEnrollmentOpen] = useState(false);
+  const openEnrollment = () => setEnrollmentOpen(true);
+  const closeEnrollment = () => setEnrollmentOpen(false);
+
   useEffect(() => {
     let cleanup = () => { };
     const loadGsap = async () => {
@@ -508,7 +487,7 @@ export default function DevOpsLanding() {
             </p>
 
             <div className="hero-actions flex items-center gap-3.5 flex-wrap mb-11">
-              <BtnPrimary href="#enroll">Enroll in DevOps Course — ₹35,000 →</BtnPrimary>
+              <BtnPrimary onClick={openEnrollment}>Enroll in DevOps Course — ₹35,000 →</BtnPrimary>
               <BtnPrimary href="#curriculum">View Curriculum</BtnPrimary>
             </div>
 
@@ -591,11 +570,25 @@ export default function DevOpsLanding() {
       </section>
 
       {/* ═══════════════ TICKER ═══════════════ */}
-      <div aria-hidden="true" className="bg-[var(--bg2)] border-y py-3.5 overflow-hidden">
+      <div aria-hidden="true" className="bg-[var(--bg2)] border-y border-[var(--border2)] py-3.5 overflow-hidden relative">
+        {/* Edge fade masks */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-24 z-10 bg-gradient-to-r from-[var(--bg2)] to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-24 z-10 bg-gradient-to-l from-[var(--bg2)] to-transparent" />
+
         <div className="animate-ticker flex w-max" role="list">
           {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
-            <div key={i} className="flex items-center gap-2.5 px-9 whitespace-nowrap font-mono text-[0.77rem] text-[var(--text-muted)]" role="listitem">
-              {item} <span className="text-[var(--border2)] ml-1">{'//'}</span>
+            <div
+              key={i}
+              
+              className="flex items-center gap-2.5 px-9 whitespace-nowrap font-mono text-[0.77rem] text-[var(--text-muted)]"
+              role="listitem"
+              style={{
+                animation: `ticker-glow 4s ease-in-out ${1.5 + (i % TICKER_ITEMS.length) * 0.4}s infinite`,
+                opacity: 0.5,  // holds steady until animation kicks in
+              }}
+            >
+              {item}
+              <span className="text-[var(--border2)] ml-1">{'//'}</span>
             </div>
           ))}
         </div>
@@ -715,10 +708,46 @@ export default function DevOpsLanding() {
             {TOOLS.map((tool) => (
               <li
                 key={tool.name}
-                className="tool-card bg-[var(--card)] border rounded-xl p-6 flex flex-col items-center gap-2.5 text-center transition-all duration-300 hover:border-[rgba(74,144,255,0.25)] hover:-translate-y-1.5 hover:shadow-[0_16px_36px_rgba(0,0,0,0.4)]"
+                className="
+      tool-card relative overflow-hidden
+      bg-[var(--card)] border border-[var(--border2)] rounded-xl p-6
+      flex flex-col items-center gap-2.5 text-center
+      transition-all duration-300 ease-out cursor-default
+      hover:-translate-y-2
+      hover:border-[hsl(217,70%,55%,0.4)]
+      hover:shadow-[0_0_0_1px_hsl(217,70%,55%,0.15),0_20px_40px_rgba(0,0,0,0.5)]
+      group
+    "
               >
-                <span className="text-[2rem]" aria-hidden="true">{tool.icon}</span>
-                <span className="font-mono text-[0.73rem] font-semibold text-[var(--text-muted)] tracking-[0.03em]">{tool.name}</span>
+                {/* Glow sweep on hover */}
+                <span
+                  className="
+        pointer-events-none absolute inset-0 rounded-xl opacity-0
+        group-hover:opacity-100 transition-opacity duration-300
+        bg-[radial-gradient(ellipse_at_50%_0%,hsl(217,70%,55%,0.12)_0%,transparent_70%)]
+      "
+                />
+
+                {/* Top shimmer line */}
+                <span
+                  className="
+        pointer-events-none absolute top-0 left-0 right-0 h-[1.5px] rounded-t-xl
+        bg-gradient-to-r from-transparent via-[hsl(217,70%,65%)] to-transparent
+        scale-x-0 group-hover:scale-x-100
+        transition-transform duration-500 ease-out origin-left
+      "
+                />
+
+                <span
+                  className="text-[2rem] transition-transform duration-300 group-hover:scale-110"
+                  aria-hidden="true"
+                >
+                  {tool.icon}
+                </span>
+
+                <span className="font-mono text-[0.73rem] font-semibold text-[var(--text-muted)] tracking-[0.03em] transition-colors duration-300 group-hover:text-[hsl(217,70%,72%)]">
+                  {tool.name}
+                </span>
               </li>
             ))}
           </ul>
@@ -759,7 +788,7 @@ export default function DevOpsLanding() {
               <div className="bg-[var(--card)] border border-[var(--border2)] rounded-[18px] p-9 sticky top-[60px] shadow-[0_40px_80px_rgba(0,0,0,0.5)]">
                 <div className="flex items-baseline gap-2 mb-2">
                   <span className="font-serif text-[3.4rem] font-bold tracking-[-0.03em] leading-none">₹35,000</span>
-                  <span className="text-base text-[var(--text-dim)] line-through" aria-label="Original price ₹12,999">₹12,999</span>
+                  <span className="text-base text-[var(--text-dim)] line-through" aria-label="Original price ₹12,999">₹55,000</span>
                 </div>
                 <p className="text-[0.82rem] text-[var(--text-muted)] mb-6">One-time · Lifetime access · Early-bird pricing</p>
                 <div className="bg-[rgba(245,158,11,0.07)] border border-[rgba(245,158,11,0.18)] rounded-lg px-3.5 py-2.5 text-[0.8rem] text-[var(--amber)] mb-2">
@@ -783,12 +812,13 @@ export default function DevOpsLanding() {
                   ))}
                 </ul>
                 {/* Enroll button — your existing popup trigger goes here */}
-                <a
-                  href="#"
+                <button
+                  type="button"
+                  onClick={openEnrollment}
                   className="block w-full mt-6 py-4 bg-[var(--primary)] text-white border-none rounded-[9px] font-body text-base font-bold cursor-pointer transition-all duration-300 text-center no-underline hover:bg-[var(--primary-glow)] hover:shadow-[0_0_36px_rgba(74,144,255,0.5)] hover:-translate-y-0.5"
                 >
                   Enroll Now — ₹35,000
-                </a>
+                </button>
                 <p className="text-center mt-3.5 text-[0.75rem] text-[var(--text-dim)]">
                   🔒 30-day money-back guarantee · No questions asked
                 </p>
@@ -885,7 +915,7 @@ export default function DevOpsLanding() {
               Join engineers who chose to learn DevOps from someone who has actually done it — at Samsung, at McKinsey, and in production every day. This DevOps course is built for engineers who are serious about their career.
             </p>
             <div className="flex justify-center gap-3.5 flex-wrap">
-              <BtnPrimary href="#enroll" className="text-base px-9 py-4">
+              <BtnPrimary onClick={openEnrollment} className="text-base px-9 py-4">
                 Enroll in DevOps Course — ₹35,000 →
               </BtnPrimary>
               <BtnGhost href="#curriculum" className="text-base px-9 py-4">
@@ -908,7 +938,7 @@ export default function DevOpsLanding() {
         <div className="font-mono text-[0.88rem] text-[var(--text-dim)]" itemProp="name">
           ⬡ DevOps<span className="text-[var(--primary)]">Mastery</span>
         </div>
-        <p className="text-[0.76rem] text-[var(--text-dim)]">© 2025 DevOps Mastery. India's leading hands-on DevOps course.</p>
+        <p className="text-[0.76rem] text-[var(--text-dim)]">© 2025  India's leading hands-on DevOps course.</p>
         <nav aria-label="Footer navigation">
           <ul className="flex gap-5">
             {["Privacy", "Terms", "Contact"].map((link) => (
@@ -924,6 +954,7 @@ export default function DevOpsLanding() {
           </ul>
         </nav>
       </footer>
+      <EnrollmentPopup open={isEnrollmentOpen} onClose={closeEnrollment} hideTrigger />
     </div>
   );
 }

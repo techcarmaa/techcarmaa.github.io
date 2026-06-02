@@ -183,6 +183,29 @@
     }
 }
 
+@keyframes ticker {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+@keyframes ticker-glow {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        text-shadow: none;
+    }
+
+    50% {
+        opacity: 1;
+        text-shadow: 0 0 12px hsl(217, 70%, 65%), 0 0 24px hsl(217, 70%, 55%, 0.4);
+    }
+}
+
 @layer utilities {
     .blur-xs {
         filter: blur(2px);
